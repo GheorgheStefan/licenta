@@ -23,12 +23,6 @@ public class LoginController {
         return ResponseEntity.ok(loginService.login(request));
     }
 
-    @GetMapping("/validate")
-    public ResponseEntity<String> extractUsername(
-            @RequestHeader("Authorization") String headerValue
-    ){
 
-        return ResponseEntity.ok(jwtService.extractEmail(headerValue.substring(7)));
-    }
 
 }
