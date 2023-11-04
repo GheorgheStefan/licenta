@@ -1,13 +1,16 @@
 package com.licenta.backend.controller;
 
 import com.licenta.backend.dto.DtoUsersResponse;
+import com.licenta.backend.dto.user.request.RegisterRequestDto;
+import com.licenta.backend.dto.user.request.SigninRequestDto;
+import com.licenta.backend.dto.user.response.RegisterResponseDto;
+import com.licenta.backend.dto.user.response.SigninResponseDto;
 import com.licenta.backend.entity.User;
 import com.licenta.backend.repository.UserRepository;
+import com.licenta.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,20 +19,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UsersController {
     private final UserRepository userRepository;
+    private final UserService userService;
 
 
-    @GetMapping()
-    public ResponseEntity<List<DtoUsersResponse>> getAllUsers() {
-        List<User> users = userRepository.findAll();
+    @PostMapping("/signin")
+    public ResponseEntity<SigninResponseDto> signin(
+            @RequestBody SigninRequestDto request) {
+        return ResponseEntity.ok(userService.signin(request));
+    }
 
-        List<DtoUsersResponse> usersResponse = users.stream()
-                .map(user -> DtoUsersResponse.builder()
-                        .id(user.getId())
-                        .email(user.getEmail())
-                        .password(user.getPassword())
-                        .build())
-                .toList();
-        return new ResponseEntity<>(usersResponse, org.springframework.http.HttpStatus.OK);
+    @PostMapping("/register")
+    public ResponseEntity<RegisterResponseDto> register(
+            @RequestBody RegisterRequestDto request) {
+        return ResponseEntity.ok(userService.register(request));
     }
 
 }

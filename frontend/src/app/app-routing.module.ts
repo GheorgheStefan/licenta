@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {LoginComponent} from "./login/login.component";
-import {RegisterComponent} from "./register/register.component";
+import {LoginComponent} from "../UserActions/login/login.component";
+import {RegisterComponent} from "../UserActions/register/register.component";
+import {HomePageComponent} from "./home-page/home-page.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: '', redirectTo: 'register', pathMatch: 'full'}
+  { path: 'login/register', component: RegisterComponent},
+  {path: 'home', component: HomePageComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
 @NgModule({
