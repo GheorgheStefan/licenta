@@ -56,9 +56,11 @@ public class UserService {
         var newUser = new User();
         newUser.setEmail(request.getEmail());
         newUser.setPassword(passwordEncoder.encode(request.getPassword()));
-        newUser.setFirstname(request.getFirstName());
-        newUser.setLastname(request.getLastName());
-        newUser.setRole(Role.USER);
+        newUser.setFirstname(request.getFirstname());
+        logger.info("Firstname: {}", request.getFirstname());
+        newUser.setLastname(request.getLastname());
+        logger.info("Lastname: {}", request.getLastname());
+        newUser.setRole(Role.BUYER);
 
         userRepository.save(newUser);
 

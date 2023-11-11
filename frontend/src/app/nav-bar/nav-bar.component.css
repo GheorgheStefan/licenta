@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+* {
+  margin: 0;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: black;
+}
+li, a{
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: white;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+.nav_links li {
+  display: inline;
+  /*margin: 0 10px;*/
+}
+
+.nav_links li a {
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+  position: relative;
+}
+
+.nav_links li a::before {
+  content: "";
+  border-radius: 20px;
+  position: absolute;
+  width: 0; /* Start with zero width */
+  height: 5px;
+  bottom: -1px;
+  left: 0;
+  background-color: #0088a9;
+  visibility: hidden;
+  transition: all 0.3s ease 0s;
+}
+.nav_links li a:hover::before {
+  visibility: visible;
+  width: 100%; /* Expand to 100% width on hover */
+}
+.nav_links li a:hover {
+  color: #0088a9;
+}
+.logo {
+  cursor: pointer;
+}
+.images{
+  width: 50px;
+  height: 50px;
+  background-color: white;
+}
+
+
+

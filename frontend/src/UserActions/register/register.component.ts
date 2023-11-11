@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,9 @@ import {HttpClient} from "@angular/common/http";
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
 
-    constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+    constructor(private formBuilder: FormBuilder,
+                private http: HttpClient,
+                private router: Router) {
         this.registerForm = this.formBuilder.group({
             email: ['', Validators.required],
             password: ['', Validators.required],
@@ -37,6 +40,8 @@ export class RegisterComponent implements OnInit {
 
         this.http.post('http://localhost:8080/users/register', requestData).subscribe((data) => {
             console.log('POST Request Response:', data);
+
+            this.router.navigate(['/login']);
         });
 
     }

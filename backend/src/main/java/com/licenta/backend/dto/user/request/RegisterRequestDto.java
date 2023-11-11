@@ -9,7 +9,7 @@ import lombok.*;
 public class RegisterRequestDto {
     String email;
     String password;
-    String firstName;
-    String lastName;
+    String firstname;
+    String lastname;
 
 }
