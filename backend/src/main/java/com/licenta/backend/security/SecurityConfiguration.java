@@ -37,7 +37,9 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth.requestMatchers(
                                         antMatcher("/users/**"),
-                                        antMatcher("/login/**")
+                                        antMatcher("/login/**"),
+                                        antMatcher("/api/**"),
+                                        antMatcher("/**")
                                 ).permitAll()
                                 .anyRequest()
                                 .authenticated()
