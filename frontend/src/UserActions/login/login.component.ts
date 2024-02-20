@@ -51,12 +51,13 @@ export class LoginComponent implements OnInit {
 
                 console.log(decodedToken);
 
-                if (decodedToken && decodedToken.roles === 'ADMIN') {
+                console.log(decodedToken.role);
+                if (decodedToken && decodedToken.role === 'BUYER') {
                     this.dataService.setData(data);
-                    this.router.navigate(['/dashboard']); // Redirect to the dashboard for admins
+                    this.router.navigate(['/home']);
                 } else {
                     this.dataService.setData(data);
-                    this.router.navigate(['/home']); // Redirect to the home page for regular users
+                    this.router.navigate(['/dashboard/home']);
                 }
             }
         });

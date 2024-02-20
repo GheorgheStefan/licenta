@@ -3,13 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "../UserActions/login/login.component";
 import {RegisterComponent} from "../UserActions/register/register.component";
 import {HomePageComponent} from "./home-page/home-page.component";
-import {DashboardComponent} from "./dashboard/dashboard.component";
+import {DashboardHomeComponent} from "./dashboard/dashboard-home/dashboard-home.component";
+import {DashboardProductsComponent} from "./dashboard/dashboard-products/dashboard-products.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'login/register', component: RegisterComponent},
-  {path: 'home', component: HomePageComponent},
-  { path: 'dashboard', component: DashboardComponent},
+  { path: 'home', component: HomePageComponent},
+  { path: 'dashboard/home', component: DashboardHomeComponent},
+  { path: 'dashboard/product', component: DashboardProductsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

@@ -9,8 +9,12 @@ import { RegisterComponent } from '../UserActions/register/register.component';
 import {RouterModule} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
 import { HomePageComponent } from './home-page/home-page.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { NavBarComponent } from './nav-bars/general-nav-bar/nav-bar.component';
+import { DashboardNavBarComponent } from './nav-bars/dashboard-nav-bar/dashboard-nav-bar.component';
+import { DashboardHomeComponent } from './dashboard/dashboard-home/dashboard-home.component';
+import { DashboardProductsComponent } from './dashboard/dashboard-products/dashboard-products.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -19,14 +23,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     RegisterComponent,
     HomePageComponent,
     NavBarComponent,
-    DashboardComponent
+    DashboardNavBarComponent,
+    DashboardHomeComponent,
+    DashboardProductsComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        HttpClientModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
