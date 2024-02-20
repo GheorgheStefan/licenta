@@ -14,6 +14,7 @@ import { DashboardNavBarComponent } from './nav-bars/dashboard-nav-bar/dashboard
 import { DashboardHomeComponent } from './dashboard/dashboard-home/dashboard-home.component';
 import { DashboardProductsComponent } from './dashboard/dashboard-products/dashboard-products.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButton} from "@angular/material/button";
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButton
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,31 @@
+<form [formGroup]="myform">
+  <h1 mat-dialog-title>Add Product Details</h1>
+  <div mat-dialog-content>
+
+    <mat-form-field>
+      <mat-label> Nume Produs </mat-label>
+      <input formControlName="name" matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label> Descriere </mat-label>
+      <input formControlName="description" matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label> Pret </mat-label>
+      <input formControlName="price" matInput>
+    </mat-form-field>
+
+    <input formControlName="file" (change)="onFileSelected($event)" type="file" id="file">
+
+  </div>
+
+  <div mat-dialog-actions>
+
+    <button mat-button (click)="closePopup()">Exit</button>
+    <button mat-button (click)="addProduct()">Save</button>
+
+  </div>
+</form>
+
