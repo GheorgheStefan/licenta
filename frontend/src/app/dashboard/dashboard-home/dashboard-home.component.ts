@@ -9,14 +9,7 @@ import {AddProductPopupComponent} from "../../popups/add-product-popup/add-produ
 })
 export class DashboardHomeComponent {
 
-  constructor(private dialog: MatDialog) {
-  }
 
-  OpenPopup() {
-    this.dialog.open(AddProductPopupComponent, {
-
-    });
-  }
 
 
 }

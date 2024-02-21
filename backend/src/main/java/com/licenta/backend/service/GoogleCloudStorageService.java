@@ -21,9 +21,6 @@ public class GoogleCloudStorageService {
         BlobId blobId = BlobId.of(bucketName, UUID.randomUUID().toString());
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(file.getContentType()).build();
         storage.create(blobInfo, file.getBytes());
-        System.out.println("AICI SUNT incept____________________________");
-        System.out.println("Asa se numeste file-ul" + file);
-        System.out.println("AICI SUNT termin____________________________");
         System.out.println(blobInfo.getName());
         return "https://storage.googleapis.com/licenta-gheorghe-stefan/" + blobId.getName();
     }

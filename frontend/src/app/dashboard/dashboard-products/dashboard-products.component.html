@@ -1,4 +1,32 @@
 <app-dashboard-nav-bar></app-dashboard-nav-bar>
-<button mat-button (click)="openAddProductForm()">Adăugare produs</button>
+<button mat-raised-button color="primary" (click)="OpenPopup()">Adauga Produs</button>
 <p>dashboard-products works!</p>
-<button mat-raised-button color="primary"> AddProduct(+) </button>
+
+<div class="container">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td>{{product.id}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.price}}</td>
+                <td><img src="{{product.imageUrl}}" style="width: 100px; height: 100px;"></td>
+                <td>
+                    <button class="btn btn-primary" >Edit</button>
+                    <button class="btn btn-danger" >Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!--<app-add-product-popup [showPopup]="showPopup" (closePopup)="ClosePopup()" (addProduct)="AddProduct($event)"></app-add-product-popup>-->

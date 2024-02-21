@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MatDialog, MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from "@angular/material/dialog";
+import {MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from "@angular/material/dialog";
 import {MatButton} from "@angular/material/button";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
@@ -41,8 +41,8 @@ export class AddProductPopupComponent {
 
   addProduct() {
      let product = {... this.myform.value, file: this.file}; // suprascrie file-ul
-      this.productService.saveProduct(product).subscribe(res => {
-        console.log('POST Request Response:', res);
+      this.productService.saveProduct(product).subscribe(httpResponse => {
+        console.log(httpResponse);
         this.closePopup();
       });
   }
