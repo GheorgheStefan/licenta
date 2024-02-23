@@ -19,9 +19,18 @@ public class GoogleCloudStorageService {
 
     public String saveImage(MultipartFile file) throws IOException {
         BlobId blobId = BlobId.of(bucketName, UUID.randomUUID().toString());
+
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(file.getContentType()).build();
         storage.create(blobInfo, file.getBytes());
-        System.out.println(blobInfo.getName());
         return "https://storage.googleapis.com/licenta-gheorghe-stefan/" + blobId.getName();
     }
+
+    public String saveImage(byte[] bytes) {
+        BlobId blobId = BlobId.of(bucketName, UUID.randomUUID().toString());
+        // TODO: set content type based on file type
+        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("image/svg+xml").build();
+        storage.create(blobInfo, bytes);
+        return "https://storage.googleapis.com/licenta-gheorghe-stefan/" + blobId.getName();
+    }
+
 }

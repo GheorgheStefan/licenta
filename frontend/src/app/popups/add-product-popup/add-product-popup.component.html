@@ -17,7 +17,13 @@
       <input formControlName="price" matInput>
     </mat-form-field>
 
-    <input formControlName="file" (change)="onFileSelected($event)" type="file" id="file">
+    <input formControlName="presentationImage" (change)="onFileSelected($event)" type="file" id="file">
+
+    <div class="upload-area">
+      <input formControlName="selectedImages" type="file" multiple="true" (change)="onImagesSelected($event)" id="files" >
+    </div>
+    <!--Multi image-->
+    <!-- https://stackoverflow.com/questions/51587241/how-to-upload-multiple-files-in-angular-6-with-addmore-button -->
 
   </div>
 

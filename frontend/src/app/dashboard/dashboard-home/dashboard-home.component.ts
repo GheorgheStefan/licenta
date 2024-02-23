@@ -8,8 +8,18 @@ import {AddProductPopupComponent} from "../../popups/add-product-popup/add-produ
   styleUrls: ['./dashboard-home.component.scss']
 })
 export class DashboardHomeComponent {
+  items: any;
 
 
+  fileSelectionEvent($event: Event, i: number) {
 
+  }
 
+  removeItem(i: number) {
+
+  }
+
+  addItem() {
+
+  }
 }

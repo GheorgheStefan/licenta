@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductRegisterResponseDto {
-    private String id;
+    private Long id;
     private String name;
     private String description;
     private String price;

@@ -6,27 +6,21 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "product")
-public class Product {
-
+@Table(name = "images_other_product")
+public class OtherProductImages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
-    private String price;
-    private String presentationImage;
+    private String imageUrl;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    private List<OtherProductImages> selectedImages;
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Product product;
 
 }
