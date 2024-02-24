@@ -26,7 +26,8 @@ public class Product {
     private String presentationImage;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "product")
+    @OneToMany(targetEntity=OtherProductImages.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private List<OtherProductImages> selectedImages;
 
 }

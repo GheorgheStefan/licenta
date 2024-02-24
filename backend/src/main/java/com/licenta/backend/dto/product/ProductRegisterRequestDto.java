@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductRegisterRequestDto {
+
     private String name;
     private String description;
     private String price;

@@ -12,23 +12,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ProductService {
+
     private final ProductRepository productRepository;
-    public String extractBase64Code(String input) {
-        String base64Code = "";
-        int start = 0;
-        while (start >= 0) {
-            start = input.indexOf('"', start + 1);
-            if (start < 0) {
-                break;
-            }
-            int end = input.indexOf('"', start + 1);
-            if (end < 0) {
-                break;
-            }
-            base64Code = input.substring(start + 1, end);
-        }
-        return base64Code;
-    }
 
     public List<Product> findAll() {
         return productRepository.findAll();

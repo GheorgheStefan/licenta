@@ -25,10 +25,10 @@ public class GoogleCloudStorageService {
         return "https://storage.googleapis.com/licenta-gheorghe-stefan/" + blobId.getName();
     }
 
-    public String saveImage(byte[] bytes) {
+    public String saveImage(byte[] bytes, String contentType) {
         BlobId blobId = BlobId.of(bucketName, UUID.randomUUID().toString());
         // TODO: set content type based on file type
-        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("image/svg+xml").build();
+        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(contentType).build();
         storage.create(blobInfo, bytes);
         return "https://storage.googleapis.com/licenta-gheorghe-stefan/" + blobId.getName();
     }

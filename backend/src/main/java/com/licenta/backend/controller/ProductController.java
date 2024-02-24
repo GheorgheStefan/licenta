@@ -1,8 +1,10 @@
 package com.licenta.backend.controller;
 
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.licenta.backend.dto.product.ImageDetails;
 import com.licenta.backend.dto.product.ProductRegisterRequestDto;
 import com.licenta.backend.dto.product.ProductRegisterResponseDto;
 import com.licenta.backend.entity.OtherProductImages;
@@ -39,15 +41,12 @@ public class ProductController {
             @ModelAttribute ProductRegisterRequestDto productRegisterRequestDto
     ) throws IOException {
         List<OtherProductImages> otherProductImages = new ArrayList<>();
-        List<String> imagesList = objectMapper.readValue(productRegisterRequestDto.getSelectedImages(), new TypeReference<List<String>>() {});
-
-        otherProductImages = imagesList.stream()
-                .map(image -> {
-                    return OtherProductImages.builder()
-                            .imageUrl(googleCloudStorageService.saveImage(Base64.getDecoder().decode(image)))
-                            .build();
-                })
-                .toList();
+        List<ImageDetails> imageList = objectMapper.readValue(productRegisterRequestDto.getSelectedImages(), new TypeReference<List<ImageDetails>>() {});
+        for (var image : imageList){
+            otherProductImages.add(OtherProductImages.builder()
+                    .imageUrl(googleCloudStorageService.saveImage(Base64.getDecoder().decode((image.getImageUrl())), image.getImageType()))
+                    .build());
+        }
 
 
         Product product = Product.builder()
@@ -57,6 +56,10 @@ public class ProductController {
                 .presentationImage(googleCloudStorageService.saveImage(productRegisterRequestDto.getPresentationImage()))
                 .selectedImages(otherProductImages)
                 .build();
+
+
+        productService.save(product);
+
 
 
         return ok(ProductRegisterResponseDto.builder()
