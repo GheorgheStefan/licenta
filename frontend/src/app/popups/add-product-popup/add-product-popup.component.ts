@@ -3,9 +3,11 @@ import {MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from "
 import {MatButton} from "@angular/material/button";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProductService} from "../../service/product.service";
 import {Observable, ReplaySubject} from "rxjs";
+import { NgxDropzoneModule} from 'ngx-dropzone';
+import {NgForOf, NgIf} from "@angular/common";
 
 interface ImageData {
   imageUrl: any;
@@ -23,23 +25,27 @@ interface ImageData {
     MatLabel,
     MatInput,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxDropzoneModule,
+    NgForOf,
+    NgIf
   ],
   templateUrl: './add-product-popup.component.html',
   styleUrl: './add-product-popup.component.scss'
 })
 
 export class AddProductPopupComponent implements OnInit{
+  private presentationFilesData: File[] = [];
+
   constructor(private dialog: MatDialogRef<AddProductPopupComponent>,
               private formBuilder: FormBuilder,
               private productService: ProductService) {
-
   }
   srcResult: any;
   presentationImage: any;
-
-  arrayOf64Images: any = [];
-  arrayOf64ImagesTypes: any = [];
+  files: File[] = [];
+  filesData: File[] = [];
+  prezentationFiles: File[] = [];
   images : ImageData[] = [];
   myform = this.formBuilder.group({
     name: this.formBuilder.control(''),
@@ -49,35 +55,33 @@ export class AddProductPopupComponent implements OnInit{
     selectedImages: this.formBuilder.control(''),
   });
 
-  addProduct() {
-    const imageData: ImageData = {
-      imageUrl: '',
-      imageType: ''
-    };
+  async addProduct() {
+    await this.populateImages(this.files);
+    this.onFileSelected(this.prezentationFiles[0])
 
-    // console.log(JSON.stringify(this.images));
-    let product = {...  this.myform.value,
+    //sol provizorie
+    // await new Promise(f => setTimeout(f, 5000));
+
+    let product = {
+      ...this.myform.value,
       presentationImage: this.presentationImage,
       selectedImages: JSON.stringify(this.images)
     };
-    console.log(product);
     this.productService.saveProduct(product).subscribe(httpResponse => {
-      console.log(httpResponse);
       this.closePopup();
     });
   }
   closePopup() {
     this.dialog.close();
   }
-  onFileSelected( event: any) {
-    this.presentationImage = event.target.files[0]
+  onFileSelected( file: any) {
+    this.presentationImage = file;
     const inputNode: any = document.querySelector('#file');
     if (typeof (FileReader) !== 'undefined') {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.srcResult = e.target.result;
       };
-      reader.readAsArrayBuffer(inputNode.files[0]);
     }
   }
   ngOnInit() {
@@ -91,15 +95,46 @@ export class AddProductPopupComponent implements OnInit{
       result.next(btoa((event.target?.result) as string));
       result.complete();
     }
-    return result;
+    return result.asObservable();
   }
-  onImagesSelected(event: any){
-    for(let i = 0; i < event.target.files.length; i++){
-      this.convertFileToBase64(event.target.files[i]).subscribe(base64 => {
-        // this.arrayOf64Images.push(base64);
-        // this.arrayOf64ImagesTypes.push(event.target.files[i].type);
-        this.images.push({imageUrl: base64, imageType: event.target.files[i].type});
+  populateImages( files: File[]){
+    let image : any = {};
+    for(let i = 0; i <files.length; i++){
+      image = this.convertFileToBase64(files[i]);
+      image.subscribe({
+        next: (buffer: string[]) => {
+          this.images.push({imageUrl: buffer, imageType: files[i].type});
+          this.update();
+        }
+
       });
+      this.update();
     }
+    return this.images;
+  }
+  update(){
+    console.log(this.images);
+  }
+
+
+  onSelect(event : any) {
+    this.files.push(...event.addedFiles);
+    this.filesData = this.files;
+  }
+
+  onRemove(event : any) {
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  onSelectSingleImage(event: any) {
+    if (this.prezentationFiles.length < 1){
+      this.prezentationFiles.push(...event.addedFiles);
+    }
+    this.presentationFilesData = this.prezentationFiles;
+
+
+  }
+  onRemovePresentationImage(event : any) {
+    this.prezentationFiles.splice(this.prezentationFiles.indexOf(event), 1);
   }
 }

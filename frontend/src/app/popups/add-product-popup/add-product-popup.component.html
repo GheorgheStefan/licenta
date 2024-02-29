@@ -17,11 +17,27 @@
       <input formControlName="price" matInput>
     </mat-form-field>
 
-    <input formControlName="presentationImage" (change)="onFileSelected($event)" type="file" id="file">
+<!--    <input formControlName="presentationImage" (change)="onFileSelected($event)" type="file" id="file">-->
 
-    <div class="upload-area">
-      <input formControlName="selectedImages" type="file" multiple="true" (change)="onImagesSelected($event)" id="files" >
-    </div>
+<!--    <div class="upload-area">-->
+<!--      <input formControlName="selectedImages" type="file" multiple="true" (change)="onImagesSelected($event)" id="files" >-->
+<!--    </div>-->
+
+    <p>prezentation iamge</p>
+    <ngx-dropzone (change)="onSelectSingleImage($event)">
+      <ngx-dropzone-image-preview *ngFor="let f of prezentationFiles" [file]="f" [removable]="true" (removed)="onRemovePresentationImage(prezentationFiles[0])">
+        <ngx-dropzone-label >{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+      </ngx-dropzone-image-preview>
+    </ngx-dropzone>
+
+
+    <p>More image for products</p>
+    <ngx-dropzone (change)="onSelect($event)">
+      <ngx-dropzone-image-preview *ngFor="let f of files" [file]="f" [removable] = "true" (removed)="onRemove(f)">
+        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+      </ngx-dropzone-image-preview>
+    </ngx-dropzone>
+
     <!--Multi image-->
     <!-- https://stackoverflow.com/questions/51587241/how-to-upload-multiple-files-in-angular-6-with-addmore-button -->
 
