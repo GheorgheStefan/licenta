@@ -22,7 +22,7 @@ public class Product {
     private Long id;
     private String name;
     private String description;
-    private String price;
+    private float price;
     private String presentationImage;
 
     @JsonIgnore

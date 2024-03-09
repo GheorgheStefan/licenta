@@ -12,7 +12,7 @@ public class ProductRegisterResponseDto {
     private Long id;
     private String name;
     private String description;
-    private String price;
+    private float price;
     private String imageUrl;
 
 }

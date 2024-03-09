@@ -47,8 +47,6 @@ public class ProductController {
                     .imageUrl(googleCloudStorageService.saveImage(Base64.getDecoder().decode((image.getImageUrl())), image.getImageType()))
                     .build());
         }
-
-
         Product product = Product.builder()
                 .name(productRegisterRequestDto.getName())
                 .description(productRegisterRequestDto.getDescription())
@@ -56,11 +54,7 @@ public class ProductController {
                 .presentationImage(googleCloudStorageService.saveImage(productRegisterRequestDto.getPresentationImage()))
                 .selectedImages(otherProductImages)
                 .build();
-
-
         productService.save(product);
-
-
 
         return ok(ProductRegisterResponseDto.builder()
                 .name(product.getName())
