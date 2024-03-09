@@ -19,4 +19,5 @@ public class ProductRegisterRequestDto {
     private float price;
     private MultipartFile presentationImage;
     private String selectedImages;
+    private String sizes;
 }

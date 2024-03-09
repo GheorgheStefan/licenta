@@ -30,4 +30,11 @@ public class Product {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private List<OtherProductImages> selectedImages;
 
+    @JsonIgnore
+    @OneToMany(targetEntity=Sizes.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private List<Sizes> productSizes;
+
+
+
 }

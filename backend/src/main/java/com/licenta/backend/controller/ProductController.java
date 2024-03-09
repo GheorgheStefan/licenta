@@ -7,10 +7,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.licenta.backend.dto.product.ImageDetails;
 import com.licenta.backend.dto.product.ProductRegisterRequestDto;
 import com.licenta.backend.dto.product.ProductRegisterResponseDto;
+import com.licenta.backend.dto.product.SizeDetails;
 import com.licenta.backend.entity.OtherProductImages;
 import com.licenta.backend.entity.Product;
+import com.licenta.backend.entity.Sizes;
 import com.licenta.backend.service.GoogleCloudStorageService;
 import com.licenta.backend.service.ProductService;
+import com.licenta.backend.service.SizesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +36,7 @@ import static org.springframework.http.ResponseEntity.ok;
 public class ProductController {
 
     private final ProductService productService;
+    private final SizesService sizesService;
     private final ObjectMapper objectMapper;
     private final GoogleCloudStorageService googleCloudStorageService;
 
@@ -41,10 +45,18 @@ public class ProductController {
             @ModelAttribute ProductRegisterRequestDto productRegisterRequestDto
     ) throws IOException {
         List<OtherProductImages> otherProductImages = new ArrayList<>();
+        List<Sizes> sizes = new ArrayList<>();
         List<ImageDetails> imageList = objectMapper.readValue(productRegisterRequestDto.getSelectedImages(), new TypeReference<List<ImageDetails>>() {});
+        List<SizeDetails> sizeDetailsList = objectMapper.readValue(productRegisterRequestDto.getSizes(), new TypeReference<List<SizeDetails>>() {});
         for (var image : imageList){
             otherProductImages.add(OtherProductImages.builder()
                     .imageUrl(googleCloudStorageService.saveImage(Base64.getDecoder().decode((image.getImageUrl())), image.getImageType()))
+                    .build());
+        }
+        for (var size : sizeDetailsList){
+            sizes.add(Sizes.builder()
+                            .quantity(size.getQuantity())
+                            .size(size.getSize())
                     .build());
         }
         Product product = Product.builder()
@@ -53,6 +65,7 @@ public class ProductController {
                 .price(productRegisterRequestDto.getPrice())
                 .presentationImage(googleCloudStorageService.saveImage(productRegisterRequestDto.getPresentationImage()))
                 .selectedImages(otherProductImages)
+                .productSizes(sizes)
                 .build();
         productService.save(product);
 
