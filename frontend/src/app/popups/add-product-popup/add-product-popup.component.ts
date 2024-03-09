@@ -3,11 +3,12 @@ import {MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from "
 import {MatButton} from "@angular/material/button";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ProductService} from "../../service/product.service";
 import {Observable, ReplaySubject} from "rxjs";
 import { NgxDropzoneModule} from 'ngx-dropzone';
 import {NgForOf, NgIf} from "@angular/common";
+import {coerceStringArray} from "@angular/cdk/coercion";
 
 interface ImageData {
   imageUrl: any;
@@ -41,10 +42,10 @@ export class AddProductPopupComponent implements OnInit{
               private formBuilder: FormBuilder,
               private productService: ProductService) {
   }
+  imagesEncoded: ImageData[] = [];
   srcResult: any;
   presentationImage: any;
   files: File[] = [];
-  filesData: File[] = [];
   prezentationFiles: File[] = [];
   images : ImageData[] = [];
   myform = this.formBuilder.group({
@@ -53,20 +54,36 @@ export class AddProductPopupComponent implements OnInit{
     description: this.formBuilder.control(''),
     presentationImage: this.formBuilder.control(''),
     selectedImages: this.formBuilder.control(''),
+    sizes: this.formBuilder.array([])
   });
+  iamgesConverted: ImageData[] = [];
+  get sizesData() {
+    return this.myform.get('sizes') as FormArray;
+  }
+
 
   async addProduct() {
-    await this.populateImages(this.files);
+    // this.populateImages();
+    this.convertFileToBase64();
+    console.log("Images:!!!!!!!!!!!!!!!!!!!!!!")
+    console.log(this.iamgesConverted);
+    console.log(this.iamgesConverted.length);
     this.onFileSelected(this.prezentationFiles[0])
 
-    //sol provizorie
-    // await new Promise(f => setTimeout(f, 5000));
+    //sol provizorie merge
+    await new Promise(f => setTimeout(f, 5000));
+    console.log("Images:!!!!!!!!!!!!!!!!!!!!!!")
+    console.log(this.iamgesConverted);
+    console.log(this.iamgesConverted.length);
 
     let product = {
       ...this.myform.value,
       presentationImage: this.presentationImage,
-      selectedImages: JSON.stringify(this.images)
+      selectedImages: JSON.stringify(this.iamgesConverted),
+      sizes: JSON.stringify(this.sizesData.value)
     };
+    console.log("Product:!!!!!!!!!!!!!!!!!!!!!!")
+    console.log(product);
     this.productService.saveProduct(product).subscribe(httpResponse => {
       this.closePopup();
     });
@@ -85,41 +102,38 @@ export class AddProductPopupComponent implements OnInit{
     }
   }
   ngOnInit() {
-  }
+    this.myform = this.formBuilder.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['', Validators.required],
+      presentationImage: [''],
+      selectedImages: [''],
+      sizes: this.formBuilder.array([])
+    });
 
-  convertFileToBase64(file: File) : Observable<string>{
-    const result = new ReplaySubject<string>(1);
-    const reader = new FileReader();
-    reader.readAsBinaryString(file);
-    reader.onload = (event) => {
-      result.next(btoa((event.target?.result) as string));
-      result.complete();
-    }
-    return result.asObservable();
   }
-  populateImages( files: File[]){
-    let image : any = {};
-    for(let i = 0; i <files.length; i++){
-      image = this.convertFileToBase64(files[i]);
-      image.subscribe({
-        next: (buffer: string[]) => {
-          this.images.push({imageUrl: buffer, imageType: files[i].type});
-          this.update();
-        }
-
-      });
-      this.update();
-    }
-    return this.images;
-  }
-  update(){
-    console.log(this.images);
-  }
-
+  // convertFileToBase64(file: File): string {
+  //   const reader = new FileReader();
+  //   reader.readAsBinaryString(file);
+  //   reader.onload = (event) => {
+  //     const base64 = btoa((event.target?.result) as string);
+  //     return base64;
+  //   }
+  //   return '';
+  // }
+  // populateImages() {
+  //   this.files.forEach(file => {
+  //     const base64 = this.convertFileToBase64(file);
+  //     const image: any = {}; // Create a new image object for each file
+  //     image.imageUrl = base64;
+  //     image.imageType = file.type;
+  //     this.images.push(image);
+  //   });
+  // }
 
   onSelect(event : any) {
     this.files.push(...event.addedFiles);
-    this.filesData = this.files;
+    console.log(this.files);
   }
 
   onRemove(event : any) {
@@ -131,10 +145,37 @@ export class AddProductPopupComponent implements OnInit{
       this.prezentationFiles.push(...event.addedFiles);
     }
     this.presentationFilesData = this.prezentationFiles;
-
-
   }
+
   onRemovePresentationImage(event : any) {
     this.prezentationFiles.splice(this.prezentationFiles.indexOf(event), 1);
   }
+
+
+  addSize() {
+    const sizes = this.myform.get('sizes') as FormArray; // Get the sizes form array
+    sizes.push(this.formBuilder.group({
+      size: ['', Validators.required],
+      quantity: ['', Validators.required]
+    }));
+  }
+
+
+
+  ////////////////
+
+  convertFileToBase64() {
+    for (let i = 0; i < this.files.length; i++) {
+      const reader = new FileReader();
+      reader.readAsBinaryString(this.files[i]);
+      reader.onload = (event) => {
+        const base64 = btoa((event.target?.result) as string);
+        this.iamgesConverted.push({imageUrl: base64, imageType: this.files[i].type});
+      }
+    }
+  }
+
+
+
+
 }

@@ -17,12 +17,6 @@
       <input formControlName="price" matInput>
     </mat-form-field>
 
-<!--    <input formControlName="presentationImage" (change)="onFileSelected($event)" type="file" id="file">-->
-
-<!--    <div class="upload-area">-->
-<!--      <input formControlName="selectedImages" type="file" multiple="true" (change)="onImagesSelected($event)" id="files" >-->
-<!--    </div>-->
-
     <p>prezentation iamge</p>
     <ngx-dropzone (change)="onSelectSingleImage($event)">
       <ngx-dropzone-image-preview *ngFor="let f of prezentationFiles" [file]="f" [removable]="true" (removed)="onRemovePresentationImage(prezentationFiles[0])">
@@ -40,6 +34,23 @@
 
     <!--Multi image-->
     <!-- https://stackoverflow.com/questions/51587241/how-to-upload-multiple-files-in-angular-6-with-addmore-button -->
+
+    <div formArrayName="sizes">
+      <div *ngFor="let size of sizesData.controls; let i = index" [formGroupName]="i">
+        <mat-form-field>
+          <mat-label>Marime</mat-label>
+          <input formControlName="size" matInput>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Cantitate</mat-label>
+          <input formControlName="quantity" matInput>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="addSize()">Add Size and Quantity</button>
+
+
 
   </div>
 
