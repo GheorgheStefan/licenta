@@ -3,12 +3,10 @@ import {MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from "
 import {MatButton} from "@angular/material/button";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ProductService} from "../../service/product.service";
-import {Observable, ReplaySubject} from "rxjs";
 import { NgxDropzoneModule} from 'ngx-dropzone';
 import {NgForOf, NgIf} from "@angular/common";
-import {coerceStringArray} from "@angular/cdk/coercion";
 
 interface ImageData {
   imageUrl: any;
@@ -42,12 +40,10 @@ export class AddProductPopupComponent implements OnInit{
               private formBuilder: FormBuilder,
               private productService: ProductService) {
   }
-  imagesEncoded: ImageData[] = [];
   srcResult: any;
   presentationImage: any;
   files: File[] = [];
   prezentationFiles: File[] = [];
-  images : ImageData[] = [];
   myform = this.formBuilder.group({
     name: this.formBuilder.control(''),
     price: this.formBuilder.control(''),
@@ -63,7 +59,6 @@ export class AddProductPopupComponent implements OnInit{
 
 
   async addProduct() {
-    // this.populateImages();
     this.convertFileToBase64();
     console.log("Images:!!!!!!!!!!!!!!!!!!!!!!")
     console.log(this.iamgesConverted);
@@ -71,7 +66,7 @@ export class AddProductPopupComponent implements OnInit{
     this.onFileSelected(this.prezentationFiles[0])
 
     //sol provizorie merge
-    await new Promise(f => setTimeout(f, 5000));
+    await new Promise(f => setTimeout(f, 100));
     console.log("Images:!!!!!!!!!!!!!!!!!!!!!!")
     console.log(this.iamgesConverted);
     console.log(this.iamgesConverted.length);
@@ -112,28 +107,17 @@ export class AddProductPopupComponent implements OnInit{
     });
 
   }
-  // convertFileToBase64(file: File): string {
-  //   const reader = new FileReader();
-  //   reader.readAsBinaryString(file);
-  //   reader.onload = (event) => {
-  //     const base64 = btoa((event.target?.result) as string);
-  //     return base64;
-  //   }
-  //   return '';
-  // }
-  // populateImages() {
-  //   this.files.forEach(file => {
-  //     const base64 = this.convertFileToBase64(file);
-  //     const image: any = {}; // Create a new image object for each file
-  //     image.imageUrl = base64;
-  //     image.imageType = file.type;
-  //     this.images.push(image);
-  //   });
-  // }
-
   onSelect(event : any) {
-    this.files.push(...event.addedFiles);
-    console.log(this.files);
+    if (this.files.length < 3)
+      this.files.push(...event.addedFiles);
+    else{
+      for (let i = 3; i < this.files.length; i++) {
+        this.files.splice(i, 1);
+      }
+    }
+    if (this.files.length >= 4)
+      this.onSelect(event);
+
   }
 
   onRemove(event : any) {
@@ -143,7 +127,14 @@ export class AddProductPopupComponent implements OnInit{
   onSelectSingleImage(event: any) {
     if (this.prezentationFiles.length < 1){
       this.prezentationFiles.push(...event.addedFiles);
+    }else{
+      for (let i = 1; i < this.prezentationFiles.length; i++) {
+        this.prezentationFiles.splice(i, 1);
+      }
     }
+    if (this.prezentationFiles.length >= 2)
+      this.onSelectSingleImage(event);
+
     this.presentationFilesData = this.prezentationFiles;
   }
 
@@ -160,10 +151,6 @@ export class AddProductPopupComponent implements OnInit{
     }));
   }
 
-
-
-  ////////////////
-
   convertFileToBase64() {
     for (let i = 0; i < this.files.length; i++) {
       const reader = new FileReader();
@@ -174,8 +161,4 @@ export class AddProductPopupComponent implements OnInit{
       }
     }
   }
-
-
-
-
 }
