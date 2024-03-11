@@ -22,8 +22,7 @@ export class DashboardProductsComponent implements OnInit{
     });
   }
   AddProductPopUp() {
-    this.dialog.open(AddProductPopupComponent, {
-
+    const dialogRef = this.dialog.open(AddProductPopupComponent, {
     });
   }
 
