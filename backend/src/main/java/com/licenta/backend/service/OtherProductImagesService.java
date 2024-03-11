@@ -14,6 +14,10 @@ import java.util.List;
 public class OtherProductImagesService {
     private final OtherProductImagesRepository otherProductImagesRepository;
 
+    public void deleteByProductId(Long id) {
+        otherProductImagesRepository.deleteByProductId(id);
+    }
+
     public List<OtherProductImages> findAll() {
         return otherProductImagesRepository.findAll();
     }

@@ -7,10 +7,26 @@ import {FormArray, FormBuilder, FormsModule, ReactiveFormsModule, Validators} fr
 import {ProductService} from "../../service/product.service";
 import { NgxDropzoneModule} from 'ngx-dropzone';
 import {NgForOf, NgIf} from "@angular/common";
+import {MatIcon} from "@angular/material/icon";
 
 interface ImageData {
   imageUrl: any;
   imageType: any;
+}
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  presentationImage: string;
+  selectedImages: string[];
+  productSizes: Size[];
+}
+
+interface Size {
+  id: number;
+  size: string;
+  quantity: number;
 }
 @Component({
   selector: 'app-add-product-popup',
@@ -27,7 +43,8 @@ interface ImageData {
     ReactiveFormsModule,
     NgxDropzoneModule,
     NgForOf,
-    NgIf
+    NgIf,
+    MatIcon
   ],
   templateUrl: './add-product-popup.component.html',
   styleUrl: './add-product-popup.component.scss'
@@ -153,5 +170,8 @@ export class AddProductPopupComponent implements OnInit{
         this.iamgesConverted.push({imageUrl: base64, imageType: this.files[i].type});
       }
     }
+  }
+  removeSize(index: number) {
+    this.sizesData.removeAt(index);
   }
 }

@@ -1,6 +1,5 @@
 <app-dashboard-nav-bar></app-dashboard-nav-bar>
 <button mat-raised-button color="primary" (click)="AddProductPopUp()">Adauga Produs</button>
-<p>dashboard-products works!</p>
 
 <div class="container">
     <table class="table table-bordered table-striped">
@@ -23,7 +22,7 @@
               <td><img [src]="product.presentationImage" alt="Product Image" style="width: 100px; height: 100px;"></td>
               <button mat-button [matMenuTriggerFor]="menu">Actions</button>
                 <mat-menu #menu="matMenu">
-                  <button mat-menu-item>Edit</button>
+                  <button mat-menu-item (click)="updateProductPopUp(product.id)">Edit</button>
                   <button mat-menu-item (click)="deleteProductPopUp(product.id)">Delete</button>
                 </mat-menu>
             </tr>

@@ -6,7 +6,7 @@ import {
     MatDialogContent, MatDialogRef,
     MatDialogTitle
 } from "@angular/material/dialog";
-import {MatCheckbox} from "@angular/material/checkbox";
+import {MatCheckbox, MatCheckboxChange} from "@angular/material/checkbox";
 import {FormsModule} from "@angular/forms";
 import {MatButton} from "@angular/material/button";
 import {ProductService} from "../../service/product.service";
@@ -45,13 +45,22 @@ export class DeleteProductDialogComponent {
                     this.dialogRef.close(true);
                 },
                 error: (error) => {
-                    console.error('Error deleting product:', error);
+                    console.error({error: 'Error deleting product:'}, error);
                 }
             });
         } else {
-            console.error('No productId found in data.');
+            console.error({error: 'No productId found in data.'});
+        }
+
+        if (this.skipConfirmation) {
+            this.dialogRef.close(true);
         }
     }
+
+  handleCheckboxChange(event: MatCheckboxChange): void {
+    this.skipConfirmation = event.checked;
+    localStorage.setItem('skipDeleteConfirmation', this.skipConfirmation.toString());
+  }
 
 
 }

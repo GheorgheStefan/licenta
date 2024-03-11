@@ -15,7 +15,7 @@ import { DashboardHomeComponent } from './dashboard/dashboard-home/dashboard-hom
 import { DashboardProductsComponent } from './dashboard/dashboard-products/dashboard-products.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButton} from "@angular/material/button";
-import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 
 
 @NgModule({
@@ -29,16 +29,17 @@ import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
     DashboardHomeComponent,
     DashboardProductsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatButton,
-    MatMenu,
-    MatMenuTrigger
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatButton,
+        MatMenu,
+        MatMenuTrigger,
+        MatMenuItem
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

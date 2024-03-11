@@ -1,68 +1,57 @@
 <form [formGroup]="myform">
-  <h1 mat-dialog-title>Add Product Details</h1>
+  <h1 mat-dialog-title>Update Product Details</h1>
   <div mat-dialog-content>
 
     <mat-form-field>
-      <mat-label> Nume Produs </mat-label>
+      <mat-label>Name</mat-label>
       <input formControlName="name" matInput>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label> Descriere </mat-label>
+      <mat-label>Description</mat-label>
       <input formControlName="description" matInput>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label> Pret </mat-label>
+      <mat-label>Price</mat-label>
       <input formControlName="price" matInput>
     </mat-form-field>
 
-    <p>prezentation iamge</p>
+    <p>Presentation Image</p>
     <ngx-dropzone (change)="onSelectSingleImage($event)">
       <ngx-dropzone-image-preview *ngFor="let f of prezentationFiles" [file]="f" [removable]="true" (removed)="onRemovePresentationImage(prezentationFiles[0])">
-        <ngx-dropzone-label >{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
       </ngx-dropzone-image-preview>
     </ngx-dropzone>
 
-
-    <p>More image for products</p>
+    <p>Additional Images for Products</p>
     <ngx-dropzone (change)="onSelect($event)">
-      <ngx-dropzone-image-preview *ngFor="let f of files" [file]="f" [removable] = "true" (removed)="onRemove(f)">
-        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+      <ngx-dropzone-image-preview *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
       </ngx-dropzone-image-preview>
     </ngx-dropzone>
 
-    <!--Multi image-->
-    <!-- https://stackoverflow.com/questions/51587241/how-to-upload-multiple-files-in-angular-6-with-addmore-button -->
-
+    <!-- Size and Quantity -->
     <div formArrayName="sizes">
       <div *ngFor="let size of sizesData.controls; let i = index" [formGroupName]="i">
         <mat-form-field>
-          <mat-label>Marime</mat-label>
+          <mat-label>Size</mat-label>
           <input formControlName="size" matInput>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Cantitate</mat-label>
+          <mat-label>Quantity</mat-label>
           <input formControlName="quantity" matInput>
         </mat-form-field>
         <button mat-icon-button color="warn" (click)="removeSize(i)">
           <mat-icon>delete</mat-icon>
         </button>
-
       </div>
     </div>
 
     <button mat-raised-button color="primary" (click)="addSize()">Add Size and Quantity</button>
 
-
-
   </div>
 
   <div mat-dialog-actions>
-
-    <button mat-button (click)="closePopup()">Exit</button>
-    <button mat-button (click)="addProduct()">Save</button>
-
+    <button mat-button (click)="closePopup()">Cancel</button>
+    <button mat-button (click)="updateProduct()">Update</button>
   </div>
 </form>
-

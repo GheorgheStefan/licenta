@@ -8,14 +8,10 @@ import {HttpClient} from "@angular/common/http";
 
 export class ProductService {
   private data: any;
+  private products: any;
 
   constructor( private http: HttpClient) {
   }
-
-  saveProduct(product: any) {
-    return this.http.post('http://localhost:8080/products/add', this.getFormData(product));
-  }
-
 
   getFormData(data: any) {
     const formData = new FormData();
@@ -24,9 +20,26 @@ export class ProductService {
     }
     return formData;
   }
+  saveProduct(product: any) {
+    return this.http.post('http://localhost:8080/products/add', this.getFormData(product));
+  }
 
   deleteProduct(productId: string) {
     return this.http.delete('http://localhost:8080/products/delete/' + productId);
+  }
+
+  getProducts() {
+    return this.http.get('http://localhost:8080/products/all');
+  }
+  getProduct(productId: string) {
+    return this.http.get('http://localhost:8080/products/' + productId);
+  }
+  getProductSizes(productId: string) {
+    return this.http.get('http://localhost:8080/products/sizes/' + productId);
+
+  }
+  updateProduct(productId: string, product: any) {
+    return this.http.put('http://localhost:8080/products/update/' + productId, this.getFormData(product));
   }
 
 }

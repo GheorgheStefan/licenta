@@ -35,6 +35,15 @@ public class Product {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private List<Sizes> productSizes;
 
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", presentationImage='" + presentationImage + '\'' +
+                '}';
+    }
 
 
 }
