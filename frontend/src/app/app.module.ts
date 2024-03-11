@@ -15,6 +15,7 @@ import { DashboardHomeComponent } from './dashboard/dashboard-home/dashboard-hom
 import { DashboardProductsComponent } from './dashboard/dashboard-products/dashboard-products.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButton} from "@angular/material/button";
+import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
 
 
 @NgModule({
@@ -34,7 +35,9 @@ import {MatButton} from "@angular/material/button";
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatButton
+    MatButton,
+    MatMenu,
+    MatMenuTrigger
   ],
   providers: [],
   bootstrap: [AppComponent]

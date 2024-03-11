@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {AddProductPopupComponent} from "../../popups/add-product-popup/add-product-popup.component";
 import {HttpClient} from "@angular/common/http";
+import {DeleteProductDialogComponent} from "../../popups/delete-product-dialog/delete-product-dialog.component";
 
 @Component({
   selector: 'app-dashboard-products',
@@ -15,12 +16,12 @@ export class DashboardProductsComponent implements OnInit{
               private http: HttpClient) {
   }
   getProducts() {
-    this.http.get('http://localhost:8080/products/all').subscribe((response) => {
+      this.http.get('http://localhost:8080/products/all').subscribe((response) => {
       this.products = response;
       console.log(this.products);
     });
   }
-  OpenPopup() {
+  AddProductPopUp() {
     this.dialog.open(AddProductPopupComponent, {
 
     });
@@ -28,6 +29,14 @@ export class DashboardProductsComponent implements OnInit{
 
   ngOnInit(): void {
     this.getProducts();
+    console.log(this.products);
+  }
+
+  deleteProductPopUp(productId: string) {
+    console.log(productId);
+      const dialogRef = this.dialog.open(DeleteProductDialogComponent, {
+          data: { productId }
+      });
   }
 
 }

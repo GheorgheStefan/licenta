@@ -15,12 +15,18 @@ export class ProductService {
   saveProduct(product: any) {
     return this.http.post('http://localhost:8080/products/add', this.getFormData(product));
   }
+
+
   getFormData(data: any) {
     const formData = new FormData();
     for (let key in data) {
       formData.append(key, data[key]);
     }
     return formData;
+  }
+
+  deleteProduct(productId: string) {
+    return this.http.delete('http://localhost:8080/products/delete/' + productId);
   }
 
 }

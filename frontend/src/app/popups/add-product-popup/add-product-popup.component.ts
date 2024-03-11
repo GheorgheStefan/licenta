@@ -60,16 +60,10 @@ export class AddProductPopupComponent implements OnInit{
 
   async addProduct() {
     this.convertFileToBase64();
-    console.log("Images:!!!!!!!!!!!!!!!!!!!!!!")
-    console.log(this.iamgesConverted);
-    console.log(this.iamgesConverted.length);
     this.onFileSelected(this.prezentationFiles[0])
 
     //sol provizorie merge
     await new Promise(f => setTimeout(f, 100));
-    console.log("Images:!!!!!!!!!!!!!!!!!!!!!!")
-    console.log(this.iamgesConverted);
-    console.log(this.iamgesConverted.length);
 
     let product = {
       ...this.myform.value,
@@ -77,9 +71,8 @@ export class AddProductPopupComponent implements OnInit{
       selectedImages: JSON.stringify(this.iamgesConverted),
       sizes: JSON.stringify(this.sizesData.value)
     };
-    console.log("Product:!!!!!!!!!!!!!!!!!!!!!!")
-    console.log(product);
     this.productService.saveProduct(product).subscribe(httpResponse => {
+      console.log(httpResponse);
       this.closePopup();
     });
   }

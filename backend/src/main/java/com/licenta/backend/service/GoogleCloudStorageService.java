@@ -33,4 +33,10 @@ public class GoogleCloudStorageService {
         return "https://storage.googleapis.com/licenta-gheorghe-stefan/" + blobId.getName();
     }
 
+    public void deleteImage(String imageUrl) {
+        String[] parts = imageUrl.split("/");
+        String imageName = parts[parts.length - 1];
+        storage.delete(bucketName, imageName);
+    }
+
 }
