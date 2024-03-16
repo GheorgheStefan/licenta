@@ -1,0 +1,17 @@
+<app-general-nav-bar></app-general-nav-bar>
+<p>footwear works!</p>
+<div class="rounded-xl shadow-xl">
+  <div *ngFor="let product of products">
+    <img class="rounded-t-xl w-full h-36 object-cover" src="{{product.presentationImage}}">
+  </div>
+</div>
+
+
+<div *ngFor="let product of products">
+  <div class="card" (click)="null">
+    <img src="{{product.presentationImage}}" width="720" height="855">
+    <!-- Display product information here -->
+  </div>
+</div>
+
+
