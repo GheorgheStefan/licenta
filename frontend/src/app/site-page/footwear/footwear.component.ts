@@ -19,4 +19,9 @@ export class FootwearComponent implements OnInit{
     });
   }
 
+  openProduct(productId:any) {
+    this.productService.getProductDetails(productId).subscribe(product => {
+      console.log(product);
+    });
+  }
 }

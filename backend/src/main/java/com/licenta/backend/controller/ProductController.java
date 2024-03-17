@@ -3,10 +3,7 @@ package com.licenta.backend.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.licenta.backend.dto.product.ImageDetails;
-import com.licenta.backend.dto.product.ProductRegisterRequestDto;
-import com.licenta.backend.dto.product.ProductRegisterResponseDto;
-import com.licenta.backend.dto.product.SizeDetails;
+import com.licenta.backend.dto.product.*;
 import com.licenta.backend.entity.OtherProductImages;
 import com.licenta.backend.entity.Product;
 import com.licenta.backend.entity.Sizes;
@@ -101,6 +98,25 @@ public class ProductController {
     public List<Sizes> getProductSizes(@PathVariable Long id) {
         Product product = productService.findById(id);
         return product.getProductSizes();
+    }
+    @GetMapping("/images/{id}")
+    public List<OtherProductImages> getProductImges(@PathVariable Long id){
+        Product product = productService.findById(id);
+        return product.getSelectedImages();
+    }
+
+    @GetMapping("/{id}/details")
+    public ProductDetailsResponseDto getProductDetails(@PathVariable Long id) {
+        Product product = productService.findById(id);
+        List<Sizes> sizes = product.getProductSizes();
+        List<OtherProductImages> images = product.getSelectedImages();
+
+        ProductDetailsResponseDto productDetailsDTO = new ProductDetailsResponseDto();
+        productDetailsDTO.setProduct(product);
+        productDetailsDTO.setSizes(sizes);
+        productDetailsDTO.setImages(images);
+
+        return productDetailsDTO;
     }
     ///////
     @PutMapping("/update/{id}")

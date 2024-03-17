@@ -1,17 +1,20 @@
 <app-general-nav-bar></app-general-nav-bar>
-<p>footwear works!</p>
-<div class="rounded-xl shadow-xl">
-  <div *ngFor="let product of products">
-    <img class="rounded-t-xl w-full h-36 object-cover" src="{{product.presentationImage}}">
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-20">
+  <div *ngFor="let product of products" class="product-card rounded-xl shadow-xl h-full" (click)="openProduct(product.id)">
+    <div class="relative overflow-hidden h-96 sm:h-72 md:h-96 cursor-pointer"> <!-- Adjust the height here -->
+      <img class="absolute inset-0 w-full h-full object-cover" [src]="product.presentationImage">
+    </div>
+    <div class="flex flex-col p-4 sm:p-3 h-32">
+      <div class="flex flex-row justify-between">
+        <h1 class="text-lg sm:text-xl font-bold">{{product.name}}</h1>
+        <p class="text-lg sm:text-xl font-bold">{{product.price}} RON</p>
+      </div>
+    </div>
   </div>
 </div>
 
 
-<div *ngFor="let product of products">
-  <div class="card" (click)="null">
-    <img src="{{product.presentationImage}}" width="720" height="855">
-    <!-- Display product information here -->
-  </div>
-</div>
+
 
 

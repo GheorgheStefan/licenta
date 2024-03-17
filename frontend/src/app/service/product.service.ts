@@ -34,6 +34,10 @@ export class ProductService {
   getProduct(productId: string) {
     return this.http.get('http://localhost:8080/products/' + productId);
   }
+  getProductDetails(productId: string) {
+    return this.http.get('http://localhost:8080/products/' + productId + '/details');
+
+  }
   getProductSizes(productId: string) {
     return this.http.get('http://localhost:8080/products/sizes/' + productId);
 
