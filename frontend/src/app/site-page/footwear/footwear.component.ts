@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../../service/product.service";
+import {NavigationExtras, Router} from "@angular/router";
 
 @Component({
   selector: 'app-footwear',
@@ -8,7 +9,8 @@ import {ProductService} from "../../service/product.service";
 })
 export class FootwearComponent implements OnInit{
   products: any = [];
-  constructor( private productService: ProductService) {
+  constructor( private productService: ProductService,
+               private router: Router) {
 
   }
 
@@ -19,9 +21,11 @@ export class FootwearComponent implements OnInit{
     });
   }
 
-  openProduct(productId:any) {
-    this.productService.getProductDetails(productId).subscribe(product => {
-      console.log(product);
+  openProduct(productId: any) {
+    this.productService.getProduct(productId).subscribe((data: any) => {
+      console.log(data.id); // Accessing the id property
+      console.log(data.name);
+      this.router.navigate([`/footwear/product/${data.id}`], { state: { productId: data.id } });
     });
   }
 }

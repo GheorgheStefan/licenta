@@ -1,1 +1,34 @@
-<p>product-display works!</p>
+
+<div *ngIf="this.product">
+  <h2>Name: {{ this.product.product.name }}</h2>
+  <p>Description: {{ this.product.product.description }}</p>
+
+
+  <h3>Sizes:</h3>
+  <form #selectionForm="ngForm">
+    <label for="size">Select Size:</label>
+    <select id="size" name="size" [(ngModel)]="selectedSize" required>
+      <option *ngFor="let size of product.sizes" [value]="size">{{ size.size }}</option>
+    </select>
+
+    <label for="quantity">Select Quantity:</label>
+    <input type="number" id="quantity" name="quantity" [(ngModel)]="selectedQuantity" min="1" required>
+
+    <button type="submit" (click)="addToCart()" [disabled]="!selectionForm.valid">Add to Cart</button>
+  </form>
+
+  <h3>Images:</h3>
+  <div *ngIf="images && images.length > 0" class="carousel-container">
+    <img *ngFor="let image of images; let i=index"
+         [src]="image"
+         [ngClass]="{'image-active': selectedIndex === i}"
+         class="transition">
+
+    <div *ngIf="indicators" class="carousel-dot-container">
+    <span class="dot" *ngFor="let dot of images; let i = index"
+          [ngClass]="{'active': selectedIndex === i}"
+          (click)="selectedIndex = i">
+
+    </span>
+    </div>
+  </div>
