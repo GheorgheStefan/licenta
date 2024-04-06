@@ -17,6 +17,21 @@
       <input formControlName="price" matInput>
     </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <input formControlName="category" matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Sub Category</mat-label>
+      <input formControlName="subCategory" matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Brand</mat-label>
+      <input formControlName="brand" matInput>
+    </mat-form-field>
+
     <p>Presentation Image</p>
     <ngx-dropzone (change)="onSelectSingleImage($event)">
       <ngx-dropzone-image-preview *ngFor="let f of prezentationFiles" [file]="f" [removable]="true" (removed)="onRemovePresentationImage(prezentationFiles[0])">

@@ -7,6 +7,8 @@ import {DashboardHomeComponent} from "./dashboard/dashboard-home/dashboard-home.
 import {DashboardProductsComponent} from "./dashboard/dashboard-products/dashboard-products.component";
 import {FootwearComponent} from "./site-page/footwear/footwear.component";
 import {ProductDisplayComponent} from "./site-page/product-display/product-display.component";
+import {UserSignInComponent} from "./userActions/user-sign-in/user-sign-in.component";
+import {UserRegisterComponent} from "./userActions/user-register/user-register.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'dashboard/home', component: DashboardHomeComponent},
   { path: 'dashboard/product', component: DashboardProductsComponent },
   { path: 'footwear/product/:id', component: ProductDisplayComponent },
+  { path: 'sign-in', component: UserSignInComponent },
+  { path: 'register', component: UserRegisterComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

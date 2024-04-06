@@ -81,6 +81,9 @@ export class UpdateProductPopupComponent  implements OnInit{
     description: this.formBuilder.control(''),
     presentationImage: this.formBuilder.control(''),
     selectedImages: this.formBuilder.control(''),
+    category: this.formBuilder.control(''),
+    subcategory: this.formBuilder.control(''),
+    brand: this.formBuilder.control(''),
     sizes: this.formBuilder.array([])
   });
   product:any;
@@ -168,6 +171,9 @@ export class UpdateProductPopupComponent  implements OnInit{
         description: this.product.description,
         price: this.product.price,
         presentationImage: this.product.presentationImage,
+        category: this.product.category,
+        subcategory: this.product.subcategory,
+        brand: this.product.brand
       });
 
     });

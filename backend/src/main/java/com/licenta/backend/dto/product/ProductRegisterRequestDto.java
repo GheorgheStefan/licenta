@@ -20,4 +20,7 @@ public class ProductRegisterRequestDto {
     private MultipartFile presentationImage;
     private String selectedImages;
     private String sizes;
+    private String category;
+    private String subcategory;
+    private String brand;
 }

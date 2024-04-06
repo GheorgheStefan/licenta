@@ -55,6 +55,9 @@ public class ProductController {
         }
         Product product = Product.builder()
                 .name(productRegisterRequestDto.getName())
+                .category(productRegisterRequestDto.getCategory())
+                .subcategory(productRegisterRequestDto.getSubcategory())
+                .brand(productRegisterRequestDto.getBrand())
                 .description(productRegisterRequestDto.getDescription())
                 .price(productRegisterRequestDto.getPrice())
                 .presentationImage(googleCloudStorageService.saveImage(productRegisterRequestDto.getPresentationImage()))
@@ -68,6 +71,9 @@ public class ProductController {
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())
+                .category(product.getCategory())
+                .subcategory(product.getSubcategory())
+                .brand(product.getBrand())
                 .imageUrl(product.getPresentationImage())
                 .build());
     }
@@ -158,6 +164,9 @@ public class ProductController {
         product.setName(productRegisterRequestDto.getName());
         product.setDescription(productRegisterRequestDto.getDescription());
         product.setPrice(productRegisterRequestDto.getPrice());
+        product.setCategory(productRegisterRequestDto.getCategory());
+        product.setSubcategory(productRegisterRequestDto.getSubcategory());
+        product.setBrand(productRegisterRequestDto.getBrand());
         product.setPresentationImage(googleCloudStorageService.saveImage(productRegisterRequestDto.getPresentationImage()));
         product.setSelectedImages(otherProductImages);
         product.setProductSizes(sizes);
@@ -170,6 +179,9 @@ public class ProductController {
                 .description(product.getDescription())
                 .price(product.getPrice())
                 .imageUrl(product.getPresentationImage())
+                .category(product.getCategory())
+                .subcategory(product.getSubcategory())
+                .brand(product.getBrand())
                 .build());
     }
 

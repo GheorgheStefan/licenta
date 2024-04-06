@@ -1,68 +1,83 @@
-<form [formGroup]="myform">
-  <h1 mat-dialog-title>Add Product Details</h1>
-  <div mat-dialog-content>
+  <form [formGroup]="myform">
+    <h1 mat-dialog-title>Add Product Details</h1>
+    <div mat-dialog-content style="width: 80%; height: 80%; overflow: auto;">
 
-    <mat-form-field>
-      <mat-label> Nume Produs </mat-label>
-      <input formControlName="name" matInput>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label> Descriere </mat-label>
-      <input formControlName="description" matInput>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label> Pret </mat-label>
-      <input formControlName="price" matInput>
-    </mat-form-field>
-
-    <p>prezentation iamge</p>
-    <ngx-dropzone (change)="onSelectSingleImage($event)">
-      <ngx-dropzone-image-preview *ngFor="let f of prezentationFiles" [file]="f" [removable]="true" (removed)="onRemovePresentationImage(prezentationFiles[0])">
-        <ngx-dropzone-label >{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-      </ngx-dropzone-image-preview>
-    </ngx-dropzone>
-
-
-    <p>More image for products</p>
-    <ngx-dropzone (change)="onSelect($event)">
-      <ngx-dropzone-image-preview *ngFor="let f of files" [file]="f" [removable] = "true" (removed)="onRemove(f)">
-        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-      </ngx-dropzone-image-preview>
-    </ngx-dropzone>
-
-    <!--Multi image-->
-    <!-- https://stackoverflow.com/questions/51587241/how-to-upload-multiple-files-in-angular-6-with-addmore-button -->
-
-    <div formArrayName="sizes">
-      <div *ngFor="let size of sizesData.controls; let i = index" [formGroupName]="i">
+      <div style="display: flex; justify-content: space-between;">
         <mat-form-field>
-          <mat-label>Marime</mat-label>
-          <input formControlName="size" matInput>
+          <mat-label>Nume Produs</mat-label>
+          <input formControlName="name" matInput>
         </mat-form-field>
-        <mat-form-field>
-          <mat-label>Cantitate</mat-label>
-          <input formControlName="quantity" matInput>
-        </mat-form-field>
-        <button mat-icon-button color="warn" (click)="removeSize(i)">
-          <mat-icon>delete</mat-icon>
-        </button>
 
+        <mat-form-field>
+          <mat-label>Pret</mat-label>
+          <input formControlName="price" matInput>
+        </mat-form-field>
       </div>
+
+      <mat-form-field>
+        <mat-label>Descriere</mat-label>
+        <input formControlName="description" matInput>
+      </mat-form-field>
+
+      <div style="display: flex; justify-content: space-between;">
+
+        <mat-form-field>
+          <mat-label>Categorie</mat-label>
+          <input formControlName="category" matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Subcategorie</mat-label>
+          <input formControlName="subcategory" matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Brand</mat-label>
+          <input formControlName="brand" matInput>
+        </mat-form-field>
+      </div>
+
+      <p>prezentation image</p>
+      <ngx-dropzone (change)="onSelectSingleImage($event)">
+        <ngx-dropzone-image-preview *ngFor="let f of prezentationFiles" [file]="f" [removable]="true" (removed)="onRemovePresentationImage(prezentationFiles[0])">
+          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-image-preview>
+      </ngx-dropzone>
+
+
+      <p>More images for products</p>
+      <ngx-dropzone (change)="onSelect($event)">
+        <ngx-dropzone-image-preview *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-image-preview>
+      </ngx-dropzone>
+
+      <!--Multi image-->
+      <!-- https://stackoverflow.com/questions/51587241/how-to-upload-multiple-files-in-angular-6-with-addmore-button -->
+
+      <div formArrayName="sizes">
+        <div *ngFor="let size of sizesData.controls; let i = index" [formGroupName]="i">
+          <mat-form-field>
+            <mat-label>Marime</mat-label>
+            <input formControlName="size" matInput>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Cantitate</mat-label>
+            <input formControlName="quantity" matInput>
+          </mat-form-field>
+          <button mat-icon-button color="warn" (click)="removeSize(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <button mat-raised-button color="primary" (click)="addSize()">Add Size and Quantity</button>
+
+      <div mat-dialog-actions>
+        <button mat-button (click)="closePopup()">Exit</button>
+        <button mat-button (click)="addProduct()">Save</button>
+      </div>
+
     </div>
-
-    <button mat-raised-button color="primary" (click)="addSize()">Add Size and Quantity</button>
-
-
-
-  </div>
-
-  <div mat-dialog-actions>
-
-    <button mat-button (click)="closePopup()">Exit</button>
-    <button mat-button (click)="addProduct()">Save</button>
-
-  </div>
-</form>
+  </form>
 

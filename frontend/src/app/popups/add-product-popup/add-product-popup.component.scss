@@ -16,3 +16,10 @@ mat-card {
 button {
   margin: 2px;
 }
+
+form{
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+

@@ -18,6 +18,10 @@ import {MatButton} from "@angular/material/button";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {NgxPaginationModule} from "ngx-pagination";
 import {FootwearComponent} from "./site-page/footwear/footwear.component";
+import {MdbDropdownModule} from "mdb-angular-ui-kit/dropdown";
+import {AlertModule} from "ngx-bootstrap/alert";
+import {BsDropdownModule} from "ngx-bootstrap/dropdown";
+
 
 
 @NgModule({
@@ -43,7 +47,10 @@ import {FootwearComponent} from "./site-page/footwear/footwear.component";
     MatMenuTrigger,
     MatMenuItem,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MdbDropdownModule,
+    AlertModule.forRoot(),
+    BsDropdownModule
   ],
   providers: [],
   exports: [

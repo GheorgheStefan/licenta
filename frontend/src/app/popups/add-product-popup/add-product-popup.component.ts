@@ -67,7 +67,10 @@ export class AddProductPopupComponent implements OnInit{
     description: this.formBuilder.control(''),
     presentationImage: this.formBuilder.control(''),
     selectedImages: this.formBuilder.control(''),
-    sizes: this.formBuilder.array([])
+    sizes: this.formBuilder.array([]),
+    category: this.formBuilder.control(''),
+    subcategory: this.formBuilder.control(''),
+    brand: this.formBuilder.control('')
   });
   iamgesConverted: ImageData[] = [];
   get sizesData() {
@@ -111,8 +114,11 @@ export class AddProductPopupComponent implements OnInit{
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
-      presentationImage: [''],
-      selectedImages: [''],
+      presentationImage: ['', Validators.required],
+      selectedImages: ['', Validators.required],
+      category: ['', Validators.required],
+      subcategory: ['', Validators.required],
+      brand: ['', Validators.required],
       sizes: this.formBuilder.array([])
     });
 

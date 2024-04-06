@@ -14,5 +14,8 @@ public class ProductRegisterResponseDto {
     private String description;
     private float price;
     private String imageUrl;
+    private String category;
+    private String subcategory;
+    private String brand;
 
 }

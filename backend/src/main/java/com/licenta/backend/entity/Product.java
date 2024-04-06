@@ -24,6 +24,9 @@ public class Product {
     private String description;
     private float price;
     private String presentationImage;
+    private String category;
+    private String subcategory;
+    private String brand;
 
     @JsonIgnore
     @OneToMany(targetEntity=OtherProductImages.class, cascade = CascadeType.ALL)

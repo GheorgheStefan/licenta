@@ -1,61 +1,84 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
 
-* {
-  margin: 0;
-  padding: 10px;
-  box-sizing: border-box;
-  background-color: black;
-}
 li, a{
   font-family: 'Open Sans', sans-serif;
   font-weight: 500;
   font-size: 20px;
   color: white;
 }
-header {
+hero{
+  width: 100%;
+  min-height: 100vh;
+  background: black;
+}
+//bara de navigare
+nav{
+  background: black;
+  width: 100%;
+  padding: 10px 5% 0px 5%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 10px;
-}
-.nav_links li {
-  display: inline;
-  /*margin: 0 10px;*/
-}
-
-.nav_links li a {
-  transition: all 0.3s ease 0s;
-  text-decoration: none;
   position: relative;
 }
+.cart_icon,
+.user_icon {
+  color: white;
+}
 
-.nav_links li a::before {
-  content: "";
-  border-radius: 20px;
-  position: absolute;
-  width: 0; /* Start with zero width */
-  height: 5px;
-  bottom: -1px;
-  left: 0;
-  background-color: #0088a9;
-  visibility: hidden;
-  transition: all 0.3s ease 0s;
+//logou
+.logo{
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
 }
-.nav_links li a:hover::before {
-  visibility: visible;
-  width: 100%; /* Expand to 100% width on hover */
+//iconitele
+nav div{
+  display: flex;
+  list-style: none;
 }
-.nav_links li a:hover {
-  color: #0088a9;
+//linkurile din centru
+
+.nav_links{ //nav ul
+  width: 100%;
+  text-align: center;
 }
-.logo {
-  cursor: pointer;
+.nav_links li{ //nav ul li
+  display: inline-block;
+  list-style: none;
+  margin: 10px 20px;
 }
-.images{
-  width: 50px;
-  height: 50px;
+.nav_links li a{ //nav ul li a
+  text-decoration: none;
+  color: white;
+}
+
+.white-icon {
+  filter: brightness(0) invert(1);
+}
+/// lasa doar imaginea
+button-changer{
+  border: none;
+  background: none;
+}
+
+.custom-dropdown-menu {
   background-color: white;
+  color: black;
+  width: auto !important; /* Allow menu width to fit content */
 }
+
+.custom-dropdown-menu .dropdown-item {
+  color: black !important; /* Set item text color */
+}
+
+
+
+
+
+
+
+
 
 
 
