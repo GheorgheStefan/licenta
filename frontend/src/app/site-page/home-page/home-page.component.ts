@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 
 @Component({
@@ -6,11 +6,13 @@ import { Component } from '@angular/core';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit{
 
   constructor() {}
-  openDialog() {
-    // Implementează logica pentru deschiderea ferestrei modale aici
+
+  ngOnInit(): void {
+    console.log("localStorage",localStorage);
+    console.log("sessionStorage",sessionStorage);
   }
 
 }

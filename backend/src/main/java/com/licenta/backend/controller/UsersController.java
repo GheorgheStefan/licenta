@@ -4,11 +4,16 @@ import com.licenta.backend.dto.user.request.RegisterRequestDto;
 import com.licenta.backend.dto.user.request.SigninRequestDto;
 import com.licenta.backend.dto.user.response.RegisterResponseDto;
 import com.licenta.backend.dto.user.response.SigninResponseDto;
+import com.licenta.backend.entity.Product;
+import com.licenta.backend.entity.User;
 import com.licenta.backend.repository.UserRepository;
 import com.licenta.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -28,6 +33,16 @@ public class UsersController {
     public ResponseEntity<RegisterResponseDto> register(
             @RequestBody RegisterRequestDto request) {
         return ResponseEntity.ok(userService.register(request));
+    }
+
+    @GetMapping("/all")
+    public List<User> getAllProducts() {
+        return userRepository.findAll();
+    }
+
+    @GetMapping("/{mail}")
+    public User getUserByMail(@PathVariable String mail){
+        return userService.findUserByEmail(mail);
     }
 
 }

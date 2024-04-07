@@ -4,6 +4,7 @@ import com.licenta.backend.dto.user.request.RegisterRequestDto;
 import com.licenta.backend.dto.user.request.SigninRequestDto;
 import com.licenta.backend.dto.user.response.RegisterResponseDto;
 import com.licenta.backend.dto.user.response.SigninResponseDto;
+import com.licenta.backend.entity.Product;
 import com.licenta.backend.entity.Role;
 import com.licenta.backend.exceptions.UserAlreadyExistsException;
 import com.licenta.backend.exceptions.UserDoNotExistException;
@@ -17,6 +18,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.licenta.backend.entity.User;
+
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -72,4 +76,12 @@ public class UserService {
     public boolean checkIfUserExists(String email) {
         return userRepository.findByEmail(email).isPresent();
     }
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+    public User findUserByEmail(String email) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        return userOptional.orElse(null);
+    }
+
 }

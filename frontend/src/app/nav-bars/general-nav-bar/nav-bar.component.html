@@ -13,6 +13,23 @@
 
     <div class="btn-group" dropdown>
       <button dropdownToggle type="button" class="btn button-changer" aria-controls="dropdown-basic">
+        <i class="material-icons white-icon">person</i>
+      </button>
+      <ul *dropdownMenu class="dropdown-menu dropdown-menu-right custom-dropdown-menu"
+          role="menu" aria-labelledby="button-basic">
+<!--        <li role="menuitem" *ngIf="isLoggedIn()"><p class="dropdown-item">{{firstname}} {{lastname}}</p></li>-->
+        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item eliminate-link" href="#">{{ (firstname | truncateName: lastname) }}</a></li>
+
+        <li class="divider dropdown-divider" *ngIf="isLoggedIn()"></li>
+        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" href="#">Logged</a></li>
+        <li class="divider dropdown-divider" *ngIf="isLoggedIn()"></li>
+        <li role="menuitem" *ngIf="!isLoggedIn()"><a class="dropdown-item" href="/sign-in">Sign in</a></li>
+        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" href="/sign-in" (click)="signOut()">Sign out</a></li>
+      </ul>
+    </div>
+
+    <div class="btn-group" dropdown>
+      <button dropdownToggle type="button" class="btn button-changer" aria-controls="dropdown-basic">
         <i class="material-icons white-icon">shopping_cart</i>
       </button>
       <ul *dropdownMenu class="dropdown-menu dropdown-menu-right custom-dropdown-menu"
@@ -24,21 +41,6 @@
         <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a></li>
       </ul>
     </div>
-
-    <div class="btn-group" dropdown>
-      <button dropdownToggle type="button" class="btn button-changer" aria-controls="dropdown-basic">
-        <i class="material-icons white-icon">shopping_cart</i>
-      </button>
-      <ul *dropdownMenu class="dropdown-menu dropdown-menu-right custom-dropdown-menu"
-          role="menu" aria-labelledby="button-basic">
-        <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-        <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
-        <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
-        <li class="divider dropdown-divider"></li>
-        <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a></li>
-      </ul>
-    </div>
-
 
   </nav>
 </div>

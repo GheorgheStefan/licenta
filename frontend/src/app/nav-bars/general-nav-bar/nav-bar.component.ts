@@ -1,48 +1,38 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {MatIconModule} from "@angular/material/icon";
+import {JwtHandler} from "../../service/JwtHandler";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-general-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
-export class NavBarComponent {
-  cartDropdownVisible: boolean = false;
-  userDropdownVisible: boolean = false;
+export class NavBarComponent implements OnInit{
+  public firstname = "aaaaaaaaaaaaaaaaaaaaaaa";
+  public lastname = "aaaaaaaaaaaaaaaaaaaaaaa";
 
-  constructor() { }
-  toggleDropdownUser(event: Event) {
-    event.preventDefault(); // Prevent the default behavior of the <a> tag
-    event.stopPropagation(); // Oprim propagarea evenimentului în sus
-    this.userDropdownVisible = !this.userDropdownVisible;
+
+  constructor(private jwtHandler: JwtHandler,
+              private http: HttpClient) { }
+
+  ngOnInit(): void {
+    this.http.get('http://localhost:8080/users/'+this.jwtHandler.getEmail()).subscribe((data: any) => {
+      this.firstname = data.firstname;
+      this.lastname = data.lastname;
+      console.log(data);
+    });
+
   }
 
-  @HostListener('document:click', ['$event'])
-  onPageClick(event: MouseEvent): void {
-    const isCartDropdownVisible = this.cartDropdownVisible && !this.isClickedInside(event, 'cartDropdown');
-    const isUserDropdownVisible = this.userDropdownVisible && !this.isClickedInside(event, 'userDropdown');
-
-    if (isCartDropdownVisible || isUserDropdownVisible) {
-      if (isCartDropdownVisible) {
-        console.log('tot apar');
-        this.cartDropdownVisible = false;
-      }
-      if (isUserDropdownVisible) {
-        this.userDropdownVisible = false;
-      }
-    }
-  }
-  private isClickedInside(event: MouseEvent, dropdownId: string): boolean {
-    const targetElement = event.target as HTMLElement;
-    return !!targetElement.closest(`#${dropdownId}`);
+  isLoggedIn() {
+    return this.jwtHandler.isLoggedIn();
   }
 
-  toggleDropdownCart(event: Event) {
-    console.log('toggleDropdownCart');
-    event.preventDefault(); // Prevent the default behavior of the <a> tag
-    event.stopPropagation(); // Oprim propagarea evenimentului în sus
-
-    this.cartDropdownVisible = !this.cartDropdownVisible;
-    console.log('cartDropdownVisible: ', this.cartDropdownVisible);
+  signOut() {
+    this.jwtHandler.removeToken();
   }
+
+
+
 }

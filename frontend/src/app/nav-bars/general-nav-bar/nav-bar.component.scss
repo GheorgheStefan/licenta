@@ -69,8 +69,17 @@ button-changer{
 }
 
 .custom-dropdown-menu .dropdown-item {
+  display: inline-block;
+  width: auto;
   color: black !important; /* Set item text color */
 }
+.eliminate-link{
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: inherit;
+}
+
 
 
 

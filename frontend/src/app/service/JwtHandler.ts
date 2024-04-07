@@ -34,6 +34,15 @@ export class JwtHandler {
     return jwt.role;
   }
 
+  getEmail(): string {
+    const token = this.getToken();
+    if (token === null) {
+      return '';
+    }
+    const jwt = this.parseJwt(token);
+    return jwt.sub;
+  }
+
 
   setToken(token: string, rememberMe: boolean) {
     if(rememberMe) {

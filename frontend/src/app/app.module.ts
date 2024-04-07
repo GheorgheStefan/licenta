@@ -3,10 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from '../UserActions/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { RegisterComponent } from '../UserActions/register/register.component';
-import {RouterModule} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
 import { HomePageComponent } from './site-page/home-page/home-page.component';
 import { NavBarComponent } from './nav-bars/general-nav-bar/nav-bar.component';
@@ -21,14 +18,14 @@ import {FootwearComponent} from "./site-page/footwear/footwear.component";
 import {MdbDropdownModule} from "mdb-angular-ui-kit/dropdown";
 import {AlertModule} from "ngx-bootstrap/alert";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
+import {TruncateNamePipe} from "./nav-bars/truncate-name.pipe";
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
+    TruncateNamePipe,
     HomePageComponent,
     NavBarComponent,
     DashboardNavBarComponent,
