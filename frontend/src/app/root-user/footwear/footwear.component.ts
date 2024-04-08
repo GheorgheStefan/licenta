@@ -1,10 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../../service/product.service";
-import {NavigationExtras, Router} from "@angular/router";
+import {NavigationExtras, Router, RouterLink} from "@angular/router";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-footwear',
+  standalone: true,
   templateUrl: './footwear.component.html',
+  imports: [
+    NgForOf,
+    RouterLink
+  ],
   styleUrl: './footwear.component.scss'
 })
 export class FootwearComponent implements OnInit{
@@ -22,10 +28,6 @@ export class FootwearComponent implements OnInit{
   }
 
   openProduct(productId: any) {
-    this.productService.getProduct(productId).subscribe((data: any) => {
-      console.log(data.id); // Accessing the id property
-      console.log(data.name);
-      this.router.navigate([`/footwear/product/${data.id}`], { state: { productId: data.id } });
-    });
+      // this.router.navigate([`/footwear/product/${data.id}`], { state: { productId: data.id } });
   }
 }

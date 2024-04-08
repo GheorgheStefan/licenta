@@ -1,3 +1,4 @@
+
 mat-card {
   margin: 2%;
   text-align: left;
@@ -8,7 +9,7 @@ mat-card {
   margin: 1%;
 }
 
-.mat-sef { /* Incomplete */
+.mat-sef {
   width: 48%;
   margin: 1%;
 }
@@ -18,8 +19,6 @@ button {
 }
 
 form{
-  display: flex;
-  flex-wrap: wrap;
-  overflow: hidden;
+  height: auto;
 }
 

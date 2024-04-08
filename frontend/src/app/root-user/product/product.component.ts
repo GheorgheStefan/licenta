@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../service/product.service";
 import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-product-display',
+  selector: 'app-product',
   standalone: true,
   imports: [
     NgForOf,
@@ -14,10 +14,10 @@ import {FormsModule} from "@angular/forms";
     FormsModule,
     NgClass
   ],
-  templateUrl: './product-display.component.html',
-  styleUrl: './product-display.component.scss'
+  templateUrl: './product.component.html',
+  styleUrl: './product.component.scss'
 })
-export class ProductDisplayComponent implements OnInit{
+export class ProductComponent implements OnInit{
   productId: any;
   product: any;
   selectedSize: any;
@@ -31,19 +31,20 @@ export class ProductDisplayComponent implements OnInit{
               private productService: ProductService) { }
 
   ngOnInit(): void {
-    const navigation = window.history.state;
-    if (!navigation || navigation.productId === undefined) {
-      return;
-    }
-
-    this.productService.getProductDetails(navigation.productId).subscribe((product: any) => {
-      this.product = product;
-      this.images.push(this.product.product.presentationImage);
-      for (let image of this.product.images) {
-        this.images.push(image.imageUrl);
+    this.route.params.subscribe({
+      next: (params:any) => {
+        this.productService.getProductDetails(params.id).subscribe((product: any) => {
+          this.product = product;
+          console.log(this.product);
+          this.images.push(this.product.product.presentationImage);
+          for (let image of this.product.images) {
+            this.images.push(image.imageUrl);
+          }
+        }, error => {
+          console.log(error);
+        });
       }
-
-    });
+    })
 
   }
 

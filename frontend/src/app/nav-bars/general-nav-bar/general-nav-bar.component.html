@@ -18,8 +18,8 @@
       <ul *dropdownMenu class="dropdown-menu dropdown-menu-right custom-dropdown-menu"
           role="menu" aria-labelledby="button-basic">
 <!--        <li role="menuitem" *ngIf="isLoggedIn()"><p class="dropdown-item">{{firstname}} {{lastname}}</p></li>-->
-        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item eliminate-link" href="#">{{ (firstname | truncateName: lastname) }}</a></li>
-
+        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item eliminate-link" href="#">{{ firstname }}</a></li>
+<!--        (firstname | truncateName: lastname)-->
         <li class="divider dropdown-divider" *ngIf="isLoggedIn()"></li>
         <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" href="#">Logged</a></li>
         <li class="divider dropdown-divider" *ngIf="isLoggedIn()"></li>

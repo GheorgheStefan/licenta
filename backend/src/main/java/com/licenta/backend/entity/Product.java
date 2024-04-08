@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -37,6 +39,11 @@ public class Product {
     @OneToMany(targetEntity=Sizes.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private List<Sizes> productSizes;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "productList")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<ShoppingCart> shoppingCartList;
 
     public String toString() {
         return "Product{" +

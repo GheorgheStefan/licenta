@@ -4,6 +4,11 @@ import {AddProductPopupComponent} from "../../popups/add-product-popup/add-produ
 import {DeleteProductDialogComponent} from "../../popups/delete-product-dialog/delete-product-dialog.component";
 import {ProductService} from "../../service/product.service";
 import {UpdateProductPopupComponent} from "../../popups/update-product-popup/update-product-popup.component";
+import {MatButton} from "@angular/material/button";
+import {FormsModule} from "@angular/forms";
+import {NgForOf} from "@angular/common";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 
@@ -18,7 +23,17 @@ enum SearchAttribute {
 }
 @Component({
   selector: 'app-dashboard-products',
+  standalone: true,
   templateUrl: './dashboard-products.component.html',
+  imports: [
+    MatButton,
+    FormsModule,
+    NgForOf,
+    MatMenuTrigger,
+    MatMenu,
+    NgxPaginationModule,
+    MatMenuItem
+  ],
   styleUrls: ['./dashboard-products.component.scss']
 })
 export class DashboardProductsComponent implements OnInit{
@@ -41,7 +56,11 @@ export class DashboardProductsComponent implements OnInit{
 
   AddProductPopUp() {
     const dialogRef = this.dialog.open(AddProductPopupComponent, {
+      width: '800px',
+      height: '500px',
+      disableClose: true,
     });
+
     dialogRef.afterClosed().subscribe(() => {
       this.fetchProducts();
     });

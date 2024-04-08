@@ -2,13 +2,22 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {MatIconModule} from "@angular/material/icon";
 import {JwtHandler} from "../../service/JwtHandler";
 import {HttpClient} from "@angular/common/http";
+import {RouterLink} from "@angular/router";
+import {BsDropdownModule} from "ngx-bootstrap/dropdown";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-general-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss']
+  standalone: true,
+  templateUrl: './general-nav-bar.component.html',
+  imports: [
+    RouterLink,
+    BsDropdownModule,
+    NgIf
+  ],
+  styleUrls: ['./general-nav-bar.component.scss']
 })
-export class NavBarComponent implements OnInit{
+export class GeneralNavBarComponent implements OnInit{
   public firstname = "aaaaaaaaaaaaaaaaaaaaaaa";
   public lastname = "aaaaaaaaaaaaaaaaaaaaaaa";
 
