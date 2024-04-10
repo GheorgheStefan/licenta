@@ -1,6 +1,5 @@
 package com.licenta.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
@@ -19,13 +18,11 @@ import java.util.List;
 public class ShoppingCart {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private int quantity;
+    private int amount;
     private String size;
-    private String name;
-    private float price; //nuj daca are rost
-    private String presentationImage; //nuj daca are rost
+
 
     @ManyToMany
     @JoinTable(
@@ -35,6 +32,10 @@ public class ShoppingCart {
     )
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Product> productList;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     //produce one to many relationship
     //user one to one

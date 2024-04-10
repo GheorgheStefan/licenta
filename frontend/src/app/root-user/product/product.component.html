@@ -1,10 +1,12 @@
-<div class="d-flex" *ngIf="this.product">
+<div class="container" *ngIf="this.product">
 
-  <div *ngIf="images && images.length > 0" class="carousel-container">
+  <div *ngIf="images && images.length > 0" class="carousel-container product-images product-images-container ">
+    <div class="arrow left-arrow" (click)="previousImage()"></div>
     <img *ngFor="let image of images; let i=index"
          [src]="image"
          [ngClass]="{'image-active': selectedIndex === i}"
          class="transition">
+    <div class="arrow right-arrow" (click)="nextImage()"></div>
 
     <div *ngIf="indicators" class="carousel-dot-container">
     <span class="dot" *ngFor="let dot of images; let i = index"
@@ -15,22 +17,33 @@
     </div>
   </div>
 
-  <div class="flex-grow-1">
+  <div class="product-details-container">
+    <h1>Brand: {{ this.product.product.brand }}</h1>
     <h2>Name: {{ this.product.product.name }}</h2>
-    <p>Description: {{ this.product.product.description }}</p>
-
+    <h3>Price: {{ this.product.product.price }} RON </h3>
 
     <h3>Sizes:</h3>
-    <form #selectionForm="ngForm">
-      <label for="size">Select Size:</label>
-      <select id="size" name="size" [(ngModel)]="selectedSize" required>
-        <option *ngFor="let size of product.sizes" [value]="size">{{ size.size }}</option>
-      </select>
+    <form> <!-- aci mergea un div-->
+      <div>
+        <div *ngFor="let row of sizeRows" class="sizes-container">
+          <button class="size-cell" *ngFor="let size of row" [class.selected]="size === selectedSize"
+                  (click)="selectSize(size)" >
+            {{ size.size }}
+          </button>
+        </div>
+      </div>
 
-      <label for="quantity">Select Quantity:</label>
-      <input type="number" id="quantity" name="quantity" [(ngModel)]="selectedQuantity" min="1" required>
+      <label>Select Quantity:</label>
 
-      <button type="submit" (click)="addToCart()" [disabled]="!selectionForm.valid">Add to Cart</button>
+      <div class="container justify-content-center">
+        <div class="qty-input">
+          <button class="qty-count qty-count--minus" (click)="decrement()" type="button" [disabled]="!sizeSelected">-</button>
+          <input class="product-qty" type="number" name="product-qty" [(ngModel)]="selectedQuantity" required>
+          <button class="qty-count qty-count--add" (click)="increment()" type="button" [disabled]="!sizeSelected">+</button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn" (click)="addToCart()" [disabled]="!cartRegistrationForm.valid">Add to Cart</button>
     </form>
   </div>
 

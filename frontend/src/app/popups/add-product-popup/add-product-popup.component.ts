@@ -5,7 +5,7 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {FormArray, FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ProductService} from "../../service/product.service";
-import { NgxDropzoneModule} from 'ngx-dropzone';
+import {NgxDropzoneModule} from 'ngx-dropzone';
 import {NgForOf, NgIf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 
@@ -13,6 +13,7 @@ interface ImageData {
   imageUrl: any;
   imageType: any;
 }
+
 interface Product {
   id: number;
   name: string;
@@ -28,6 +29,7 @@ interface Size {
   size: string;
   quantity: number;
 }
+
 @Component({
   selector: 'app-add-product-popup',
   standalone: true,
@@ -50,13 +52,14 @@ interface Size {
   styleUrl: './add-product-popup.component.scss'
 })
 
-export class AddProductPopupComponent implements OnInit{
+export class AddProductPopupComponent implements OnInit {
   private presentationFilesData: File[] = [];
 
   constructor(private dialog: MatDialogRef<AddProductPopupComponent>,
               private formBuilder: FormBuilder,
               private productService: ProductService) {
   }
+
   srcResult: any;
   presentationImage: any;
   files: File[] = [];
@@ -73,6 +76,7 @@ export class AddProductPopupComponent implements OnInit{
     brand: this.formBuilder.control('')
   });
   iamgesConverted: ImageData[] = [];
+
   get sizesData() {
     return this.myform.get('sizes') as FormArray;
   }
@@ -96,10 +100,12 @@ export class AddProductPopupComponent implements OnInit{
       this.closePopup();
     });
   }
+
   closePopup() {
     this.dialog.close();
   }
-  onFileSelected( file: any) {
+
+  onFileSelected(file: any) {
     this.presentationImage = file;
     const inputNode: any = document.querySelector('#file');
     if (typeof (FileReader) !== 'undefined') {
@@ -109,6 +115,7 @@ export class AddProductPopupComponent implements OnInit{
       };
     }
   }
+
   ngOnInit() {
     this.myform = this.formBuilder.group({
       name: ['', Validators.required],
@@ -123,10 +130,11 @@ export class AddProductPopupComponent implements OnInit{
     });
 
   }
-  onSelect(event : any) {
+
+  onSelect(event: any) {
     if (this.files.length < 3)
       this.files.push(...event.addedFiles);
-    else{
+    else {
       for (let i = 3; i < this.files.length; i++) {
         this.files.splice(i, 1);
       }
@@ -136,14 +144,14 @@ export class AddProductPopupComponent implements OnInit{
 
   }
 
-  onRemove(event : any) {
+  onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
   onSelectSingleImage(event: any) {
-    if (this.prezentationFiles.length < 1){
+    if (this.prezentationFiles.length < 1) {
       this.prezentationFiles.push(...event.addedFiles);
-    }else{
+    } else {
       for (let i = 1; i < this.prezentationFiles.length; i++) {
         this.prezentationFiles.splice(i, 1);
       }
@@ -154,7 +162,7 @@ export class AddProductPopupComponent implements OnInit{
     this.presentationFilesData = this.prezentationFiles;
   }
 
-  onRemovePresentationImage(event : any) {
+  onRemovePresentationImage(event: any) {
     this.prezentationFiles.splice(this.prezentationFiles.indexOf(event), 1);
   }
 
@@ -177,6 +185,7 @@ export class AddProductPopupComponent implements OnInit{
       }
     }
   }
+
   removeSize(index: number) {
     this.sizesData.removeAt(index);
   }
