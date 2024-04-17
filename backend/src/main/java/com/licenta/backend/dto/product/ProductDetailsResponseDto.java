@@ -2,7 +2,7 @@ package com.licenta.backend.dto.product;
 
 import com.licenta.backend.entity.OtherProductImages;
 import com.licenta.backend.entity.Product;
-import com.licenta.backend.entity.Sizes;
+import com.licenta.backend.entity.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ProductDetailsResponseDto {
 
         private Product product;
-        private List<Sizes> sizes;
+        private List<Size> sizes;
         private List<OtherProductImages> images;
 
 }

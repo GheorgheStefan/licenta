@@ -1,0 +1,52 @@
+
+<div class="checkout-container">
+  <div class="container">
+    <p>checkout works!</p>
+  </div>
+
+   <div class="scroll-panel">
+        <div class="main-container" *ngFor="let item of cartItems" (click)="onItemClick(item.productId)">
+          <div class="product-image">
+            <img [src]="item.presentationImage" alt="product image">
+          </div>
+
+          <div class="product-details">
+            <div>Brand:{{item.brand}}</div>
+            <div>Name:{{item.name}}</div>
+            <div>Size:{{item.size}}</div>
+            <div class="product-quantity row">
+              <div class="col-auto">
+                <button mat-icon-button (click)="onDecreaseQuantity(item)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+              </div>
+              <div class="col-auto">
+                <span class="amount-container">Amount:{{ item.amount}}</span>
+              </div>
+              <div class="col-auto">
+                <button mat-icon-button (click)="onIncreaseQuantity(item)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-actions">
+            <div class="product-price">Price:{{item.price}} RON</div>
+            <button class="remove-product" mat-icon-button (click)="onRemoveItem(item)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+        </div>
+
+     <div>
+        <div class="total-price">Total price:{{totalPrice}} RON</div>
+        <button class="checkout-button" mat-raised-button (click)="onCheckout()">Checkout</button>
+    </div>
+
+</div>
+
+
+
+

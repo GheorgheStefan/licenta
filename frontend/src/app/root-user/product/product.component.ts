@@ -1,11 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 import {ProductService} from "../../service/product.service";
 import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {JwtHandler} from "../../service/JwtHandler";
 import {UserService} from "../../service/user.service";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 import {ShoppingCartService} from "./shoppingCart.service";
 
 @Component({

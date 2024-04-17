@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.licenta.backend.dto.product.*;
 import com.licenta.backend.entity.OtherProductImages;
 import com.licenta.backend.entity.Product;
-import com.licenta.backend.entity.Sizes;
+import com.licenta.backend.entity.Size;
 import com.licenta.backend.service.GoogleCloudStorageService;
 import com.licenta.backend.service.OtherProductImagesService;
 import com.licenta.backend.service.ProductService;
@@ -39,7 +39,7 @@ public class ProductController {
             @ModelAttribute ProductRegisterRequestDto productRegisterRequestDto
     ) throws IOException {
         List<OtherProductImages> otherProductImages = new ArrayList<>();
-        List<Sizes> sizes = new ArrayList<>();
+        List<Size> sizes = new ArrayList<>();
         List<ImageDetails> imageList = objectMapper.readValue(productRegisterRequestDto.getSelectedImages(), new TypeReference<>() {});
         List<SizeDetails> sizeDetailsList = objectMapper.readValue(productRegisterRequestDto.getSizes(), new TypeReference<>() {});
         for (var image : imageList){
@@ -48,7 +48,7 @@ public class ProductController {
                     .build());
         }
         for (var size : sizeDetailsList){
-            sizes.add(Sizes.builder()
+            sizes.add(Size.builder()
                             .quantity(size.getQuantity())
                             .size(size.getSize())
                     .build());
@@ -101,7 +101,7 @@ public class ProductController {
     }
     /// asta nu stiu daca e ok
     @GetMapping("/sizes/{id}")
-    public List<Sizes> getProductSizes(@PathVariable Long id) {
+    public List<Size> getProductSizes(@PathVariable Long id) {
         Product product = productService.findById(id);
         return product.getProductSizes();
     }
@@ -114,7 +114,7 @@ public class ProductController {
     @GetMapping("/{id}/details")
     public ProductDetailsResponseDto getProductDetails(@PathVariable Long id) {
         Product product = productService.findById(id);
-        List<Sizes> sizes = product.getProductSizes();
+        List<Size> sizes = product.getProductSizes();
         List<OtherProductImages> images = product.getSelectedImages();
 
         ProductDetailsResponseDto productDetailsDTO = new ProductDetailsResponseDto();
@@ -143,7 +143,7 @@ public class ProductController {
         sizesService.deleteByProductId(id);
 
         List<OtherProductImages> otherProductImages = new ArrayList<>();
-        List<Sizes> sizes = new ArrayList<>();
+        List<Size> sizes = new ArrayList<>();
         List<ImageDetails> imageList = objectMapper.readValue(productRegisterRequestDto.getSelectedImages(), new TypeReference<>() {});
         List<SizeDetails> sizeDetailsList = objectMapper.readValue(productRegisterRequestDto.getSizes(), new TypeReference<>() {});
 
@@ -154,7 +154,7 @@ public class ProductController {
         }
 
         for (var size : sizeDetailsList){
-            sizes.add(Sizes.builder()
+            sizes.add(Size.builder()
                     .quantity(size.getQuantity())
                     .size(size.getSize())
                     .build());

@@ -7,6 +7,7 @@ import {RootUserComponent} from "./root-user/root-user.component";
 import {HomePageComponent} from "./root-user/home-page/home-page.component";
 import {FootwearComponent} from "./root-user/footwear/footwear.component";
 import {ProductComponent} from "./root-user/product/product.component";
+import {CheckoutComponent} from "./checkout/checkout.component";
 
 export const routes: Routes = [
 
@@ -14,7 +15,9 @@ export const routes: Routes = [
   { path: 'dashboard/product', component: DashboardProductsComponent },
   { path: 'sign-in', component: UserSignInComponent },
   { path: 'register', component: UserRegisterComponent },
-  // { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: 'checkout', component: CheckoutComponent },
+
+
 
   {path:"", component: RootUserComponent, children: [
       { path: 'home', component: HomePageComponent},
@@ -23,7 +26,6 @@ export const routes: Routes = [
     ]}
 
 
-  // { path: 'footwear', component: FootwearComponent, children: [
-  //     { path: 'product/:id', component: ProductDisplayComponent }
-  //   ]},
+
+
 ];

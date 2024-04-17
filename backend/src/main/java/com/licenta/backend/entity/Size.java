@@ -11,7 +11,7 @@ import lombok.*;
 @Entity
 @Getter
 @Table(name = "sizes")
-public class Sizes {
+public class Size {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

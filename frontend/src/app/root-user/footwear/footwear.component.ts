@@ -27,7 +27,4 @@ export class FootwearComponent implements OnInit{
     });
   }
 
-  openProduct(productId: any) {
-      // this.router.navigate([`/footwear/product/${data.id}`], { state: { productId: data.id } });
-  }
 }
