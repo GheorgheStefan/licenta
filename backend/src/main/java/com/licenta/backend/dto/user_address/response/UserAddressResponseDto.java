@@ -1,6 +1,5 @@
-package com.licenta.backend.entity;
+package com.licenta.backend.dto.user_address.response;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,26 +9,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "user_address")
-public class UserAddress {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserAddressResponseDto {
     private Long id;
-
+    private String userFirstName;
+    private String userLastName;
     private String phoneNumber;
     private String address;
     private String postalCode;
     private String country;     //Romania
     private String region;      //Olt
     private String city;        //Slatina
-    private boolean shippingAddress;
-    private boolean billingAddress;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
-
-
-
+    private String isBillingAddress;
+    private String isShippingAddress;
 }

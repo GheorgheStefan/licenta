@@ -76,14 +76,10 @@ public class UserService {
     public boolean checkIfUserExists(String email) {
         return userRepository.findByEmail(email).isPresent();
     }
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
     public User findUserByEmail(String email) {
         Optional<User> userOptional = userRepository.findByEmail(email);
         return userOptional.orElse(null);
     }
-
     public User findUserById(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
         return userOptional.orElse(null);

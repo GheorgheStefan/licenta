@@ -17,10 +17,12 @@
           role="menu" aria-labelledby="button-basic">
         <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item eliminate-link" href="#">{{ (firstname | truncateName: lastname) }}</a></li>
         <li class="divider dropdown-divider" *ngIf="isLoggedIn()"></li>
-        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" href="#">Logged</a></li>
+        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" href="#">My Orders</a></li>
+        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" routerLink="/user/address">Addresses</a></li>
+        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" href="#">Personal Information</a></li>
         <li class="divider dropdown-divider" *ngIf="isLoggedIn()"></li>
-        <li role="menuitem" *ngIf="!isLoggedIn()"><a class="dropdown-item" href="/sign-in">Sign in</a></li>
-        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" href="/sign-in" (click)="signOut()">Sign out</a></li>
+        <li role="menuitem" *ngIf="!isLoggedIn()"><a class="dropdown-item" routerLink="/sign-in">Sign in</a></li>
+        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" routerLink="/sign-in" (click)="signOut()">Sign out</a></li>
       </ul>
     </div>
 

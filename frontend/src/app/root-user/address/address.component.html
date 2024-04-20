@@ -1,0 +1,62 @@
+<h3>Addresses</h3>
+
+<div class="main-container">
+  <h2>Default addresses</h2>
+  <div class="main-addresses">
+    <div class="billing-address">
+
+      <div *ngIf="isBillingAddressSet">
+        <h4>Billing Address</h4>
+        <p>Name: {{userBillingAddress.userFirstName}} {{userBillingAddress.userLastName}}</p>
+        <p>Phone: {{userBillingAddress.phoneNumber}}</p>
+        <p>Address: {{userBillingAddress.address}}</p>
+        <p>{{userBillingAddress.country}}, {{userBillingAddress.region}}, {{userBillingAddress.city}}</p>
+        <p>Postal code: {{userBillingAddress.postalCode}}</p>
+        <a class="link" (click)="editAddressPopup(userBillingAddress.id)">Modify address</a>
+      </div>
+      <div *ngIf="!isBillingAddressSet">
+        <h4>Billing Address</h4>
+        <p>Not yet set</p>
+      </div>
+    </div>
+
+    <div class="shipping-address">
+      <div *ngIf="isShippingAddressSet">
+        <h4>Shipping Address</h4>
+        <p>Name: {{userShippingAddress.userFirstName}} {{userShippingAddress.userLastName}}</p>
+        <p>Phone: {{userShippingAddress.phoneNumber}}</p>
+        <p>Address: {{userShippingAddress.address}}</p>
+        <p>{{userShippingAddress.country}}, {{userShippingAddress.region}}, {{userShippingAddress.city}}</p>
+        <p>Postal code: {{userShippingAddress.postalCode}}</p>
+        <a class="link" (click)="editAddressPopup(userShippingAddress.id)">Modify address</a>
+      </div>
+      <div *ngIf="!isShippingAddressSet">
+        <h4>Shipping Address</h4>
+        <p>Not yet set</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Other Addresses</h2>
+  <div class="other_addresses">
+    <div *ngFor="let address of userAddresses">
+      <h4>Addresses</h4>
+      <p>Name: {{address.userFirstName}} {{address.userLastName}}</p>
+      <p>Phone: {{address.phoneNumber}}</p>
+      <p>Address: {{address.address}}</p>
+      <p>{{address.country}}, {{address.region}}, {{address.city}}</p>
+      <p>Postal code: {{address.postalCode}}</p>
+      <a class="link" (click)="editAddressPopup(address.id)">Modify address</a>
+      <a class="link" (click)="deleteAddress(address.id)">Delete address</a>
+    </div>
+
+    <div *ngIf="!userAddresses">
+      <p>No addresses found!</p>
+    </div>
+  </div>
+
+</div>
+<div class="add-button">
+  <button type="submit" class="btn" (click)="addAddress()">Add address</button>
+</div>
+<!--<button type="submit" class="btn" [disabled]="!loginForm.valid">Login</button>-->

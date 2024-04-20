@@ -84,6 +84,7 @@ export class DashboardProductsComponent implements OnInit{
         }
       });
       this.products = this.products.filter((product: Product) => product.id !== productId);
+      // this.fetchProducts(); // TODO: de verificat cand ajung la admin la stergere am problema, da nu aici neaparat, sa ma uit in toata metoda
       return;
     }
 

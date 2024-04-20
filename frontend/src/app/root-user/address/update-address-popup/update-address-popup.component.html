@@ -1,0 +1,37 @@
+<h3 class="title"> Update Address </h3>
+
+<form [formGroup]="myform">
+  <div class="address-details">
+    <mat-form-field>
+      <mat-label>Numar de telefon</mat-label>
+      <input formControlName="phoneNumber" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Adresa</mat-label>
+      <input formControlName="address" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Cod Postal</mat-label>
+      <input formControlName="postalCode" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tara</mat-label>
+      <input formControlName="country" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Judet</mat-label>
+      <input formControlName="region" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Oras</mat-label>
+      <input formControlName="city" matInput>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="isBillingAddress">Set Billing Address</mat-checkbox>
+    <mat-checkbox formControlName="isShippingAddress">Set Shipping Address</mat-checkbox>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="updateAddress()">Add Address</button>
+
+</form>
+

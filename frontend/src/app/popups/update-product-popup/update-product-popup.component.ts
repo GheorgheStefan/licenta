@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {NgxDropzoneModule} from "ngx-dropzone";
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -13,7 +13,6 @@ import {
 import {MatInput} from "@angular/material/input";
 import {NgForOf} from "@angular/common";
 import {ProductService} from "../../service/product.service";
-import {of} from "rxjs";
 import {MatIcon} from "@angular/material/icon";
 
 interface ImageData {
@@ -53,7 +52,8 @@ interface Size {
     NgForOf,
     MatDialogContent,
     MatDialogTitle,
-    MatIcon
+    MatIcon,
+    MatIconButton
   ],
   templateUrl: './update-product-popup.component.html',
   styleUrl: './update-product-popup.component.scss'
@@ -179,7 +179,6 @@ export class UpdateProductPopupComponent  implements OnInit{
     });
     this.productService.getProductSizes(this.data.productId).subscribe(Data => {
       this.product = Data;
-      // console.log(Data);
       for (const data of this.product) {
         this.sizesData.push(this.formBuilder.group({
           size: data.size,

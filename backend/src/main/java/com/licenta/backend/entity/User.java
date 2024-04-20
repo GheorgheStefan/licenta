@@ -2,10 +2,7 @@ package com.licenta.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+//@Getter
 @Table(name = "user")
 public class User implements UserDetails {
     @Id
@@ -39,6 +37,11 @@ public class User implements UserDetails {
     @OneToOne(targetEntity=ShoppingCart.class, cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private ShoppingCart shoppingCart;
+
+    @JsonIgnore
+    @OneToMany(targetEntity = UserAddress.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<UserAddress> userAddresses;
 
 
 

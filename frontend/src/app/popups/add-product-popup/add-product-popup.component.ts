@@ -57,8 +57,7 @@ export class AddProductPopupComponent implements OnInit {
 
   constructor(private dialog: MatDialogRef<AddProductPopupComponent>,
               private formBuilder: FormBuilder,
-              private productService: ProductService) {
-  }
+              private productService: ProductService) {}
 
   srcResult: any;
   presentationImage: any;

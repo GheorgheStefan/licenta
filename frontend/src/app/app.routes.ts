@@ -8,6 +8,7 @@ import {HomePageComponent} from "./root-user/home-page/home-page.component";
 import {FootwearComponent} from "./root-user/footwear/footwear.component";
 import {ProductComponent} from "./root-user/product/product.component";
 import {CheckoutComponent} from "./checkout/checkout.component";
+import {AddressComponent} from "./root-user/address/address.component";
 
 export const routes: Routes = [
 
@@ -22,7 +23,8 @@ export const routes: Routes = [
   {path:"", component: RootUserComponent, children: [
       { path: 'home', component: HomePageComponent},
       { path: 'footwear', component: FootwearComponent },
-      { path: 'footwear/product/:id', component: ProductComponent }
+      { path: 'footwear/product/:id', component: ProductComponent },
+      { path: 'user/address', component: AddressComponent },
     ]}
 
 

@@ -73,9 +73,6 @@ export class ProductComponent implements OnInit {
 
   }
 
-
-
-
   nextImage() {
     if (this.selectedIndex < this.images.length - 1) {
       this.selectedIndex++;
@@ -124,7 +121,6 @@ export class ProductComponent implements OnInit {
       this.selectedQuantity--;
     }
   }
-
 
   addToCart() {
     this.cartRegistrationForm.patchValue({
