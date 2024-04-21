@@ -1,12 +1,13 @@
 <div class="container" *ngIf="this.product">
 
   <div *ngIf="images && images.length > 0" class="carousel-container product-images product-images-container ">
-    <div class="arrow left-arrow" (click)="previousImage()"></div>
+<!--    <div class="arrow left-arrow" (click)="previousImage()"></div>-->
     <img *ngFor="let image of images; let i=index"
          [src]="image"
          [ngClass]="{'image-active': selectedIndex === i}"
-         class="transition">
+         class="transition" alt="">
     <div class="arrow right-arrow" (click)="nextImage()"></div>
+    <div class="arrow left-arrow" (click)="previousImage()"></div>
 
     <div *ngIf="indicators" class="carousel-dot-container">
     <span class="dot" *ngFor="let dot of images; let i = index"

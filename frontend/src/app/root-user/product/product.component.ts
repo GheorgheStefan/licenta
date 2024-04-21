@@ -84,6 +84,7 @@ export class ProductComponent implements OnInit {
   previousImage() {
     if (this.selectedIndex > 0) {
       this.selectedIndex--;
+    }else {
       this.selectedIndex = this.images.length - 1;
     }
   }

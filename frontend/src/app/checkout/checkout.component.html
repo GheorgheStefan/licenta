@@ -1,50 +1,128 @@
+<div class="bara-navigare">
+  <div class="logo">Logo</div>
+  <div class="checkout-scris logo">Checkout</div>
+</div>
 
 <div class="checkout-container">
-  <div class="container">
-    <p>checkout works!</p>
-  </div>
-
-   <div class="scroll-panel">
-        <div class="main-container" *ngFor="let item of cartItems" (click)="onItemClick(item.productId)">
-          <div class="product-image">
-            <img [src]="item.presentationImage" alt="product image">
+  <div class="container-info">
+    <div class="shipping-address">
+      <div *ngIf="isShippingAddressSet">
+        <div class="shipping-details">
+          <div class="shipping-address-title"><h4>1.Shipping Address</h4></div>
+          <div class="shipping-address-content">
+            <p>Name: {{ shippingAddress.userFirstName }} {{ shippingAddress.userLastName }}</p>
+            <p>Phone: {{ shippingAddress.phoneNumber }}</p>
+            <p>Address: {{ shippingAddress.address }}</p>
+            <p>{{ shippingAddress.country }}, {{ shippingAddress.region }}, {{ shippingAddress.city }}</p>
+            <p>Postal code: {{ shippingAddress.postalCode }}</p>
           </div>
-
-          <div class="product-details">
-            <div>Brand:{{item.brand}}</div>
-            <div>Name:{{item.name}}</div>
-            <div>Size:{{item.size}}</div>
-            <div class="product-quantity row">
-              <div class="col-auto">
-                <button mat-icon-button (click)="onDecreaseQuantity(item)">
-                  <mat-icon>remove</mat-icon>
-                </button>
-              </div>
-              <div class="col-auto">
-                <span class="amount-container">Amount:{{ item.amount}}</span>
-              </div>
-              <div class="col-auto">
-                <button mat-icon-button (click)="onIncreaseQuantity(item)">
-                  <mat-icon>add</mat-icon>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="product-actions">
-            <div class="product-price">Price:{{item.price}} RON</div>
-            <button class="remove-product" mat-icon-button (click)="onRemoveItem(item)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-
         </div>
+      </div>
+      <div *ngIf="!isShippingAddressSet">
+        <div class="shipping-address-title"><h4>1. Shipping Address</h4></div>
+        <p>Not yet set</p>
+      </div>
 
-     <div>
-        <div class="total-price">Total price:{{totalPrice}} RON</div>
-        <button class="checkout-button" mat-raised-button (click)="onCheckout()">Checkout</button>
+      <div class="change-address">
+        <div>
+          <a class="link" (click)="editAddressPopup(shippingAddress.id)">Modify address</a>
+        </div>
+      </div>
     </div>
 
+    <div class="curier shipping-address">
+      <div class="shipping-address-title">
+        <h4>2. Delivery</h4>
+      </div>
+      <div class="curier2">
+        <div class="delivery-option" style="display: flex; justify-content: space-between;">
+          <mat-checkbox color="primary" [(ngModel)]="inHouseDelivery" (click)="toggleCheckbox('inHouse')">
+            <span matTooltip="The delivery is made by us!">
+              <h1 style="margin: 0;">In-house Delivery</h1>
+            </span>
+            <p style="margin: 0;">Delivery in 2-3 days</p>
+          </mat-checkbox>
+          <h4>10 RON</h4>
+        </div>
+        <div class="delivery-option" style="display: flex; justify-content: space-between;">
+          <mat-checkbox color="primary" [(ngModel)]="externalDelivery" (click)="toggleCheckbox('external')">
+            <span matTooltip="The delivery is made by GLS or DHL!">
+              <h1 style="margin: 0;">Standard delivery</h1>
+            </span>
+            <p style="margin: 0;">Delivery in 3-4 days</p>
+          </mat-checkbox>
+          <h4>20 RON</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-panel">
+    <div class="main-container" *ngFor="let item of cartItems" (click)="onItemClick(item.productId)">
+      <div class="product-image">
+        <img [src]="item.presentationImage" alt="product image">
+      </div>
+
+      <div class="product-details">
+        <div class="item">Brand:{{ item.brand }}</div>
+        <div class="item">Name:{{ item.name }}</div>
+        <div class="item">Size:{{ item.size }}</div>
+        <div class="product-quantity">
+          <div class="buton-propriu-zis">
+            <div class="arithmetic-sign">
+              <button class="quantity-button" (click)="onDecreaseQuantity(item)">
+                <i class="material-icons white-icon">remove</i>
+              </button>
+            </div>
+            <div class="display-quantity">
+              <div>{{ item.amount }}</div>
+            </div>
+            <div class="arithmetic-sign">
+              <button class="quantity-button" (click)="onIncreaseQuantity(item)">
+                <i class="material-icons white-icon">add</i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-actions">
+        <div class="product-price">
+          <div> {{ item.price }} RON</div>
+        </div>
+        <div>
+          <button class="remove-product" (click)="onRemoveItem(item)">
+            <i class="material-icons">delete</i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <hr>
+    <div style="display: flex; justify-content: space-between;">
+      <div class="total-price">Products price:</div>
+      <div class="actual-price">{{ productsPrice }} RON</div>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+      <div class="total-price">Shipping price:</div>
+      <div class="actual-price">{{ shippingPrice }} RON</div>
+    </div>
+    <hr>
+    <div style="display: flex; justify-content: space-between;">
+      <div class="total-price">Total price:</div>
+      <div class="actual-price">{{ totalPrice }} RON</div>
+    </div>
+  </div>
+</div>
+
+<div class="checkout-button">
+  <button type="submit" class="btn" (click)="onCheckout()">Place Order</button>
+</div>
+
+<hr>
+<div class="conditions">
+  <div>   By placing your order, you confirm that you are of legal age and that you accept our Purchasing <a href="">Conditions</a> and our
+    <a href="">Privacy Policy</a>.</div>
 </div>
 
 
