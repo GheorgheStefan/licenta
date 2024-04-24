@@ -155,6 +155,7 @@ export class UpdateProductPopupComponent  implements OnInit{
       selectedImages: JSON.stringify(this.iamgesConverted),
       sizes: JSON.stringify(this.sizesData.value)
     };
+    console.log("Produsul updatat este:");
     console.log(product);
     this.productService.updateProduct(this.productId, product).subscribe(httpResponse => {
       console.log(httpResponse);

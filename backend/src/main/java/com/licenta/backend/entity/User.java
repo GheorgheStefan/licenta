@@ -43,6 +43,11 @@ public class User implements UserDetails {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<UserAddress> userAddresses;
 
+    @JsonIgnore
+    @OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<Order> orders;
+
 
 
     public String toString() {

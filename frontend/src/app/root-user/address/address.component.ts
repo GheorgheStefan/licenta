@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AddressService} from "./address.service";
 import {NgForOf, NgIf} from "@angular/common";
-import {AddProductPopupComponent} from "../../popups/add-product-popup/add-product-popup.component";
 import {AddAddressPopupComponent} from "./add-address-popup/add-address-popup.component";
 import {MatDialog} from "@angular/material/dialog";
 import {JwtHandler} from "../../service/JwtHandler";
 import {UpdateAddressPopupComponent} from "./update-address-popup/update-address-popup.component";
+import {forkJoin, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-address',
@@ -18,7 +18,7 @@ import {UpdateAddressPopupComponent} from "./update-address-popup/update-address
   styleUrl: './address.component.scss'
 })
 
-export class AddressComponent implements OnInit {
+export class AddressComponent implements OnInit, OnDestroy {
   isShippingAddressSet: any = true;
   isBillingAddressSet: any = true;
   addressesExist: any = true;
@@ -26,6 +26,8 @@ export class AddressComponent implements OnInit {
   userBillingAddress: any;
   userShippingAddress: any;
   userAddresses: any[] = [];
+
+  subscriptions: Subscription[] = [];
 
   constructor(private addressService: AddressService,
               private dialog: MatDialog,
@@ -35,34 +37,28 @@ export class AddressComponent implements OnInit {
   ngOnInit(): void {
     this.fetchAddresses();
   }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
 
   fetchAddresses(): void {
-    this.userBillingAddress = this.addressService.getUserBillingAddress(this.jwtHandler.getEmail()).subscribe(
-      (res: any) => {
-        this.userBillingAddress = res;
+    const billingAddress$ = this.addressService.getUserBillingAddress(this.jwtHandler.getEmail());
+    const shippingAddress$ = this.addressService.getUserShippingAddress(this.jwtHandler.getEmail());
+    const userAddresses$ = this.addressService.getUserAddresses(this.jwtHandler.getEmail());
+
+    const combinedSub = forkJoin([billingAddress$, shippingAddress$, userAddresses$]).subscribe(
+      ([billingAddress, shippingAddress, userAddresses]) => {
+        this.userBillingAddress = billingAddress;
+        this.userShippingAddress = shippingAddress;
+        this.userAddresses = userAddresses;
       },
       error => {
         this.isBillingAddressSet = false;
-      }
-    );
-    this.userShippingAddress = this.addressService.getUserShippingAddress(this.jwtHandler.getEmail()).subscribe(
-      (res: any) => {
-        this.userShippingAddress = res;
-      },
-      error => {
         this.isShippingAddressSet = false;
-      }
-    );
-
-    this.addressService.getUserAddresses(this.jwtHandler.getEmail()).subscribe(
-      (res: any) => {
-        this.userAddresses = res;
-        console.log(this.userAddresses);
-      },
-      error => {
         this.addressesExist = false;
       }
     );
+    this.subscriptions.push(combinedSub);
   }
 
   addAddress() {
@@ -71,7 +67,7 @@ export class AddressComponent implements OnInit {
       height: '500px',
     });
 
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe((data) => {
       this.fetchAddresses();
     });
   }

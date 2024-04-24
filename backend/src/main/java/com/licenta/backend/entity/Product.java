@@ -43,6 +43,11 @@ public class Product {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private List<CartProduct> cartProducts;
 
+    @JsonIgnore
+    @OneToMany(targetEntity=OrderProduct.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private List<OrderProduct> orderProducts;
+
     public String toString() {
         return "Product{" +
                 "id=" + id +

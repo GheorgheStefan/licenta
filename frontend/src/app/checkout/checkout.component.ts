@@ -16,6 +16,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatTooltip} from "@angular/material/tooltip";
 import {FormsModule} from "@angular/forms";
+import {CheckoutService} from "./services/checkout.service";
 
 @Component({
   selector: 'app-checkout',
@@ -45,7 +46,8 @@ export class CheckoutComponent implements OnInit {
               private shoppingCartService: ShoppingCartService,
               private jwtHandler: JwtHandler,
               private addressService: AddressService,
-              private dialog: MatDialog
+              private dialog: MatDialog,
+              private checkoutService: CheckoutService
   ) {
   }
 
@@ -93,7 +95,6 @@ export class CheckoutComponent implements OnInit {
     }
 
     this.cartProductService.modifyCartAmount(item).subscribe((response: any) => {
-      // console.log(response);
       this.refreshTotalPrice();
     });
   }
@@ -119,6 +120,18 @@ export class CheckoutComponent implements OnInit {
   }
 
   onCheckout() {
+    let order = {
+      userId: this.userId,
+      shippingMethod: this.inHouseDelivery ? 'inHouse' : 'standard',
+      shippingPrice: this.shippingPrice,
+      productsPrice: this.productsPrice
+    };
+    console.log("asta e orderul meu", order);
+    this.checkoutService.saveOrder(order).subscribe((response: any) => {
+      console.log(response);
+      this.cartItems = [];
+      this.refreshTotalPrice();
+    });
 
   }
 
@@ -130,9 +143,11 @@ export class CheckoutComponent implements OnInit {
     if (this.inHouseDelivery) {
       this.totalPrice += 10;
       this.shippingPrice = 10;
+      this.inHouseDelivery = true;
     } else if (this.externalDelivery) {
       this.totalPrice += 20;
       this.shippingPrice = 20;
+      this.inHouseDelivery = false;
     }
 
     this.productsPrice = this.totalPrice - this.shippingPrice;
@@ -149,7 +164,8 @@ export class CheckoutComponent implements OnInit {
       this.fetchAddresses();
     });
   }
-  toggleCheckbox(checkbox: string){
+
+  toggleCheckbox(checkbox: string) {
     if (checkbox === 'inHouse') {
       this.inHouseDelivery = true;
       this.externalDelivery = false;

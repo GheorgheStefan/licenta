@@ -18,6 +18,7 @@ export class ProductService {
     for (let key in data) {
       formData.append(key, data[key]);
     }
+    console.log(formData);
     return formData;
   }
   saveProduct(product: any) {

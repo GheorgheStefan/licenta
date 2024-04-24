@@ -125,13 +125,13 @@ public class ProductController {
         return productDetailsDTO;
     }
     ///////
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{productId}")
     public ResponseEntity<ProductRegisterResponseDto> updateProduct(
-            @PathVariable Long id,
+            @PathVariable Long productId,
             @ModelAttribute ProductRegisterRequestDto productRegisterRequestDto
     ) throws IOException {
 
-        Product product = productService.findById(id);
+        Product product = productService.findById(productId);
         //image delete
         for (var image : product.getSelectedImages()){
             googleCloudStorageService.deleteImage(image.getImageUrl());
@@ -139,8 +139,8 @@ public class ProductController {
         googleCloudStorageService.deleteImage(product.getPresentationImage());
         //image delete
 
-        otherProductImagesService.deleteByProductId(id);
-        sizesService.deleteByProductId(id);
+        otherProductImagesService.deleteByProductId(productId);
+        sizesService.deleteByProductId(productId);
 
         List<OtherProductImages> otherProductImages = new ArrayList<>();
         List<Size> sizes = new ArrayList<>();
