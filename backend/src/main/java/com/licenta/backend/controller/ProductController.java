@@ -7,7 +7,7 @@ import com.licenta.backend.dto.product.*;
 import com.licenta.backend.entity.OtherProductImages;
 import com.licenta.backend.entity.Product;
 import com.licenta.backend.entity.Size;
-import com.licenta.backend.service.GoogleCloudStorageService;
+import com.licenta.backend.service.utils.GoogleCloudStorageService;
 import com.licenta.backend.service.OtherProductImagesService;
 import com.licenta.backend.service.ProductService;
 import com.licenta.backend.service.SizesService;

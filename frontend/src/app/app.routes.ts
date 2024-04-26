@@ -9,25 +9,22 @@ import {FootwearComponent} from "./root-user/footwear/footwear.component";
 import {ProductComponent} from "./root-user/product/product.component";
 import {CheckoutComponent} from "./checkout/checkout.component";
 import {AddressComponent} from "./root-user/address/address.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
 
 export const routes: Routes = [
 
-  { path: 'dashboard/home', component: DashboardHomeComponent},
-  { path: 'dashboard/product', component: DashboardProductsComponent },
   { path: 'sign-in', component: UserSignInComponent },
   { path: 'register', component: UserRegisterComponent },
   { path: 'checkout', component: CheckoutComponent },
 
-
-
-  {path:"", component: RootUserComponent, children: [
+  {path:"", component: RootUserComponent,children: [
       { path: 'home', component: HomePageComponent},
       { path: 'footwear', component: FootwearComponent },
       { path: 'footwear/product/:id', component: ProductComponent },
       { path: 'user/address', component: AddressComponent },
+    ]},
+  {path: "dashboard", component: DashboardComponent, children: [
+      { path: 'home', component: DashboardHomeComponent },
+      { path: 'product', component: DashboardProductsComponent }
     ]}
-
-
-
-
 ];

@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class OrderRequestDto {
     private Long userId;
     private String shippingMethod;
-    private int ProductsPrice;
-    private int shippingPrice;
+    private Float productsPrice;
+    private Float shippingPrice;
 }

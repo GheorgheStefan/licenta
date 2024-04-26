@@ -23,6 +23,8 @@ public class Order {
     private LocalDate orderDate;
     private String status;
     private String shippingOption;
+    private Float productsPrice;
+    private Float shippingPrice;
 
 
     private String deliveryAddress;
@@ -31,6 +33,7 @@ public class Order {
     private String deliveryCountry;
     private String deliveryPostalCode;
     private String deliveryPhoneNumber;
+
     private String BillingAddress;
     private String BillingCity;
     private String BillingRegion;

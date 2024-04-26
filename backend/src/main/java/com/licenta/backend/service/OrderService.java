@@ -63,6 +63,8 @@ public class OrderService {
                 .user(user.get())
                 .orderDate(LocalDate.now())
                 .status("PENDING")
+                .shippingPrice(orderRequestDto.getShippingPrice())
+                .productsPrice(orderRequestDto.getProductsPrice())
                 .shippingOption(orderRequestDto.getShippingMethod())
                 .deliveryAddress(shippingAddress.getAddress())
                 .deliveryCity(shippingAddress.getCity())
