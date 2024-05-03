@@ -1,16 +1,18 @@
 package com.licenta.backend.service;
 
+import com.licenta.backend.dto.user.request.ChangePasswordRequestDto;
 import com.licenta.backend.dto.user.request.RegisterRequestDto;
+import com.licenta.backend.dto.user.request.ResetUserPasswordRequestDto;
 import com.licenta.backend.dto.user.request.SigninRequestDto;
 import com.licenta.backend.dto.user.response.RegisterResponseDto;
 import com.licenta.backend.dto.user.response.SigninResponseDto;
-import com.licenta.backend.entity.Product;
 import com.licenta.backend.entity.Role;
 import com.licenta.backend.exceptions.UserAlreadyExistsException;
 import com.licenta.backend.exceptions.UserDoNotExistException;
 import com.licenta.backend.exceptions.WrongPasswordException;
 import com.licenta.backend.repository.UserRepository;
 import com.licenta.backend.security.JwtService;
+import com.licenta.backend.service.utils.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -31,6 +33,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+    private final EmailService emailService;
 
 
 
@@ -64,12 +67,15 @@ public class UserService {
         logger.info("Firstname: {}", request.getFirstname());
         newUser.setLastname(request.getLastname());
         logger.info("Lastname: {}", request.getLastname());
+        newUser.setEnabled(false);
         newUser.setRole(Role.BUYER);
 
         userRepository.save(newUser);
 
         return RegisterResponseDto.builder()
                 .token(jwtService.generateToken(newUser))
+                .userId(newUser.getId())
+                .email(newUser.getEmail())
                 .build();
     }
 
@@ -85,4 +91,46 @@ public class UserService {
         return userOptional.orElse(null);
     }
 
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public User changeRole(Long id, Role role) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setRole(role);
+            userRepository.save(user);
+            return user;
+        }
+        return null;
+    }
+
+    public void activateUser(String token) {
+        String email = jwtService.extractEmail(token);
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setEnabled(true);
+            userRepository.save(user);
+        }
+    }
+
+    public void sendMailResetPassword(ResetUserPasswordRequestDto requestBody) {
+        Optional<User> userOptional = userRepository.findByEmail(requestBody.getEmail());
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            String link = "http://localhost:4200/reset-password/" + user.getId();
+            emailService.sendResetPasswordEmail(user.getEmail(), link, user.getFirstname(), user.getLastname());
+        }
+    }
+
+    public void resetPassword(Long id, ChangePasswordRequestDto requestDto) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setPassword(passwordEncoder.encode(requestDto.getNewPassword()));
+            userRepository.save(user);
+        }
+    }
 }

@@ -127,7 +127,26 @@
         </dependency>
 <!--        -->
 
+<!--        SendGrid-->
+        <dependency>
+            <groupId>com.sendgrid</groupId>
+            <artifactId>sendgrid-java</artifactId>
+            <version>4.9.3</version>
+        </dependency>
+        <!--        -->
 
+        <!--   QRcode     -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.5.2</version>
+        </dependency>
+        <!--        -->
     </dependencies>
 
 

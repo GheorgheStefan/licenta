@@ -38,8 +38,7 @@ export class UserRegisterComponent implements OnInit{
       }
     }
 
-    this.userService.register(requestData)
-      .subscribe((data: any) => {
+    this.userService.register(requestData).subscribe((data: any) => {
         console.log('POST Request Response:', data);
         this.userService.redirectToLogin();
       });

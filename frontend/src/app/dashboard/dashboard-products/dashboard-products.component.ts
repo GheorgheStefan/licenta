@@ -42,7 +42,7 @@ export class DashboardProductsComponent implements OnInit{
   name: any = "";
   selectedAttribute: keyof Product = 'name';
   readonly searchAttributes: string[] = Object.values(SearchAttribute);
-  p: number = 1;
+    p: number = 1;
 
   constructor(private dialog: MatDialog,
               private productService: ProductService) {

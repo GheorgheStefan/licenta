@@ -2,12 +2,15 @@ package com.licenta.backend.service;
 
 import com.licenta.backend.dto.order.OrderRequestDto;
 import com.licenta.backend.dto.order.OrderResponseDto;
+import com.licenta.backend.dto.order.response.OrderDashboardResponseDto;
 import com.licenta.backend.entity.*;
 import com.licenta.backend.exceptions.UserDoNotExistException;
 import com.licenta.backend.repository.OrderRepository;
 import com.licenta.backend.repository.ShoppingCartRepository;
 import com.licenta.backend.repository.SizesRepository;
 import com.licenta.backend.repository.UserRepository;
+import com.licenta.backend.service.utils.EmailService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,16 +25,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
-    private final ShoppingCartService shoppingCartService;
-    private final UserService userService;
     private final UserRepository userRepository;
     private final ShoppingCartRepository shoppingCartRepository;
     private final UserAddressService userAddressService;
     private final OrderProductService orderProductService;
-    private final SizesService sizesService;
     private final SizesRepository sizesRepository;
     private final CartProductService cartProductService;
+    private final EmailService emailService;
 
+    @Transactional
     public OrderResponseDto createOrder(OrderRequestDto orderRequestDto) {
         Optional<User> user = userRepository.findById(orderRequestDto.getUserId());
 
@@ -93,9 +95,10 @@ public class OrderService {
         }
 
         return OrderResponseDto.builder()
-                .orderId(order.getId())
-                .orderDate(order.getOrderDate())
-                .status(order.getStatus())
+                .userMail(user.get().getEmail())
+                .orderId(order1.getId())
+                .orderDate(order1.getOrderDate())
+                .status(order1.getStatus())
                 .build();
     }
 
@@ -116,6 +119,29 @@ public class OrderService {
 
         }
 
+    }
+
+    public List<OrderDashboardResponseDto> getAllOrdersDashboard() {
+        List<Order> orders = orderRepository.findAll();
+        List<OrderDashboardResponseDto> orderDashboardResponseDtos = new ArrayList<>();
+        for (Order order : orders) {
+            OrderDashboardResponseDto orderDashboardResponseDto = OrderDashboardResponseDto.builder()
+                    .orderId(order.getId())
+                    .orderDate(order.getOrderDate())
+                    .productsPrice(order.getProductsPrice())
+                    .shippingPrice(order.getShippingPrice())
+                    .shippingOption(order.getShippingOption())
+                    .status(order.getStatus())
+                    .userId(order.getUser().getId())
+                    .build();
+            orderDashboardResponseDtos.add(orderDashboardResponseDto);
+        }
+        return orderDashboardResponseDtos;
+
+    }
+
+    public Order getOrderById(Long id) {
+        return orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
     }
 
 }

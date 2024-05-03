@@ -1,0 +1,40 @@
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()"><i class="fa-solid fa-bars"></i></button>
+    <div class="logo-text" *ngIf="collapsed">Logo</div>
+  </div>
+  <ul class="sidenav-nav">
+    <li class="sidenav-nav-item">
+      <a routerLink="/dashboard/home" class="sidenav-nav-link"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon fa-solid fa-chart-simple"></i>
+        <span class="sidenav-link-text" *ngIf="collapsed">Statistics</span>
+      </a>
+    </li>
+    <li class="sidenav-nav-item">
+      <a routerLink="/dashboard/product" class="sidenav-nav-link"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon fa-solid fa-shop"></i>
+        <span class="sidenav-link-text" *ngIf="collapsed">Products</span>
+      </a>
+    </li>
+    <li class="sidenav-nav-item">
+      <a routerLink="/dashboard/users" class="sidenav-nav-link"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon fa-solid fa-user-group"></i>
+        <span class="sidenav-link-text" *ngIf="collapsed">Users</span>
+      </a>
+    </li>
+    <li class="sidenav-nav-item">
+      <a routerLink="/dashboard/orders" class="sidenav-nav-link"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon fa-solid fa-bag-shopping"></i>
+        <span class="sidenav-link-text" *ngIf="collapsed">Orders</span>
+      </a>
+    </li>
+  </ul>
+</div>

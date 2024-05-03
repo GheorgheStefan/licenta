@@ -3,7 +3,17 @@ package com.licenta.backend.service.utils;
 import com.licenta.backend.entity.Order;
 import com.licenta.backend.entity.OrderProduct;
 import com.licenta.backend.entity.Product;
+import com.licenta.backend.repository.OrderProductRepository;
 import com.licenta.backend.repository.OrderRepository;
+import com.licenta.backend.service.OrderProductService;
+import com.licenta.backend.service.OrderService;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
 import lombok.RequiredArgsConstructor;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -24,15 +34,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PdfService {
 
+    private final OrderProductService orderProductService;
     private final OrderRepository orderRepository;
 
-    public byte[] activationAccountPdf() {
-
-        return null;
-    }
-
-    public byte[] createEmptyPdf() { // 8 produse maxim
-        Order order = orderRepository.findById(1L).orElseThrow(() -> new RuntimeException("Order not found"));
+    public byte[] createInvoicePdf(Long orderId) { // 8 produse maxim
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+        List<OrderProduct> orderProducts = orderProductService.getAllOrderProductsByOrderId(orderId);
         try (PDDocument document = new PDDocument(); ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
             //Font, marime, si tot asa
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
@@ -275,8 +282,6 @@ public class PdfService {
             fontSize = 9;
             contentStream.setFont(font, fontSize);
 
-            List<OrderProduct> orderProducts = order.getOrderProducts();
-
             for (OrderProduct orderProduct : orderProducts) {
                 Product product = orderProduct.getProduct();
 
@@ -397,6 +402,9 @@ public class PdfService {
         }
     }
 
+
+
+
     public void savePdfLocallyOnDesktop(byte[] pdfBytes, String fileName) {
         String desktopPath = System.getProperty("user.home") + "/Desktop/";
         String filePath = desktopPath + fileName;
@@ -406,6 +414,30 @@ public class PdfService {
             System.out.println("PDF saved successfully to: " + filePath);
         } catch (IOException e) {
             throw new RuntimeException("Error saving PDF", e);
+        }
+    }
+
+
+    public void sendMail(){
+        Email from = new Email("stefan.gha9@gmail.com");
+        String subject = "Sending with SendGrid is Fun";
+        Email to = new Email("steveomigi@gmail.com");
+        Content content = new Content("text/plain", "and easy to do anywhere, even with Java");
+        Mail mail = new Mail(from, subject, to, content);
+
+        SendGrid sg = new SendGrid(System.getenv("API_KEY"));
+        var a = System.getenv("API_KEY");
+        Request request = new Request();
+        try {
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+            Response response = sg.api(request);
+            System.out.println(response.getStatusCode());
+            System.out.println(response.getBody());
+            System.out.println(response.getHeaders());
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
     }
 

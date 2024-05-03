@@ -3,14 +3,16 @@ package com.licenta.backend.controller;
 
 import com.licenta.backend.dto.order.OrderRequestDto;
 import com.licenta.backend.dto.order.OrderResponseDto;
+import com.licenta.backend.dto.order.response.OrderDashboardResponseDto;
+import com.licenta.backend.entity.Order;
 import com.licenta.backend.service.OrderService;
+import com.licenta.backend.service.utils.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -18,11 +20,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
+    private final EmailService emailService;
 
     @PostMapping("")
     public ResponseEntity<OrderResponseDto> createOrder(@RequestBody OrderRequestDto orderRequestDto){
-        OrderResponseDto orderResponseDto = orderService.createOrder(orderRequestDto);
+        OrderResponseDto orderResponseDto = orderService.createOrder(orderRequestDto); //& send email
+        emailService.sendInvoiceMail(orderResponseDto.getUserMail(), orderResponseDto.getOrderId());
         return ResponseEntity.ok(orderResponseDto);
     }
+
+    @GetMapping("")
+    public List<OrderDashboardResponseDto> getAllOrders(){
+        return orderService.getAllOrdersDashboard();
+    }
+    @GetMapping("/{id}")
+    public Order getOrderById(@PathVariable Long id){
+        return orderService.getOrderById(id);
+    }
+
 
 }

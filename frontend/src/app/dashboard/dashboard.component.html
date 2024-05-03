@@ -1,13 +1,8 @@
-<!--<app-dashboard-nav-bar> </app-dashboard-nav-bar>-->
-<!--<main>-->
-<!--  <router-outlet></router-outlet>-->
-<!--</main>-->
-<div class="content-dashboard">
-  <div class="navbar-dashboard">
-    <app-dashboard-nav-bar></app-dashboard-nav-bar>
-  </div>
-  <div class="content-navbar-dashboard">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<app-dashboard-nav-bar (onToggleSideNav)="onToggleSideNav($event)"></app-dashboard-nav-bar>
+<app-dashboard-body
+  [collapsed]="isSideNavCollapsed"
+  [screenWidth]="screenWidth">
+  <router-outlet></router-outlet>
+</app-dashboard-body>
+
 

@@ -1,0 +1,29 @@
+import {Component, Input} from '@angular/core';
+import {RouterOutlet} from "@angular/router";
+import {NgClass} from "@angular/common";
+
+@Component({
+  selector: 'app-dashboard-body',
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    NgClass
+  ],
+  templateUrl: './dashboard-body.component.html',
+  styleUrl: './dashboard-body.component.scss'
+})
+export class DashboardBodyComponent {
+  @Input() collapsed = false;
+  @Input() screenWidth = 0;
+
+
+  getBodyClass() {
+    let styleClass = '';
+    if (this.collapsed && this.screenWidth > 768) {
+      styleClass = 'body-trimmed';
+    }else if (this.collapsed && this.screenWidth <= 768) {
+      styleClass = 'body-md-screen';
+    }
+    return styleClass;
+  }
+}

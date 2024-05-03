@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import * as jwt_decode from 'jwt-decode';
 import {Router} from "@angular/router";
-import {DataService} from "../service/data.service";
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +38,16 @@ export class UserService {
 
   redirectToLogin() {
     this.router.navigate(['/sign-in']);
+  }
+
+  activateAccount(token : any) {
+    return this.http.get('http://localhost:8080/users/activate/' + token);
+  }
+  resetPassword(id:any, data: any) {
+    return this.http.put('http://localhost:8080/users/reset-password/'+ id, data);
+  }
+  sendMailPassword(data: any) {
+    return this.http.put('http://localhost:8080/users/sendMailResetPassword', data);
   }
 
 }

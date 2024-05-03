@@ -1,0 +1,20 @@
+
+<div class="central-container">
+
+  <div class="shipping">
+    <h2>Shipping</h2>
+    <p>Shipping Address: {{order?.deliveryAddress}}</p>
+    <p>{{order?.deliveryCountry}}, {{order?.deliveryRegion}}, {{order?.deliveryCity}} </p>
+    <p>Postal Code: {{order?.deliveryPostalCode}}</p>
+    <p>Phone: {{order?.deliveryPhoneNumber}}</p>
+  </div>
+
+  <div class="payment">
+    <h2>Billing</h2>
+    <p>Shipping Address: {{order?.billingAddress}}</p>
+    <p>{{order?.billingCountry}}, {{order?.billingRegion}}, {{order?.billingCity}} </p>
+    <p>Postal Code: {{order?.billingPostalCode}}</p>
+    <p>Phone: {{order?.billingPhoneNumber}}</p>
+  </div>
+
+</div>

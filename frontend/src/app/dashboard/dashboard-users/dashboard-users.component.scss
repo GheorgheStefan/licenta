@@ -1,0 +1,99 @@
+.table-impl {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  height: 90vh;
+  background-color: lightgray;
+  -webkit-backdrop-filter: blur(7px);
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-name {
+  width: 100%;
+  height: 10%;
+  background-color: #f1f1f1;
+  padding: .8rem 1rem;
+}
+
+.table_body {
+  width: 95%;
+  max-height: calc(90% - .8rem);
+  background-color: #f1f1f1;
+  margin: .8rem auto;
+  border-radius: .6rem;
+  overflow: auto;
+  display: flex; /* Add display flex */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+}
+
+.table_body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.table_body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #888;
+}
+
+.table_body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table_body table thead th {
+  position: sticky; /* Correct the typo: 'position' */
+  top: 0;
+  left: 0;
+  background-color: darkgray;
+}
+
+table,
+th,
+td {
+  padding: 5px;
+  border-collapse: collapse;
+}
+
+tbody tr:nth-child(even) {
+  background-color: darkgray;
+}
+
+tr,
+td {
+  min-width: 100px;
+}
+
+.cust {
+  min-width: 200px;
+}
+.my-pagination ::ng-deep .ngx-pagination .current {
+  background: black;
+  color: white;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.my-pagination ::ng-deep .ngx-pagination .pagination-previous{
+  color:black;
+}
+.my-pagination ::ng-deep .ngx-pagination .pagination-next{
+  color:black;
+}
+.table-container{
+  display: flex;
+  justify-content: center;
+}
+.table-manager{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+.roller{
+  max-width: 10px;
+}
+

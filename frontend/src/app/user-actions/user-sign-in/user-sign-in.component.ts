@@ -3,23 +3,28 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {UserService} from "../user.service";
 import {JwtHandler} from "../../service/JwtHandler";
 import {RouterLink} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatTooltip} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-user-sign-in',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    MatTooltip
   ],
   templateUrl: './user-sign-in.component.html',
   styleUrl: './user-sign-in.component.scss'
 })
-export class UserSignInComponent implements OnInit{
+export class UserSignInComponent implements OnInit {
   loginForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private jwtHandler: JwtHandler) { }
+              private jwtHandler: JwtHandler,
+              private snackBar: MatSnackBar) {
+  }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -37,7 +42,7 @@ export class UserSignInComponent implements OnInit{
 
     if (this.loginForm.valid) {
       requestData = {
-        "email":this.loginForm.get('email')!.value,
+        "email": this.loginForm.get('email')!.value,
         "password": this.loginForm.get('password')!.value
       }
     }
@@ -48,4 +53,28 @@ export class UserSignInComponent implements OnInit{
         this.userService.redirectUser(data);
       });
   }
+
+  sendMailPassword() {
+    if (this.loginForm.get('email')!.value === '') {
+      this.snackBar.open('Please enter your email address', '', {
+        duration: 2000,
+        verticalPosition: 'top'
+      });
+      return;
+    }
+    let requestData = {
+      "email": this.loginForm.get('email')!.value,
+    }
+
+    this.userService.sendMailPassword(requestData)
+      .subscribe((data: any) => {
+        this.snackBar.open('Email sent successfully', '', {
+          duration: 2000,
+          verticalPosition: 'top'
+        });
+      });
+
+  }
+
 }
+

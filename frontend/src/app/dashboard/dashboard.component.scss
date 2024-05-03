@@ -1,19 +1,38 @@
-.content-dashboard{
-  display: flex;
+//.content-dashboard{
+//  display: flex;
+//}
+//
+//.navbar-dashboard{
+//  //width: 200px; /* Adjust width of sidebar as needed */
+//  //background-color: #f2f2f2; /* Example background color */
+//  width: 300px;
+//  height: 100vh; /* Înălțimea ecranului întreg */
+//  background-color: red;
+//  border-left: 10px solid black;
+//  transition: 0.5s;
+//  overflow: hidden;
+//}
+//
+//.content-navbar-dashboard{
+//  flex: 1; /* Take up remaining space */
+//  padding: 20px; /* Example padding */
+//}
+.body{
+  width: calc(100% - 5rem);
+  height: 100%;
+  margin-left: 5rem;
+  z-index: 0;
+  position: relative;
+  top: 0;
+  transition: all .5s ease;
+  background:white;
+  padding: 3rem;
 }
-
-.navbar-dashboard{
-  //width: 200px; /* Adjust width of sidebar as needed */
-  //background-color: #f2f2f2; /* Example background color */
-  width: 300px;
-  height: 100vh; /* Înălțimea ecranului întreg */
-  background-color: red;
-  border-left: 10px solid black;
-  transition: 0.5s;
-  overflow: hidden;
+.body-trimmed {
+  width: calc(100% - 16.5625rem);
+  margin-left: 16.5625rem;
 }
-
-.content-navbar-dashboard{
-  flex: 1; /* Take up remaining space */
-  padding: 20px; /* Example padding */
+.body-md-screen{
+  width: calc(100% - 5rem);
+  margin-left: 5rem;
 }

@@ -1,4 +1,4 @@
-package com.licenta.backend.dto.user.response;
+package com.licenta.backend.dto.user.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterResponseDto {
-    Long userId;
-    String email;
-    String token;
-
+public class ResetUserPasswordRequestDto {
+    private String email;
 }

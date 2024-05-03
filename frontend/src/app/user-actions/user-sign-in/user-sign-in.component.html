@@ -15,7 +15,9 @@
 
     <div class="remember-forget" formGroupName="rememberForgetGroup">
       <label><input type="checkbox" formControlName="rememberMe"> Remember me</label>
-      <a href="#">Forget Password?</a>
+      <span class="reset-link" matTooltip="Fill the Email field!">
+        <a (click) = "sendMailPassword()">Forget Password?</a>
+      </span>
     </div>
 
     <button type="submit" class="btn" [disabled]="!loginForm.valid">Login</button>

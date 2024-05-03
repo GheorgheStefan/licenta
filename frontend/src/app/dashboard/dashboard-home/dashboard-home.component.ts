@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {AddProductPopupComponent} from "../../popups/add-product-popup/add-product-popup.component";
-import {DashboardNavBarComponent} from "../dashboard-nav-bar/dashboard-nav-bar.component";
+import {DashboardNavBarComponent} from "../dashboard-components/dashboard-nav-bar/dashboard-nav-bar.component";
 
 @Component({
   selector: 'app-dashboard-home',
