@@ -1,0 +1,47 @@
+//charts
+.charts{
+  display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    div{
+        width: 50%;
+        height: 350px;
+    }
+}
+
+// stat boxes
+.container-box {
+  margin-top: 8px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  width: calc(25% - 20px);
+  margin: 10px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  box-shadow: black 0 0 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .box {
+    width: calc(50% - 20px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .box {
+    width: calc(100% - 20px);
+  }
+}
+
+.name{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

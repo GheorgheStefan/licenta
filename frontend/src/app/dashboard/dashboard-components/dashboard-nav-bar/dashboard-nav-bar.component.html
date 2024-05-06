@@ -6,9 +6,9 @@
   <ul class="sidenav-nav">
     <li class="sidenav-nav-item">
       <a routerLink="/dashboard/home" class="sidenav-nav-link"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact: true}">
-        <i class="sidenav-link-icon fa-solid fa-chart-simple"></i>
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon fa-solid fa-chart-simple pl-1.5"></i>
         <span class="sidenav-link-text" *ngIf="collapsed">Statistics</span>
       </a>
     </li>
@@ -32,8 +32,19 @@
       <a routerLink="/dashboard/orders" class="sidenav-nav-link"
          routerLinkActive="active"
          [routerLinkActiveOptions]="{exact: true}">
-        <i class="sidenav-link-icon fa-solid fa-bag-shopping"></i>
+        <i class="sidenav-link-icon fa-solid fa-bag-shopping pl-1.5"></i>
         <span class="sidenav-link-text" *ngIf="collapsed">Orders</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item move-this-div-to-the-bottom">
+      <a routerLink="/dashboard/user" class="sidenav-nav-link"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon fa-solid fa-user pl-1.5"></i>
+        <span matTooltip = "{{email}}">
+          <span class="sidenav-link-text fade-text" *ngIf="collapsed">Admin</span>
+        </span>
       </a>
     </li>
   </ul>

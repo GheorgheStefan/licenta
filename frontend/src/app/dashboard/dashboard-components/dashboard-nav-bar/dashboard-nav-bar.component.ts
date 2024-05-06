@@ -1,6 +1,8 @@
 import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {NgClass, NgIf} from "@angular/common";
+import {JwtHandler} from "../../../service/JwtHandler";
+import {MatTooltip} from "@angular/material/tooltip";
 interface SideNavToggle {
   screenWidth: number;
   collapsed: boolean;
@@ -13,11 +15,13 @@ interface SideNavToggle {
     RouterLink,
     NgIf,
     NgClass,
-    RouterLinkActive
+    RouterLinkActive,
+    MatTooltip
   ],
   styleUrls: ['./dashboard-nav-bar.component.scss']
 })
 export class DashboardNavBarComponent implements OnInit{
+  email: string = '';
 
   @Output()onToggleSideNav = new EventEmitter();
   screenWidth: number = 0;
@@ -33,8 +37,11 @@ export class DashboardNavBarComponent implements OnInit{
     this.onToggleSideNav.emit({screenWidth: this.screenWidth, collapsed: this.collapsed});
   }
 
+  constructor(private jwtHandler: JwtHandler) {}
+
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
+    this.email = this.jwtHandler.getEmail();
   }
 
   toggleCollapse() {

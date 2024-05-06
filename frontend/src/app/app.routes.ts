@@ -14,6 +14,7 @@ import {DashboardUsersComponent} from "./dashboard/dashboard-users/dashboard-use
 import {DashboardOrdersComponent} from "./dashboard/dashboard-orders/dashboard-orders.component";
 import {AccountActivationComponent} from "./user-actions/account-activation/account-activation.component";
 import {ResetPasswordComponent} from "./user-actions/reset-password/reset-password.component";
+import {DashboardUserComponent} from "./dashboard/dashboard-user/dashboard-user.component";
 
 export const routes: Routes = [
 
@@ -33,7 +34,8 @@ export const routes: Routes = [
       { path: 'home', component: DashboardHomeComponent },
       { path: 'product', component: DashboardProductsComponent },
       { path: 'users', component:DashboardUsersComponent},
-      { path: 'orders', component:DashboardOrdersComponent}
+      { path: 'orders', component:DashboardOrdersComponent},
+      { path: 'user', component:DashboardUserComponent}
 
     ]}
 ];

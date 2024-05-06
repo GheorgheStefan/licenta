@@ -1,4 +1,8 @@
 .sidenav{
+  //
+  //display: flex;
+  //flex-direction: column;
+  //
   background: black;
   transition: all .5s ease;
   position: fixed;
@@ -101,5 +105,16 @@
     color: black;
   }
 }
+
+
+///// Teste
+.move-this-div-to-the-bottom {
+  margin-top: auto;
+  width: auto;
+  padding-bottom:10px;
+
+}
+
+
 
 
