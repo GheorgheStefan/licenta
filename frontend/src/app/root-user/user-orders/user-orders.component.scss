@@ -2,6 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
+  padding: 10px;
   margin-bottom: 20px;
 }
 
@@ -10,29 +12,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color:#f5f5f0;
-  box-shadow: gray 1px 1px 10px;
-  border: 1px solid black;
+  border: 1px solid gray;
   border-radius: 10px;
+  width:95%;
+  margin-bottom: 25px;
+
 }
 .container-for-basic-info .basic-info{
-  padding: 10px;
+  //padding: 5px;
   margin-left: 5px;
-  margin-right: 5px;
+  //margin-right: 5px;
 }
 .container-for-basic-info .edit-info{
-  position: absolute;
   top: 0;
-  z-index: 1000;
   padding: 10px;
   right: 0;
   margin-right: 5px;
 }
 .edit-info .link{
-    padding-top: 10px;
-    display: block;
-    color: black;
-  }
+  padding-top: 10px;
+  color: black;
+}
 .edit-info .link:hover {
   text-decoration: underline; /* Add underline on hover */
   cursor: pointer; /* Add a pointer on hover */
@@ -47,24 +47,5 @@
   color: black;
   font-size: 15px;
   font-weight: 400;
-  padding: 10px;
+  padding: 5px;
 }
-.btn{
-  width: 90%;
-  height: 50px;
-  border: none;
-  outline: none;
-  background: black;
-  color: white;
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
-  border-radius: 40px;
-  border-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-.checkout-button{
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-

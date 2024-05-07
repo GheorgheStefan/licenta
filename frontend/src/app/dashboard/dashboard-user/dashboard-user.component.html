@@ -1,1 +1,29 @@
-<p>dashboard-user works!</p>
+<div class="title">
+  <h1>MyAccount</h1>
+</div>
+<div class="container-for-basic-info">
+  <div class="basic-info">
+    <p>Account Info:</p>
+    <ul>
+      <li>Account id: {{user?.id}}</li>
+      <li>First name: {{user?.firstname}}</li>
+      <li>Last name: {{user?.lastname}}</li>
+      <li>Email: {{user?.email}}</li>
+      <li>Role: {{user?.role}}</li>
+    </ul>
+  </div>
+  <div class="edit-info">
+    <div class=" d-flex place-content-column place-items-center flex-col-reverse">
+      <a class="link" (click)="editInfo(user.id)">Edit</a>
+      <a class="link" (click)="changePassword()">Change Password</a>
+    </div>
+  </div>
+
+</div>
+<hr>
+
+<div class="checkout-button">
+  <button type="submit" class="btn" (click)="signOut()">Log out</button>
+</div>
+
+

@@ -15,6 +15,8 @@ import {DashboardOrdersComponent} from "./dashboard/dashboard-orders/dashboard-o
 import {AccountActivationComponent} from "./user-actions/account-activation/account-activation.component";
 import {ResetPasswordComponent} from "./user-actions/reset-password/reset-password.component";
 import {DashboardUserComponent} from "./dashboard/dashboard-user/dashboard-user.component";
+import {UserInformationComponent} from "./root-user/user-information/user-information.component";
+import {UserOrdersComponent} from "./root-user/user-orders/user-orders.component";
 
 export const routes: Routes = [
 
@@ -28,7 +30,9 @@ export const routes: Routes = [
       { path: 'home', component: HomePageComponent},
       { path: 'footwear', component: FootwearComponent },
       { path: 'footwear/product/:id', component: ProductComponent },
-      { path: 'user/address', component: AddressComponent },
+      { path: 'user/address/:id', component: AddressComponent },
+      { path: 'user/info/:id', component: UserInformationComponent },
+      { path: 'user/orders/:id', component: UserOrdersComponent },
     ]},
   {path: "dashboard", component: DashboardComponent, children: [
       { path: 'home', component: DashboardHomeComponent },

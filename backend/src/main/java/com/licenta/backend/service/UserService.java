@@ -1,11 +1,9 @@
 package com.licenta.backend.service;
 
-import com.licenta.backend.dto.user.request.ChangePasswordRequestDto;
-import com.licenta.backend.dto.user.request.RegisterRequestDto;
-import com.licenta.backend.dto.user.request.ResetUserPasswordRequestDto;
-import com.licenta.backend.dto.user.request.SigninRequestDto;
+import com.licenta.backend.dto.user.request.*;
 import com.licenta.backend.dto.user.response.RegisterResponseDto;
 import com.licenta.backend.dto.user.response.SigninResponseDto;
+import com.licenta.backend.dto.user.response.UserEditResponseDto;
 import com.licenta.backend.entity.Role;
 import com.licenta.backend.exceptions.UserAlreadyExistsException;
 import com.licenta.backend.exceptions.UserDoNotExistException;
@@ -132,5 +130,20 @@ public class UserService {
             user.setPassword(passwordEncoder.encode(requestDto.getNewPassword()));
             userRepository.save(user);
         }
+    }
+
+    public UserEditResponseDto updateUser(UserEditRequestDto request) {
+        Optional<User> userOptional = userRepository.findById(request.getId());
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setEmail(request.getEmail());
+            user.setFirstname(request.getFirstname());
+            user.setLastname(request.getLastname());
+            userRepository.save(user);
+            return UserEditResponseDto.builder()
+                    .id(user.getId())
+                    .build();
+        }
+        return null;
     }
 }

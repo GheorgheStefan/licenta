@@ -1,0 +1,23 @@
+<div class="title">
+  <h1>My Orders</h1>
+</div>
+<div class="container d-flex place-content-center place-items-center" *ngFor="let order of userOrders">
+  <div class="container-for-basic-info">
+    <div class="basic-info">
+      <ul>
+        <li>OrderId: {{ order?.orderId }} Order Date: {{ order?.orderDate }}</li>
+<!--        <li>Order Date: {{ order?.orderDate }}</li>-->
+        <li>Shipping: {{ order?.shippingOption }}</li>
+        <li>Total Price: {{ order?.totalPrice }}</li>
+        <li>Status: {{ order?.status }}</li>
+      </ul>
+    </div>
+    <div class="edit-info">
+      <div class=" d-flex place-content-center place-items-center flex-col-reverse">
+        <a class="link">See info</a> <!-- (click)="editInfo(user.id)" -->
+        <a class="link" *ngIf="order?.status === 'PENDING'">Cancel Order</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>

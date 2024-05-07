@@ -2,12 +2,10 @@ package com.licenta.backend.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.licenta.backend.dto.user.request.ChangePasswordRequestDto;
-import com.licenta.backend.dto.user.request.RegisterRequestDto;
-import com.licenta.backend.dto.user.request.ResetUserPasswordRequestDto;
-import com.licenta.backend.dto.user.request.SigninRequestDto;
+import com.licenta.backend.dto.user.request.*;
 import com.licenta.backend.dto.user.response.RegisterResponseDto;
 import com.licenta.backend.dto.user.response.SigninResponseDto;
+import com.licenta.backend.dto.user.response.UserEditResponseDto;
 import com.licenta.backend.entity.Role;
 import com.licenta.backend.entity.User;
 import com.licenta.backend.repository.UserRepository;
@@ -92,5 +90,11 @@ public class UsersController {
         userService.resetPassword(id, requestDto);
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("")
+    public ResponseEntity<UserEditResponseDto> updateUser(@ModelAttribute UserEditRequestDto userEditRequestDto){
+        return ResponseEntity.ok(userService.updateUser(userEditRequestDto));
+    }
+
 
 }

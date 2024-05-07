@@ -24,6 +24,7 @@ import {switchMap} from "rxjs";
 export class GeneralNavBarComponent implements OnInit{
   public firstname = " ";
   public lastname = " ";
+  user: any;
 
 
   constructor(private jwtHandler: JwtHandler,
@@ -37,6 +38,12 @@ export class GeneralNavBarComponent implements OnInit{
     }, error => {
       console.log(error);
     });
+
+    this.user = this.userService.getUserIdByEmail(this.jwtHandler.getEmail()).subscribe((user: any) => {
+        this.user = user;
+      }
+    );
+    // console.log(this.user);
 
     // this.userService.getUserIdByEmail(this.jwtHandler.getEmail()).pipe(
     //   switchMap((user: any) => {

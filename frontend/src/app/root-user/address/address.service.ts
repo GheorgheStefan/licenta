@@ -21,7 +21,6 @@ export class AddressService {
   }
 
   addAddress(address: any) {
-    // console.log(address);
     return this.http.post('http://localhost:8080/user-address', this.getFormData(address));
   }
 
@@ -49,13 +48,10 @@ export class AddressService {
     return this.http.get('http://localhost:8080/user-address/address/' + addressId);
   }
 
-
   // countries = ["Franța", "România"];
   //
   // cities = {
   //   "Franța": ["Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Strasbourg", "Montpellier", "Bordeaux", "Lille"],
   //   "România": ["Alba", "Arad", "Argeș", "Bacău", "Bihor", "Bistrița-Năsăud", "Botoșani", "Brăila", "Brașov", "București", "Buzău", "Călărași", "Caraș-Severin", "Cluj", "Constanța", "Covasna", "Dâmbovița", "Dolj", "Galați", "Giurgiu", "Gorj", "Harghita", "Hunedoara", "Ialomița", "Iași", "Ilfov", "Maramureș", "Mehedinți", "Mureș", "Neamț", "Olt", "Prahova", "Satu Mare", "Sălaj", "Sibiu", "Suceava", "Teleorman", "Timiș", "Tulcea", "Vâlcea", "Vaslui", "Vrancea"]
   // };
-
-
 }

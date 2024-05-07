@@ -57,7 +57,7 @@ export class UpdateAddressPopupComponent {
       });
 
       this.myform.patchValue({id: this.data.id});
-      console.log(this.myform.value);
+      // console.log(this.myform.value);
     });
 
   }

@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {DashboardOrdersService} from "../../dashboard-orders/dashboard-orders.service";
+import {DashboardOrdersService} from "../dashboard-orders.service";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 
 @Component({

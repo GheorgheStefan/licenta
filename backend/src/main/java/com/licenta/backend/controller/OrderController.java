@@ -4,6 +4,8 @@ package com.licenta.backend.controller;
 import com.licenta.backend.dto.order.OrderRequestDto;
 import com.licenta.backend.dto.order.OrderResponseDto;
 import com.licenta.backend.dto.order.response.OrderDashboardResponseDto;
+import com.licenta.backend.dto.order.response.UserLastOrderResponseDto;
+import com.licenta.backend.dto.order.response.UserOrdersResponseDto;
 import com.licenta.backend.entity.Order;
 import com.licenta.backend.service.OrderService;
 import com.licenta.backend.service.utils.EmailService;
@@ -33,10 +35,22 @@ public class OrderController {
     public List<OrderDashboardResponseDto> getAllOrders(){
         return orderService.getAllOrdersDashboard();
     }
+
     @GetMapping("/{id}")
     public Order getOrderById(@PathVariable Long id){
         return orderService.getOrderById(id);
     }
+
+    @GetMapping("/last/{userId}")
+    public UserLastOrderResponseDto userLatestOrder(@PathVariable Long userId){
+        return orderService.getUserLastOrder(userId);
+    }
+    
+    @GetMapping("/user/{userId}")
+    public List<UserOrdersResponseDto> getUserOrders(@PathVariable Long userId){
+        return orderService.getUserOrders(userId);
+    }
+
 
 
 }

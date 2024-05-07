@@ -3,6 +3,8 @@ package com.licenta.backend.service;
 import com.licenta.backend.dto.order.OrderRequestDto;
 import com.licenta.backend.dto.order.OrderResponseDto;
 import com.licenta.backend.dto.order.response.OrderDashboardResponseDto;
+import com.licenta.backend.dto.order.response.UserLastOrderResponseDto;
+import com.licenta.backend.dto.order.response.UserOrdersResponseDto;
 import com.licenta.backend.entity.*;
 import com.licenta.backend.exceptions.UserDoNotExistException;
 import com.licenta.backend.repository.OrderRepository;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -142,6 +145,40 @@ public class OrderService {
 
     public Order getOrderById(Long id) {
         return orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
+    }
+
+    public UserLastOrderResponseDto getUserLastOrder(Long userId) {
+        List<Order> orders = orderRepository.findOrdersByUserId(userId);
+        if (orders.isEmpty()) {
+            return null;
+        }
+        orders.sort((o1, o2) -> o2.getOrderDate().compareTo(o1.getOrderDate()));
+        Order order = orders.get(0);
+        return UserLastOrderResponseDto.builder()
+                .orderId(order.getId())
+                .orderDate(order.getOrderDate())
+                .productsPrice(order.getProductsPrice())
+                .shippingPrice(order.getShippingPrice())
+                .shippingOption(order.getShippingOption())
+                .totalPrice(order.getProductsPrice() + order.getShippingPrice())
+                .status(order.getStatus())
+                .build();
+    }
+
+    public List<UserOrdersResponseDto> getUserOrders(Long userId) {
+        List<Order> orders = orderRepository.findOrdersByUserId(userId);
+        List<UserOrdersResponseDto> userOrdersResponseDtos = new ArrayList<>();
+        for (Order order : orders) {
+            UserOrdersResponseDto userOrdersResponseDto = UserOrdersResponseDto.builder()
+                    .orderId(order.getId())
+                    .orderDate(order.getOrderDate())
+                    .shippingOption(order.getShippingOption())
+                    .totalPrice(order.getProductsPrice() + order.getShippingPrice())
+                    .status(order.getStatus())
+                    .build();
+            userOrdersResponseDtos.add(userOrdersResponseDto);
+        }
+        return userOrdersResponseDtos;
     }
 
 }

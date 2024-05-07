@@ -6,7 +6,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DashboardOrdersService} from "./dashboard-orders.service";
 import {AddProductPopupComponent} from "../../popups/add-product-popup/add-product-popup.component";
-import {DetailsOrderPopupComponent} from "../dashboard-components/details-order-popup/details-order-popup.component";
+import {DetailsOrderPopupComponent} from "./details-order-popup/details-order-popup.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({

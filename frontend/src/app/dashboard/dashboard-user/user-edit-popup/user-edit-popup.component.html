@@ -1,0 +1,22 @@
+<h3 class="title"> Update User </h3>
+
+<form [formGroup]="myform">
+  <div class="address-details">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input formControlName="firstname" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input formControlName="lastname" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput>
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="updateUser()">Edit</button>
+
+</form>
+

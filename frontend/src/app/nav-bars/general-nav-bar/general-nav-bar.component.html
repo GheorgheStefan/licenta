@@ -15,14 +15,14 @@
       </button>
       <ul *dropdownMenu class="dropdown-menu dropdown-menu-right custom-dropdown-menu"
           role="menu" aria-labelledby="button-basic">
-        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item eliminate-link" href="#">{{ (firstname | truncateName: lastname) }}</a></li>
+        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item eliminate-link" href="#"><p>{{ (firstname | truncateName: lastname) }}</p></a></li>
         <li class="divider dropdown-divider" *ngIf="isLoggedIn()"></li>
-        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" href="#">My Orders</a></li>
-        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" routerLink="/user/address">Addresses</a></li>
-        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" href="#">Personal Information</a></li>
+        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" routerLink="/user/orders/{{user.id}}"><p>My Orders</p></a></li> <!--<p class="text-2xl">My Orders</p>-->
+        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" routerLink="/user/address/{{user.id}}"><p>Addresses</p></a></li>
+        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" routerLink="/user/info/{{user.id}}" ><p>Personal Information</p></a></li><!--[routerLink]="[user, user.id]"-->
         <li class="divider dropdown-divider" *ngIf="isLoggedIn()"></li>
-        <li role="menuitem" *ngIf="!isLoggedIn()"><a class="dropdown-item" routerLink="/sign-in">Sign in</a></li>
-        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" routerLink="/sign-in" (click)="signOut()">Sign out</a></li>
+        <li role="menuitem" *ngIf="!isLoggedIn()"><a class="dropdown-item" routerLink="/sign-in"><p>Sign in</p></a></li>
+        <li role="menuitem" *ngIf="isLoggedIn()"><a class="dropdown-item" routerLink="/sign-in" (click)="signOut()"><p>Sign out</p></a></li>
       </ul>
     </div>
 
