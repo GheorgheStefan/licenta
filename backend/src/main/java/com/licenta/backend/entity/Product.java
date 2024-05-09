@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -23,6 +24,7 @@ public class Product {
     private String name;
     private String description;
     private Float price;
+    private LocalDate registrationDate;
     private String presentationImage;
     private String category;
     private String subcategory;

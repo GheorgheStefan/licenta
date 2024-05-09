@@ -1,42 +1,112 @@
-<button mat-raised-button color="primary" (click)="AddProductPopUp()">Adauga Produs</button>
+<!--<button mat-raised-button color="primary" (click)="AddProductPopUp()">Adauga Produs</button>-->
 
-<div class="container">
-  <nav class="navbar">
+<!--<div class="container">-->
+<!--  <nav class="navbar">-->
+<!--    <div class="search-container">-->
+<!--      <select class="form-control" [(ngModel)]="selectedAttribute" (change)="search()">-->
+<!--        <option *ngFor="let attribute of searchAttributes" [value]="attribute">{{ attribute }}</option>-->
+<!--      </select>-->
+<!--      <input class="form-control" type="text" [(ngModel)]="name" (ngModelChange)="search()" placeholder="Enter Search">-->
+<!--    </div>-->
+<!--  </nav>-->
+
+<!--  <table class="table table-bordered">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th>Id</th>-->
+<!--      <th>Name</th>-->
+<!--      <th>Description</th>-->
+<!--      <th>Price</th>-->
+<!--      <th>Image</th>-->
+<!--      <th>Actions</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr  *ngFor="let product of products | paginate: { itemsPerPage: 2, currentPage: p }">-->
+<!--      <td>{{product.id}}</td>-->
+<!--      <td>{{product.name}}</td>-->
+<!--      <td>{{product.description}}</td>-->
+<!--      <td>{{product.price}}</td>-->
+<!--      <td><img [src]="product.presentationImage" alt="Product Image" style="width: 100px; height: 100px;"></td>-->
+<!--      <td>-->
+<!--        <button mat-button [matMenuTriggerFor]="menu">Actions</button>-->
+<!--        <mat-menu #menu="matMenu">-->
+<!--          <button mat-menu-item (click)="updateProductPopUp(product.id)">Edit</button>-->
+<!--          <button mat-menu-item (click)="deleteProductPopUp(product.id)">Delete</button>-->
+<!--        </mat-menu>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--      <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+<!--  </table>-->
+<!--</div>-->
+
+
+<!-- Haideeeeeeeeeee -->
+
+
+<div class="table-impl">
+  <section class="table-name">
+    <h1 class="title-you-know">Products</h1>
+
     <div class="search-container">
-      <select class="form-control" [(ngModel)]="selectedAttribute" (change)="search()">
+
+      <input type="text" class="form-control" [(ngModel)]="name" (ngModelChange)="search()" (input)="search()">
+
+      <select class="form-control mr-4" [(ngModel)]="selectedAttribute" (change)="search()">
         <option *ngFor="let attribute of searchAttributes" [value]="attribute">{{ attribute }}</option>
       </select>
-      <input class="form-control" type="text" [(ngModel)]="name" (ngModelChange)="search()" placeholder="Enter Search">
     </div>
-  </nav>
 
-  <table class="table table-bordered">
-    <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Image</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr  *ngFor="let product of products | paginate: { itemsPerPage: 2, currentPage: p }">
-      <td>{{product.id}}</td>
-      <td>{{product.name}}</td>
-      <td>{{product.description}}</td>
-      <td>{{product.price}}</td>
-      <td><img [src]="product.presentationImage" alt="Product Image" style="width: 100px; height: 100px;"></td>
-      <td>
-        <button mat-button [matMenuTriggerFor]="menu">Actions</button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="updateProductPopUp(product.id)">Edit</button>
-          <button mat-menu-item (click)="deleteProductPopUp(product.id)">Delete</button>
-        </mat-menu>
-      </td>
-    </tr>
-    </tbody>
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  </table>
+    <button type="submit" class="btnn" (click)="AddProductPopUp()">Add Product</button>
+
+  </section>
+
+  <section class="table_body"> <!-- "table-section" -->
+    <table class="tableEdit"><!-- "tab-content" -->
+      <thead>
+      <tr>
+        <th class="tableId">Id</th>
+        <th class="tableImage">Image</th>
+        <th class="tableName">Name</th>
+        <th class="tableBrand">Brand</th>
+        <th class="tablePrice">Price</th>
+        <th class="tableSubcategory">Subcategory</th>
+        <th class="tableActions1">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let product of products | paginate: { itemsPerPage: itemsPerPage, currentPage: p } " class="">
+        <td class="tableId">{{ product.id }}</td>
+        <td class="tableImage">
+          <img [src]="product.presentationImage" alt="Product Image" class="rounded-photo">
+        </td>
+        <td class="tableName">{{ product.name }}</td>
+        <td class="tableBrand">{{ product.brand }}</td>
+        <td class="tablePrice">{{ product.price }}</td>
+        <td class="tableSubcategory">{{ product.subcategory }}</td>
+        <td class="tableActions">
+          <button mat-button (click)="updateProductPopUp(product.id)"><i class="fa-solid fa-pen-to-square"></i></button>
+          <button mat-button (click)="deleteProductPopUp(product.id)"><i class="fa-solid fa-trash"></i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+  <div class="table-container">
+    <div class="table-manager">
+      <div>
+        <label for="itemsPerPage">Items Per Page:</label>
+        <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="changeItemsPerPage()">
+          <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+        </select>
+      </div>
+      <div class="pagination-controller">
+        <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+<!-- Haideeeeeeeeeee -->

@@ -5,7 +5,7 @@
   align-items: stretch;
   flex-direction: column;
   height: 90vh;
-  background-color: lightgray;
+  background-color: #f1f1f1;
   -webkit-backdrop-filter: blur(7px);
   box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
   border-radius: 10px;
@@ -25,7 +25,7 @@
   background-color: #f1f1f1;
   margin: .8rem auto;
   border-radius: .6rem;
-  overflow: auto;
+  overflow: hidden;
   display: flex; /* Add display flex */
   align-items: center; /* Center vertically */
   justify-content: center; /* Center horizontally */
@@ -57,10 +57,6 @@ th,
 td {
   padding: 5px;
   border-collapse: collapse;
-}
-
-tbody tr:nth-child(even) {
-  background-color: darkgray;
 }
 
 tr,
@@ -95,5 +91,76 @@ td {
 }
 .roller{
   max-width: 10px;
+}
+//
+.btnn{
+  width: 20%;
+  height: 50px;
+  border: none;
+  outline: none;
+  background: black;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 40px;
+  border-shadow: 0 0 10px rgba(0,0,0,0.1);
+  right: 0;
+}
+.checkout-button{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.table-name{
+  width: 100%;
+  height: 10%;
+  background-color: #f1f1f1;
+  display: flex;
+  padding: 0.8rem 1rem;
+  flex-wrap: wrap;
+  flex-direction: column;
+  //justify-content: flex-end;
+  align-content: space-between;
+}
+.title-you-know{
+  padding-top: 11px;
+}
+.search-container{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row-reverse;
+  margin-top:11px;
+}
+.rounded-photo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%; /* This will make the photo round */
+}
+.tableId{
+  width: 10px;
+}
+.tableImage{
+  width: 15px;
+}
+.tablePrice{
+  width: 15px;
+}
+.tableActions1{
+  padding-left: 40px;
+}
+
+.tableEdit {
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-image: linear-gradient(to right, black, transparent) 1;
+}
+.pagination-controller{
+  margin-top: 1px;
+  padding-top: 5px;
 }
 

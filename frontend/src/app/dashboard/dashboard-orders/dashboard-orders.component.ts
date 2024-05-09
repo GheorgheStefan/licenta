@@ -61,8 +61,8 @@ export class DashboardOrdersComponent implements OnInit{
 
   openDetailsPopup(orderId: any) {
     const dialogRef = this.dialog.open(DetailsOrderPopupComponent, {
-      width: '800px',
-      height: '200px',
+      width: '1000px',
+      height: '520px',
       data: orderId,
       // disableClose: true,
     });

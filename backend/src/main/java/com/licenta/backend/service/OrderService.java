@@ -2,6 +2,7 @@ package com.licenta.backend.service;
 
 import com.licenta.backend.dto.order.OrderRequestDto;
 import com.licenta.backend.dto.order.OrderResponseDto;
+import com.licenta.backend.dto.order.request.OrderUpdateRequestDto;
 import com.licenta.backend.dto.order.response.OrderDashboardResponseDto;
 import com.licenta.backend.dto.order.response.UserLastOrderResponseDto;
 import com.licenta.backend.dto.order.response.UserOrdersResponseDto;
@@ -181,4 +182,9 @@ public class OrderService {
         return userOrdersResponseDtos;
     }
 
+    public Order updateOrder(Long orderId, OrderUpdateRequestDto orderUpdateRequestDto) {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+        order.setStatus(orderUpdateRequestDto.getStatus());
+        return orderRepository.save(order);
+    }
 }

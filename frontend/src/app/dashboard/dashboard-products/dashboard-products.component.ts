@@ -43,6 +43,9 @@ export class DashboardProductsComponent implements OnInit{
   selectedAttribute: keyof Product = 'name';
   readonly searchAttributes: string[] = Object.values(SearchAttribute);
     p: number = 1;
+  itemsPerPage: number = 5;
+  itemsPerPageOptions: number[] = [5, 10];
+  pagedOrders: any[] = [];
 
   constructor(private dialog: MatDialog,
               private productService: ProductService) {
@@ -51,6 +54,7 @@ export class DashboardProductsComponent implements OnInit{
   fetchProducts(): void {
     this.productService.getProducts().subscribe(products => {
       this.products = products;
+      console.log(this.products);
     });
   }
 
@@ -84,7 +88,7 @@ export class DashboardProductsComponent implements OnInit{
         }
       });
       this.products = this.products.filter((product: Product) => product.id !== productId);
-      // this.fetchProducts(); // TODO: de verificat cand ajung la admin la stergere am problema, da nu aici neaparat, sa ma uit in toata metoda
+      this.fetchProducts();
       return;
     }
 
@@ -112,6 +116,10 @@ export class DashboardProductsComponent implements OnInit{
   }
 
 
+  handleInputChange() {
+    this.search();
+  }
+
   search() {
     if (this.name === "") {
       this.ngOnInit();
@@ -123,4 +131,13 @@ export class DashboardProductsComponent implements OnInit{
     }
   }
 
+  changeItemsPerPage() {
+    this.p = 1; // Reset page number when changing items per page
+    this.paginateUsers(); // Call pagination function
+  }
+
+  paginateUsers() {
+    const startIndex = (this.p - 1) * this.itemsPerPage;
+    this.pagedOrders = this.products.slice(startIndex, startIndex + this.itemsPerPage);
+  }
 }

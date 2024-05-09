@@ -3,6 +3,7 @@ package com.licenta.backend.controller;
 
 import com.licenta.backend.dto.order.OrderRequestDto;
 import com.licenta.backend.dto.order.OrderResponseDto;
+import com.licenta.backend.dto.order.request.OrderUpdateRequestDto;
 import com.licenta.backend.dto.order.response.OrderDashboardResponseDto;
 import com.licenta.backend.dto.order.response.UserLastOrderResponseDto;
 import com.licenta.backend.dto.order.response.UserOrdersResponseDto;
@@ -49,6 +50,12 @@ public class OrderController {
     @GetMapping("/user/{userId}")
     public List<UserOrdersResponseDto> getUserOrders(@PathVariable Long userId){
         return orderService.getUserOrders(userId);
+    }
+
+    @PutMapping("/status/{orderId}")
+    public ResponseEntity<Void> changeOrderStatus(@PathVariable Long orderId, @ModelAttribute OrderUpdateRequestDto orderUpdateRequestDto){
+        orderService.updateOrder(orderId, orderUpdateRequestDto);
+        return ResponseEntity.ok().build();
     }
 
 

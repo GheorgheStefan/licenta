@@ -1,1 +1,96 @@
+<ngb-carousel [interval]="4000" [showNavigationArrows]="false" [pauseOnHover]="false" [pauseOnFocus]="false">
+  <ng-template ngbSlide *ngFor="let image of presentationImages">
+    <div class="cWrapp">
+      <img [src]="image.image" alt="Random first slide">
+      <div class="carousel-captions slide">
+        <h3>{{ image.title }}</h3>
+        <p>{{ image.description }}</p>
+      </div>
+    </div>
+  </ng-template>
+</ngb-carousel>
+
+<div class="divider">
+  <hr class="divider">
+</div>
+
+<h1 class="subTitle">New Arrivals</h1>
+
+
+<!-- ASTA E SFANTA-->
+<section class="product"> <!--product-->
+  <div class="container-fluid">
+    <div class="slider-wrap">
+      <div class="slider-main">
+        <div class="item" *ngFor="let item of presentationProducts" [routerLink]="['../footwear/product',item.id]">
+          <div class="content">
+
+            <div class="img-wrap">
+              <img [src]="item.presentationImage" alt="product">
+            </div>
+
+            <div class="text-wrap">
+              <div class="details">
+                <h3>{{ item.brand }}</h3>
+                <h4>{{ item.name }}</h4>
+              </div>
+              <div class="price">
+                <p>{{ item.price }} RON</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="button-area">
+        <button type="button" class="prev" appPrev> prev</button>
+        <button type="button" class="next" appNext> next</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ASTA E SFANTA-->
+
+<div class="divider">
+</div>
+
+<h1 class="subTitle">Recommendations</h1>
+
+
+<!-- ASTA E SFANTA-->
+<section class="product"> <!--product-->
+  <div class="container-fluid">
+    <div class="slider-wrap">
+      <div class="slider-main">
+        <div class="item" *ngFor="let item of recommendedProducts" [routerLink]="['../footwear/product',item.id]">
+          <div class="content">
+
+            <div class="img-wrap">
+              <img [src]="item.presentationImage" alt="product">
+            </div>
+
+            <div class="text-wrap">
+              <div class="details">
+                <h3>{{ item.brand }}</h3>
+                <h4>{{ item.name }}</h4>
+              </div>
+              <div class="price">
+                <p>{{ item.price }} RON</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="button-area">
+        <button type="button" class="prev" appPrev> prev</button>
+        <button type="button" class="next" appNext> next</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ASTA E SFANTA-->
+
 

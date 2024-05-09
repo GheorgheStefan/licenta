@@ -1,20 +1,46 @@
-
 <div class="central-container">
 
   <div class="shipping">
     <h2>Shipping</h2>
-    <p>Shipping Address: {{order?.deliveryAddress}}</p>
-    <p>{{order?.deliveryCountry}}, {{order?.deliveryRegion}}, {{order?.deliveryCity}} </p>
-    <p>Postal Code: {{order?.deliveryPostalCode}}</p>
-    <p>Phone: {{order?.deliveryPhoneNumber}}</p>
+    <p>Shipping Address: {{ order?.deliveryAddress }}</p>
+    <p>{{ order?.deliveryCountry }}, {{ order?.deliveryRegion }}, {{ order?.deliveryCity }} </p>
+    <p>Postal Code: {{ order?.deliveryPostalCode }}</p>
+    <p>Phone: {{ order?.deliveryPhoneNumber }}</p>
   </div>
 
   <div class="payment">
     <h2>Billing</h2>
-    <p>Shipping Address: {{order?.billingAddress}}</p>
-    <p>{{order?.billingCountry}}, {{order?.billingRegion}}, {{order?.billingCity}} </p>
-    <p>Postal Code: {{order?.billingPostalCode}}</p>
-    <p>Phone: {{order?.billingPhoneNumber}}</p>
+    <p>Shipping Address: {{ order?.billingAddress }}</p>
+    <p>{{ order?.billingCountry }}, {{ order?.billingRegion }}, {{ order?.billingCity }} </p>
+    <p>Postal Code: {{ order?.billingPostalCode }}</p>
+    <p>Phone: {{ order?.billingPhoneNumber }}</p>
   </div>
 
 </div>
+<hr>
+<div class="items-container">
+  <h2 class="p-2">Items ordered</h2>
+  <div class="scroll-baiatu">
+  <div *ngFor="let product of productArrTest" class="items-display-div">
+    <div class="info-product">
+      <ul>
+          <li>Brand: {{ product?.product.brand }}</li>
+          <li>Name: {{ product?.product.name }}</li>
+          <li>Size: {{ product?.size }}</li>
+      </ul>
+    </div>
+    <div class="number-of-items">
+      <ul class="ul-din-ceva">
+        <li>Units No:</li>
+        <li>{{ product?.amount }}</li>
+      </ul>
+    </div>
+    <div class="cost-product">
+      <p>Price: {{ product?.product.price }} RON</p>
+    </div>
+
+  </div>
+  </div>
+
+</div>
+

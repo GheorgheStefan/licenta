@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -62,6 +63,7 @@ public class ProductController {
                 .price(productRegisterRequestDto.getPrice())
                 .presentationImage(googleCloudStorageService.saveImage(productRegisterRequestDto.getPresentationImage()))
                 .selectedImages(otherProductImages)
+                .registrationDate(LocalDate.now())
                 .productSizes(sizes)
                 .build();
         productService.save(product);
@@ -169,6 +171,7 @@ public class ProductController {
         product.setBrand(productRegisterRequestDto.getBrand());
         product.setPresentationImage(googleCloudStorageService.saveImage(productRegisterRequestDto.getPresentationImage()));
         product.setSelectedImages(otherProductImages);
+        product.setRegistrationDate(LocalDate.now());
         product.setProductSizes(sizes);
 
         productService.save(product);
@@ -184,5 +187,16 @@ public class ProductController {
                 .brand(product.getBrand())
                 .build());
     }
+
+    @GetMapping("/presentation-products")
+    public List<Product> getPresentationProducts() {
+        return productService.findPresentationProducts();
+    }
+    @GetMapping("/recommended-products")
+    public List<Product> getRecommendedProducts() {
+        return productService.findRecommendedProducts();
+    }
+
+
 
 }

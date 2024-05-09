@@ -5,8 +5,55 @@
 }
 
 .shipping {
-  margin-left: 20px;
+  margin-right: 40px;
+  padding: 10px;
 }
 .payment {
-  margin-right: 20px;
+  margin-left: 40px;
+  padding: 10px;
+  margin-right: -20px;
 }
+
+.items-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+}
+.items-display-div{
+  //overflow-y: auto;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.info-product {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  width: 90%;
+}
+.cost-product {
+  //background-color: blue;
+  display: flex;
+  right: 0;
+  padding: 10px;
+  width: 15%;
+}
+.number-of-items{
+  //background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 50%;
+}
+.scroll-baiatu{
+  overflow-y: auto;
+  height: 180px;
+  width: 100%;
+}
+
+
+
+
+

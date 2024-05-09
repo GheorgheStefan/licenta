@@ -1,0 +1,140 @@
+img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+.cWrapp{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+
+}
+.carousel-captions{
+  position: absolute;
+  top: 90%;
+  left: 10%;
+  transform: translate(0, -50%);
+  //text-align: center;
+  z-index: 1;
+}
+img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
+.slide h3{
+  font-size: 2.5rem;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+.slide p{
+  font-size: 1.5rem;
+  color: black;
+  font-style: oblique;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+.divider{
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.subTitle{
+  padding-left: 10px;
+  font-size: 2.5rem;
+  color: black;
+  font-style: oblique;
+  font-weight: bold;
+  margin: 0;
+}
+//////////////////////// slider //////////////////////////
+.product{
+  padding: 20px;
+}
+.slider-wrap{
+  position: relative;
+  overflow: hidden;
+  height: 390px; //sa ma uit cand fac marimea produsului
+}
+.slider-main{
+  position: absolute;
+  width: 200%; // 300%
+}
+.item{//marime item
+  display: inline-block;
+  width: 325px;
+  height: 390px;
+  //background-color: black;
+  position: relative;
+  margin: 0 12px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.content{
+  position: absolute;
+  //top: 50%;
+  //left: 50%;
+  //transform: translate(50%, 50%);
+}
+.prev{
+  position: absolute;
+  top: 65%;
+  left: 17px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.next{
+  position: absolute;
+  top: 65%;
+  right: 24px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+////////
+// eu
+.img-wrap{
+  width: 150%;
+  height: 150%;
+  overflow: hidden;
+  position: relative;
+}
+.img-wrap img{
+  width: 325px;
+  height: 300px;
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+.text-wrap{
+  padding: 20px;
+  background-color: white;
+  width: 325px;
+}
+.price{
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.details {
+  margin: 0; /* Remove margin */
+  padding: 0; /* Remove padding */
+}
+
+.details h3, .details h4 {
+  margin: 0; /* Remove margin for h3 and h4 elements */
+}
+
+.details h3{
+  font-size: 1.5rem; /* Set font size */
+  font-weight: bold; /* Set font weight */
+  font-style: italic;
+}
+
+
+//toata aia cu produse

@@ -1,36 +1,175 @@
+// Haideeeeeeeeeeeeeeeee
 
-.modal-overlay {
-  position: fixed;
+.table-impl {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  height: 90vh;
+  background-color: #f1f1f1;
+  -webkit-backdrop-filter: blur(7px);
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.table_body {
+  width: 95%;
+  max-height: calc(90% - .8rem);
+  background-color: #f1f1f1;
+  margin: .8rem auto;
+  border-radius: .6rem;
+  overflow: auto;
+  display: flex; /* Add display flex */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+}
+
+.table_body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.table_body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #888;
+}
+
+.table_body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table_body table thead th {
+  position: sticky; /* Correct the typo: 'position' */
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Opacitatea fundalului */
+  background-color: darkgray;
+
+}
+
+table,
+th,
+td {
+  padding: 5px;
+  border-collapse: collapse;
+}
+
+
+tr,
+td {
+  min-width: 100px;
+}
+
+.cust {
+  min-width: 200px;
+}
+.my-pagination ::ng-deep .ngx-pagination .current {
+  background: black;
+  color: white;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.my-pagination ::ng-deep .ngx-pagination .pagination-previous{
+  color:black;
+}
+.my-pagination ::ng-deep .ngx-pagination .pagination-next{
+  color:black;
+}
+.table-container{
   display: flex;
   justify-content: center;
+}
+.table-manager{
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  width: 90%;
+}
+.roller{
+  max-width: 10px;
 }
 
-.modal {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-.navbar {
-  display: flex;
-  justify-content: center; /* Horizontally center the search container */
-}
-
-.search-container {
-  display: flex;
-  align-items: center; /* Vertically center elements */
-}
-
-.select-container {
-  margin-right: 10px; /* Adjust spacing between dropdown and input if needed */
-}
-tr.no-border {
+// haidee
+.btnn{
+  width: 20%;
+  height: 50px;
   border: none;
+  outline: none;
+  background: black;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 40px;
+  border-shadow: 0 0 10px rgba(0,0,0,0.1);
+  right: 0;
+}
+.checkout-button{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
+.table-name{
+  width: 100%;
+  height: 10%;
+  background-color: #f1f1f1;
+  display: flex;
+  padding: 0.8rem 1rem;
+  flex-wrap: wrap;
+  flex-direction: column;
+  //justify-content: flex-end;
+  align-content: space-between;
+}
+.title-you-know{
+  padding-top: 11px;
+}
+.search-container{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row-reverse;
+  margin-top:11px;
+}
+.rounded-photo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%; /* This will make the photo round */
+}
+.tableId{
+  width: 10px;
+}
+.tableImage{
+  width: 15px;
+}
+.tablePrice{
+  width: 15px;
+}
+.tableActions1{
+  padding-left: 40px;
+}
+
+.tableEdit {
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-image: linear-gradient(to right, black, transparent) 1;
+}
+.pagination-controller{
+  margin-top: 1px;
+  padding-top: 5px;
+}
+
+@media (max-width: 768px) {
+.search-container{
+  display:none;
+}
+  .btnn{
+    width: 40%;
+  }
+}
+
+
+
+//

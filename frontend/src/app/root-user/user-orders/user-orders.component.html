@@ -14,8 +14,8 @@
     </div>
     <div class="edit-info">
       <div class=" d-flex place-content-center place-items-center flex-col-reverse">
-        <a class="link">See info</a> <!-- (click)="editInfo(user.id)" -->
-        <a class="link" *ngIf="order?.status === 'PENDING'">Cancel Order</a>
+        <a class="link" (click)="seeInfo(order?.orderId)">See info</a> <!-- (click)="editInfo(user.id)" -->
+        <a class="link" *ngIf="order?.status === 'PENDING'" (click)="cancelOrder(order?.orderId)">Cancel Order</a>
       </div>
     </div>
   </div>
