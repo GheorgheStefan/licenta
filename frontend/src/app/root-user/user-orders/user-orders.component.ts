@@ -40,7 +40,6 @@ export class UserOrdersComponent implements OnInit {
   }
   ngOnInit(): void {
     this.fetchUser();
-    this.seeInfo(1); //sterge
   }
 
 

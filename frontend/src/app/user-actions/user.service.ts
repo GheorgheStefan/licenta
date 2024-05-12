@@ -30,9 +30,11 @@ export class UserService {
     if (decodedToken && decodedToken.role === 'BUYER') {
       this.data = data;
       this.router.navigate(['/home']);
-    } else {
+    } else if (decodedToken && decodedToken.role === 'ADMIN') {
       this.data = data;
       this.router.navigate(['/dashboard/home']);
+    }else{
+      this.router.navigate(['/delivery/home']);
     }
   }
 

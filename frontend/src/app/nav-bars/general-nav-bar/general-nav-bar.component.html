@@ -2,6 +2,7 @@
 <div class="hero">
   <nav>
     <h3 class="logo">Logo</h3>
+
     <ul class="nav_links">
       <li ><a routerLink="/home">Home</a></li>
       <li><a href="#">Recomand</a></li>
@@ -10,9 +11,15 @@
     </ul>
 
     <div class="btn-group" dropdown>
+      <button type="button" class="btn button-changer" aria-controls="dropdown-basic" href="www.google.com">
+        <i class="material-icons white-icon">search</i>
+      </button>
+    </div>
+
+
+    <div class="btn-group" dropdown>
       <button dropdownToggle type="button" class="btn button-changer" aria-controls="dropdown-basic">
         <i class="material-icons white-icon">person</i>
-<!--        <i class="fa-solid fa-user"></i>-->
       </button>
       <ul *dropdownMenu class="dropdown-menu dropdown-menu-right custom-dropdown-menu"
           role="menu" aria-labelledby="button-basic">
@@ -38,8 +45,6 @@
         <li role="menuitem"><a class="dropdown-item" routerLink="/checkout">Place Order</a></li>
       </ul>
     </div>
-
-
   </nav>
 </div>
 

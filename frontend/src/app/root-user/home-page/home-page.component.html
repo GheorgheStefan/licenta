@@ -22,6 +22,7 @@
   <div class="container-fluid">
     <div class="slider-wrap">
       <div class="slider-main">
+
         <div class="item" *ngFor="let item of presentationProducts" [routerLink]="['../footwear/product',item.id]">
           <div class="content">
 
@@ -41,10 +42,11 @@
 
           </div>
         </div>
+
       </div>
       <div class="button-area">
-        <button type="button" class="prev" appPrev> prev</button>
-        <button type="button" class="next" appNext> next</button>
+        <button type="button" class="prev" appPrev>  <i class="fa-solid fa-angle-left"></i> </button>
+        <button type="button" class="next" appNext>  <i class="fa-solid fa-angle-right"></i> </button>
       </div>
     </div>
   </div>
@@ -84,8 +86,8 @@
         </div>
       </div>
       <div class="button-area">
-        <button type="button" class="prev" appPrev> prev</button>
-        <button type="button" class="next" appNext> next</button>
+        <button type="button" class="prev" appPrev> <i class="fa-solid fa-angle-left"></i> </button>
+        <button type="button" class="next" appNext> <i class="fa-solid fa-angle-right"></i> </button>
       </div>
     </div>
   </div>

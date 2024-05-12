@@ -58,6 +58,11 @@ public class OrderController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/unsigned")
+    public List<Order> getUnsignedOrders(){
+        return orderService.getUnsignedOrders();
+    }
+
 
 
 }

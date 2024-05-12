@@ -17,6 +17,8 @@ import {ResetPasswordComponent} from "./user-actions/reset-password/reset-passwo
 import {DashboardUserComponent} from "./dashboard/dashboard-user/dashboard-user.component";
 import {UserInformationComponent} from "./root-user/user-information/user-information.component";
 import {UserOrdersComponent} from "./root-user/user-orders/user-orders.component";
+import {RootDeliveryComponent} from "./root-delivery/root-delivery.component";
+import {AdministrationPageComponent} from "./root-delivery/administration-page/administration-page.component";
 
 export const routes: Routes = [
 
@@ -34,12 +36,15 @@ export const routes: Routes = [
       { path: 'user/info/:id', component: UserInformationComponent },
       { path: 'user/orders/:id', component: UserOrdersComponent },
     ]},
+  {path:"delivery", component: RootDeliveryComponent, children:[
+      {path: 'home', component: AdministrationPageComponent},
+    ]},
   {path: "dashboard", component: DashboardComponent, children: [
       { path: 'home', component: DashboardHomeComponent },
       { path: 'product', component: DashboardProductsComponent },
       { path: 'users', component:DashboardUsersComponent},
       { path: 'orders', component:DashboardOrdersComponent},
-      { path: 'user', component:DashboardUserComponent}
+      { path: 'user', component:DashboardUserComponent},
 
     ]}
 ];

@@ -68,13 +68,16 @@
 
   <div class="container-for-basic-infov2">
       <p>Order:</p>
-      <ul class="distro-the-items">
+      <ul class="distro-the-items" *ngIf="!isLastOrderModified()" >
         <li>{{lastOrder?.orderId}}</li>
         <li>{{ lastOrder?.orderDate }}</li>
         <li>{{ lastOrder?.totalPrice }} RON</li>
         <li>{{lastOrder?.shippingOption}}</li>
         <li>{{ lastOrder?.status }}</li>
       </ul>
+    <div class="d-flex align-content-center justify-content-center">
+      <p *ngIf="isLastOrderModified()">Not purchases found!</p>
+    </div>
     </div>
 
 </div>

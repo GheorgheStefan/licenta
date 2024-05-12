@@ -28,6 +28,8 @@
             </button> <!-- (click)="updateProductPopUp(user.id)" -->
             <button mat-menu-item *ngIf="user.role !== 'ADMIN'" (click)="changeRole(user.id, 'ADMIN')">Make ADMIN
             </button> <!-- (click)="deleteProductPopUp(user.id)" -->
+            <button mat-menu-item *ngIf="user.role !== 'DELIVERY'" (click)="changeRole(user.id, 'DELIVERY')">Make DELIVERY
+            </button> <!-- (click)="deleteProductPopUp(user.id)" -->
           </mat-menu>
         </td>
       </tr>

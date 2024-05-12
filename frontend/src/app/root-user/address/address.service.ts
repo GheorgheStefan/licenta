@@ -23,19 +23,6 @@ export class AddressService {
   addAddress(address: any) {
     return this.http.post('http://localhost:8080/user-address', this.getFormData(address));
   }
-
-  getUserAddresses(userMail: string): Observable<any> {
-    return this.http.get('http://localhost:8080/user-address/' + userMail);
-  }
-
-  getUserBillingAddress(userMail: string): Observable<any> {
-    return this.http.get('http://localhost:8080/user-address/billing/' + userMail);
-  }
-
-  getUserShippingAddress(userMail: string): Observable<any> {
-    return this.http.get('http://localhost:8080/user-address/shipping/' + userMail);
-  }
-
   updateAddress(address: any) {
     return this.http.put('http://localhost:8080/user-address', this.getFormData(address));
   }
@@ -47,6 +34,20 @@ export class AddressService {
   getAddressById(addressId: number) {
     return this.http.get('http://localhost:8080/user-address/address/' + addressId);
   }
+  getUserShippingAddress(userMail: string) {
+    return this.http.get('http://localhost:8080/user-address/shipping/' + userMail);
+  }
+
+  getUserAddresses(userMail: string): Observable<any> {
+    return this.http.get('http://localhost:8080/user-address/' + userMail);
+  }
+
+  getUserBillingAddress(userMail: string): Observable<any> {
+    return this.http.get('http://localhost:8080/user-address/billing/' + userMail);
+  }
+
+
+
 
   // countries = ["Franța", "România"];
   //

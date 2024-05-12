@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserEditPopupComponent} from "../../dashboard/dashboard-user/user-edit-popup/user-edit-popup.component";
 import {JwtHandler} from "../../service/JwtHandler";
 import {DashboardUserService} from "../../dashboard/dashboard-user/dashboard-user.service";
@@ -7,21 +7,23 @@ import {UserService} from "../../user-actions/user.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {RouterLink} from "@angular/router";
 import {UserInfoService} from "./user-info.service";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-user-information',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink,
+    NgIf
   ],
   templateUrl: './user-information.component.html',
   styleUrl: './user-information.component.scss'
 })
-export class UserInformationComponent {
+export class UserInformationComponent implements OnInit {
   user: any;
   shippingAddress: any;
   billingAddress: any;
-  lastOrder: any;
+  lastOrder: any = {};
 
   constructor(private jwtHandler: JwtHandler,
               private dashboardUserService: DashboardUserService,
@@ -80,7 +82,10 @@ export class UserInformationComponent {
             verticalPosition: 'top'
           });
         });
+  }
 
 
+  isLastOrderModified(): boolean {
+    return JSON.stringify(this.lastOrder) !== JSON.stringify({});
   }
 }

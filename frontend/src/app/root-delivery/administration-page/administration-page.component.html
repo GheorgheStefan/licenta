@@ -1,0 +1,29 @@
+<div class="own-orders">
+
+</div>
+
+<div class="map-container">
+  <div class="the-map">
+    <app-map
+      [latitude]="latitude"
+      [longitude]="longitude"
+    >
+    </app-map>
+  </div>
+</div>
+
+<div class="unassigned-orders">
+  <div class="item" *ngFor="let order of unassignedOrders">
+    <div class="info">
+      <ul>
+        <li>{{order.da}}</li>
+        <li>{{}}</li>
+        <li>{{}}</li>
+      </ul>
+
+    </div>
+    <div class="actions">
+      <button (click)="assignOrder(order.id)">Assign</button>
+    </div>
+  </div>
+</div>

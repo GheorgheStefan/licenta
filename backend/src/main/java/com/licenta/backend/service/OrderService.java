@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -182,9 +181,20 @@ public class OrderService {
         return userOrdersResponseDtos;
     }
 
-    public Order updateOrder(Long orderId, OrderUpdateRequestDto orderUpdateRequestDto) {
+    public void updateOrder(Long orderId, OrderUpdateRequestDto orderUpdateRequestDto) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
         order.setStatus(orderUpdateRequestDto.getStatus());
-        return orderRepository.save(order);
+        orderRepository.save(order);
+    }
+
+    public List<Order> getUnsignedOrders(){
+        List<Order> allOrders= orderRepository.findAll();
+        List<Order> unsignedOrders = new ArrayList<>();
+        for(Order order: allOrders){
+            if(order.getStatus().equals("PENDING")){
+                unsignedOrders.add(order);
+            }
+        }
+        return unsignedOrders;
     }
 }

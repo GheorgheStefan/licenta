@@ -41,6 +41,9 @@ public class Order {
     private String BillingPostalCode;
     private String BillingPhoneNumber;
 
+//la hau
+    private long deliveryGuyId;
+
 
     @JsonIgnore
     @OneToMany

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEditRequestDto {
+    private String phone;
     private Long id;
     private String firstname;
     private String lastname;

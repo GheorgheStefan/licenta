@@ -36,7 +36,8 @@
               "./node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
               "./node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
               "./node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
-              "./node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss"
+              "./node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
 						"scripts": [
               "./node_modules/@popperjs/core/dist/umd/popper.min.js",
@@ -108,8 +109,9 @@
               "./node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
               "./node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
               "./node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
-              "./node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss"
-						],
+              "./node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
+              "node_modules/leaflet/dist/leaflet.css"
+				],
 						"scripts": [
 
             ]

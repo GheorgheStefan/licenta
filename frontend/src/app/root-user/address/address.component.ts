@@ -18,7 +18,7 @@ import {forkJoin, Subscription} from "rxjs";
   styleUrl: './address.component.scss'
 })
 
-export class AddressComponent implements OnInit, OnDestroy {
+export class AddressComponent implements OnInit {
   isShippingAddressSet: any = true;
   isBillingAddressSet: any = true;
   addressesExist: any = true;
@@ -26,8 +26,6 @@ export class AddressComponent implements OnInit, OnDestroy {
   userBillingAddress: any;
   userShippingAddress: any;
   userAddresses: any[] = [];
-
-  subscriptions: Subscription[] = [];
 
   constructor(private addressService: AddressService,
               private dialog: MatDialog,
@@ -37,28 +35,20 @@ export class AddressComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.fetchAddresses();
   }
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
-  }
 
   fetchAddresses(): void {
-    const billingAddress$ = this.addressService.getUserBillingAddress(this.jwtHandler.getEmail());
-    const shippingAddress$ = this.addressService.getUserShippingAddress(this.jwtHandler.getEmail());
-    const userAddresses$ = this.addressService.getUserAddresses(this.jwtHandler.getEmail());
+    this.addressService.getUserAddresses(this.jwtHandler.getEmail()).subscribe(
+      (res: any) => {
+        this.userAddresses = res;
+        this.addressesExist = this.userAddresses.length > 0;
+        console.log(this.userAddresses);
 
-    const combinedSub = forkJoin([billingAddress$, shippingAddress$, userAddresses$]).subscribe(
-      ([billingAddress, shippingAddress, userAddresses]) => {
-        this.userBillingAddress = billingAddress;
-        this.userShippingAddress = shippingAddress;
-        this.userAddresses = userAddresses;
-      },
-      error => {
-        this.isBillingAddressSet = false;
-        this.isShippingAddressSet = false;
-        this.addressesExist = false;
+        this.userShippingAddress = this.userAddresses.find((address: any) => address.isShippingAddress === 'true');
+        this.isShippingAddressSet = this.userShippingAddress !== undefined;
+        this.userBillingAddress = this.userAddresses.find((address: any) => address.isBillingAddress === 'true');
+        this.isBillingAddressSet = this.userBillingAddress !== undefined;
       }
     );
-    this.subscriptions.push(combinedSub);
   }
 
   addAddress() {
@@ -68,8 +58,9 @@ export class AddressComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((data) => {
-      this.fetchAddresses();
+      this.ngOnInit();
     });
+    this.fetchAddresses();
   }
 
   editAddressPopup(id: any) {
@@ -79,9 +70,10 @@ export class AddressComponent implements OnInit, OnDestroy {
       height: '500px',
     });
 
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe((data) => {
       this.fetchAddresses();
     });
+    this.fetchAddresses();
   }
 
 

@@ -62,9 +62,9 @@ public class UserService {
         newUser.setEmail(request.getEmail());
         newUser.setPassword(passwordEncoder.encode(request.getPassword()));
         newUser.setFirstname(request.getFirstname());
-        logger.info("Firstname: {}", request.getFirstname());
+//        logger.info("Firstname: {}", request.getFirstname());
         newUser.setLastname(request.getLastname());
-        logger.info("Lastname: {}", request.getLastname());
+        newUser.setPhone(request.getPhone());
         newUser.setEnabled(false);
         newUser.setRole(Role.BUYER);
 
@@ -136,6 +136,7 @@ public class UserService {
         Optional<User> userOptional = userRepository.findById(request.getId());
         if (userOptional.isPresent()) {
             User user = userOptional.get();
+            user.setPhone(request.getPhone());
             user.setEmail(request.getEmail());
             user.setFirstname(request.getFirstname());
             user.setLastname(request.getLastname());

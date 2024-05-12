@@ -1,15 +1,32 @@
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-20">
-  <div *ngFor="let product of products" class="product-card rounded-xl shadow-xl h-full" [routerLink]="['product',product.id]" >
-    <div class="relative overflow-hidden h-96 sm:h-72 md:h-96 cursor-pointer"> <!-- Adjust the height here -->
-      <img class="absolute inset-0 w-full h-full object-cover" [src]="product.presentationImage" alt="">
-    </div>
-    <div class="flex flex-col p-4 sm:p-3 h-32">
-      <div class="flex flex-row justify-between">
-        <h1 class="text-lg sm:text-xl font-bold">{{product.name}}</h1>
-        <p class="text-lg sm:text-xl font-bold">{{product.price}} RON</p>
+<div class="text-container">
+  <h1>Footwear</h1>
+</div>
+
+
+
+<div class="grid-container"> <!-- grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-20 -->
+
+  <div class="item" *ngFor="let item of products" [routerLink]="['../footwear/product',item.id]">
+    <div class="content">
+
+      <div class="img-wrap">
+        <img [src]="item.presentationImage" alt="product">
       </div>
+
+      <div class="text-wrap">
+        <div class="details">
+          <h3>{{ item.brand }}</h3>
+          <h4>{{ item.name }}</h4>
+        </div>
+        <div class="price">
+          <p>{{ item.price }} RON</p>
+        </div>
+      </div>
+
     </div>
   </div>
+
+
 </div>
 
 

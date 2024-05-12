@@ -38,16 +38,21 @@
 
   <h2>Other Addresses</h2>
   <div class="other_addresses">
-    <div *ngFor="let address of userAddresses">
-      <h4>Addresses</h4>
-      <p>Name: {{ address?.userFirstName }} {{ address?.userLastName }}</p>
-      <p>Phone: {{ address?.phoneNumber }}</p>
-      <p>Address: {{ address?.address }}</p>
-      <p>{{ address?.country }}, {{ address?.region }}, {{ address?.city }}</p>
-      <p>Postal code: {{ address?.postalCode }}</p>
-      <a class="link" (click)="editAddressPopup(address.id)">Modify address</a>
-      <a class="link" (click)="deleteAddress(address.id)">Delete address</a>
+    <div *ngFor="let address of userAddresses" class="info-container">
+      <div class="details">
+        <p class="name-address">Name: {{ address?.userFirstName }} {{ address?.userLastName }}</p>
+        <p>Phone: {{ address?.phoneNumber }}</p>
+        <p>Address: {{ address?.address }}</p>
+        <p>{{ address?.country }}, {{ address?.region }}, {{ address?.city }}</p>
+        <p>Postal code: {{ address?.postalCode }}</p>
+
+      </div>
+      <div class="links">
+        <a class="link" (click)="editAddressPopup(address.id)">Modify address</a>
+        <a class="link" (click)="deleteAddress(address.id)">Delete address</a>
+      </div>
     </div>
+
 
     <div *ngIf="!userAddresses">
       <p>No addresses found!</p>
