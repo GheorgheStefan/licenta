@@ -14,8 +14,8 @@ import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 export class MapComponent implements OnInit {
   map: any;
   options!: MapOptions;
-  @Input({transform: numberAttribute})latitude: number = 51.678418;
-  @Input({transform: numberAttribute})longitude: number = 7.809007;
+  @Input({transform: numberAttribute})latitude: number = 0;
+  @Input({transform: numberAttribute})longitude: number = 0;
 
   constructor() {}
 

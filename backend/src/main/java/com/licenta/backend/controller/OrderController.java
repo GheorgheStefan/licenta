@@ -1,6 +1,9 @@
 package com.licenta.backend.controller;
 
 
+import com.licenta.backend.dto.MapPositionResponseDto;
+import com.licenta.backend.dto.order.AllCoordinatesResponseDto;
+import com.licenta.backend.dto.order.AssignDeliveryGuyRequestDto;
 import com.licenta.backend.dto.order.OrderRequestDto;
 import com.licenta.backend.dto.order.OrderResponseDto;
 import com.licenta.backend.dto.order.request.OrderUpdateRequestDto;
@@ -63,6 +66,23 @@ public class OrderController {
         return orderService.getUnsignedOrders();
     }
 
+    /////////////////////////// Delivery Guy ///////////////////////////
+
+    @PutMapping("/assign")
+    public ResponseEntity<Order> assignOrderToDeliveryGuy(@RequestBody AssignDeliveryGuyRequestDto assignDeliveryGuyRequestDto){
+        System.out.println("OrderId " + assignDeliveryGuyRequestDto.getOrderId() + " DeliveryGuyEmail " + assignDeliveryGuyRequestDto.getDeliveryGuyEmail());
+        return ResponseEntity.ok(orderService.assignOrderToDeliveryGuy(assignDeliveryGuyRequestDto));
+    }
+
+    @GetMapping("/all/delivery/{deliveryGuyEmail}")
+    public List<Order> getAllDeliveryGuyOrders(@PathVariable String deliveryGuyEmail){
+        return orderService.getAllDeliveryGuyOrders(deliveryGuyEmail);
+    }
+
+    @PostMapping("/map/orders/{deliveryGuyEmail}")
+    public List<MapPositionResponseDto> getAllCoordonates(@PathVariable String deliveryGuyEmail, @RequestBody MapPositionResponseDto mapPositionResponseDto){
+        return orderService.getAllCoordonatesOfDeliveryGuy(deliveryGuyEmail, mapPositionResponseDto);
+    }
 
 
 }

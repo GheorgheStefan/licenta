@@ -28,12 +28,6 @@ export class DetailsOrderPopupComponent implements OnInit {
       this.order = orders;
       this.dashboardOrdersService.getOrderProducts(this.data).subscribe((products:any) => {
         this.productsArr = products;
-        for (let i = 0; i < this.productsArr.length; i++) {
-          this.productArrTest.push(this.productsArr[i]);
-          this.productArrTest.push(this.productsArr[i]);
-          this.productArrTest.push(this.productsArr[i]);
-
-        }
         console.log(this.productsArr);
       });
     });

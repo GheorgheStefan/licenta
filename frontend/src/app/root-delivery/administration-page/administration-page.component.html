@@ -1,29 +1,68 @@
 <div class="own-orders">
+  <h1 class="title">Own Orders</h1>
+  <div class="window-scroll-class">
+    <div class="item basic-info" *ngFor="let order of unassignedOrders">
+      <div class="info">
+        <ul>
+          <li> Street: {{ order.deliveryAddress }}</li>
+          <li> Country: {{ order.deliveryCountry }}</li> <!--Romania-->
+          <li>Region: {{ order.deliveryRegion }}</li><!--Olt-->
+          <li>City: {{ order.deliveryCity }}</li><!--Slatina-->
+        </ul>
 
+      </div>
+      <div class="actions">
+        <button (click)="assignOrder(order.id)">
+          <i class="fa-solid fa-pen-to-square" matTooltip="Take Order!"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="map-container">
   <div class="the-map">
     <app-map
+      *ngIf="showMap"
       [latitude]="latitude"
       [longitude]="longitude"
     >
     </app-map>
   </div>
+  <p>{{location}}</p>
 </div>
 
 <div class="unassigned-orders">
-  <div class="item" *ngFor="let order of unassignedOrders">
-    <div class="info">
-      <ul>
-        <li>{{order.da}}</li>
-        <li>{{}}</li>
-        <li>{{}}</li>
-      </ul>
+  <h1 class="title">Unassigned Orders</h1>
+  <div class="window-scroll-class">
 
+    <div class="item basic-info" *ngFor="let order of ownOrders">
+      <div class="info">
+        <ul>
+          <li> Street: {{ order.deliveryAddress }}</li>
+          <li> {{ order.deliveryCountry }}, {{ order.deliveryRegion }}, {{ order.deliveryCity }}</li> <!--Romania--> <!--Olt--> <!--Slatina-->
+          <li>Zipcode:{{ order.deliveryPostalCode }}</li>
+        </ul>
+
+      </div>
+
+      <div class="actions"><!-- deliveryCity:Slatina deliveryCountry:Olt-->
+        <button (click)="travelToPoint( order.deliveryAddress,
+                                        order.deliveryCity,
+                                        order.deliveryRegion,
+                                        order.deliveryPostalCode)">
+          <i class="fa-solid fa-person-walking"></i>
+        </button>
+      </div>
     </div>
-    <div class="actions">
-      <button (click)="assignOrder(order.id)">Assign</button>
-    </div>
+  </div>
+</div>
+
+<div class="button-container">
+  <div class="checkout-button">
+    <button type="submit" class="btn" (click)="takeMeToSelectedOrder()">Take me to the selected order!</button>
+  </div>
+  <div class="checkout-button">
+    <button type="submit" class="btn" (click)="routeForAllTheOrders()">Route for all orders!</button>
   </div>
 </div>

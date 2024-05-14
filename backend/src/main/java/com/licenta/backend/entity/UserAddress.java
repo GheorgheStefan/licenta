@@ -18,7 +18,7 @@ public class UserAddress {
     private Long id;
 
     private String phoneNumber;
-    private String address;
+    private String address;     //street
     private String postalCode;
     private String country;     //Romania
     private String region;      //Olt

@@ -1,5 +1,8 @@
 package com.licenta.backend.service;
 
+import com.licenta.backend.dto.MapPositionResponseDto;
+import com.licenta.backend.dto.order.AllCoordinatesResponseDto;
+import com.licenta.backend.dto.order.AssignDeliveryGuyRequestDto;
 import com.licenta.backend.dto.order.OrderRequestDto;
 import com.licenta.backend.dto.order.OrderResponseDto;
 import com.licenta.backend.dto.order.request.OrderUpdateRequestDto;
@@ -13,15 +16,16 @@ import com.licenta.backend.repository.ShoppingCartRepository;
 import com.licenta.backend.repository.SizesRepository;
 import com.licenta.backend.repository.UserRepository;
 import com.licenta.backend.service.utils.EmailService;
+import com.licenta.backend.service.utils.NominatimService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.function.EntityResponse;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -34,7 +38,7 @@ public class OrderService {
     private final OrderProductService orderProductService;
     private final SizesRepository sizesRepository;
     private final CartProductService cartProductService;
-    private final EmailService emailService;
+    private final NominatimService nominatimService;
 
     @Transactional
     public OrderResponseDto createOrder(OrderRequestDto orderRequestDto) {
@@ -196,5 +200,34 @@ public class OrderService {
             }
         }
         return unsignedOrders;
+    }
+
+    public List<Order> getAllDeliveryGuyOrders(String deliveryGuyEmail) {
+        User user = userRepository.findByEmail(deliveryGuyEmail).orElseThrow(() -> new RuntimeException("User not found"));
+        return orderRepository.findAll().stream().filter(order -> order.getDeliveryGuyId() == user.getId()).toList();
+    }
+
+    public Order assignOrderToDeliveryGuy(AssignDeliveryGuyRequestDto assignDeliveryGuyRequestDto) {
+        User user = userRepository.findByEmail(assignDeliveryGuyRequestDto.getDeliveryGuyEmail()).orElseThrow(() -> new RuntimeException("User not found"));
+        Order order = orderRepository.findById(assignDeliveryGuyRequestDto.getOrderId()).orElseThrow(() -> new RuntimeException("Order not found"));
+        order.setDeliveryGuyId(user.getId());
+        order.setStatus("DELIVERING");
+        orderRepository.save(order);
+        return order;
+    }
+
+    public List<MapPositionResponseDto> getAllCoordonatesOfDeliveryGuy(String deliveryGuyEmail, MapPositionResponseDto deliveryGuyPosition){
+        User user = userRepository.findByEmail(deliveryGuyEmail).orElseThrow(() -> new RuntimeException("User not found"));
+        List<Order> orders = orderRepository.findOrdersByDeliveryGuyId(user.getId());
+        List<MapPositionResponseDto> mapPositionResponseDto = new ArrayList<>();
+        mapPositionResponseDto.add(deliveryGuyPosition);
+
+
+        for (Order order : orders) {
+            mapPositionResponseDto.add(nominatimService.geocodeAddress(order.getDeliveryAddress(), order.getDeliveryCity(), order.getDeliveryRegion(), order.getDeliveryPostalCode()));
+            }
+        nominatimService.sortByDistance(mapPositionResponseDto);
+
+        return mapPositionResponseDto;
     }
 }
