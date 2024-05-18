@@ -55,6 +55,7 @@ public class NominatimService {
     }
 
     //// Sortează lista de obiecte MapPositionResponseDto în funcție de distanța față de primul obiect folosi formula Haversine
+    ///https://community.esri.com/t5/coordinate-reference-systems-blog/distance-on-a-sphere-the-haversine-formula/ba-p/902128
 
     public void sortByDistance(List<MapPositionResponseDto> list) {
         // Sortați lista bazată pe distanță față de primul obiect

@@ -1,7 +1,7 @@
 <div class="container" *ngIf="this.product">
 
   <div *ngIf="images && images.length > 0" class="carousel-container product-images product-images-container ">
-<!--    <div class="arrow left-arrow" (click)="previousImage()"></div>-->
+    <!--    <div class="arrow left-arrow" (click)="previousImage()"></div>-->
     <img *ngFor="let image of images; let i=index"
          [src]="image"
          [ngClass]="{'image-active': selectedIndex === i}"
@@ -28,7 +28,7 @@
       <div>
         <div *ngFor="let row of sizeRows" class="sizes-container">
           <button class="size-cell" *ngFor="let size of row" [class.selected]="size === selectedSize"
-                  (click)="selectSize(size)" >
+                  (click)="selectSize(size)">
             {{ size.size }}
           </button>
         </div>
@@ -38,15 +38,40 @@
 
       <div class="container justify-content-center">
         <div class="qty-input">
-          <button class="qty-count qty-count--minus" (click)="decrement()" type="button" [disabled]="!sizeSelected">-</button>
+          <button class="qty-count qty-count--minus" (click)="decrement()" type="button" [disabled]="!sizeSelected">-
+          </button>
           <input class="product-qty" type="number" name="product-qty" [(ngModel)]="selectedQuantity" required>
-          <button class="qty-count qty-count--add" (click)="increment()" type="button" [disabled]="!sizeSelected">+</button>
+          <button class="qty-count qty-count--add" (click)="increment()" type="button" [disabled]="!sizeSelected">+
+          </button>
         </div>
       </div>
 
-      <button type="submit" class="btn" (click)="addToCart()" [disabled]="!cartRegistrationForm.valid">Add to Cart</button>
+      <button type="submit" class="btn" (click)="addToCart()" [disabled]="!cartRegistrationForm.valid">Add to Cart
+      </button>
     </form>
   </div>
 
 
+</div>
+<div class="details-of-the-product">
+  <ul class="accordion">
+    <li>
+      <input type="radio" name="accordion" id="first">
+      <label for="first">Details</label>
+      <div class="content">
+        <div>
+          <h2>Description:</h2>
+          <p>{{ this.product.product.description }}</p>
+        </div>
+        <div>
+          <h2>Category:</h2>
+          <p>{{ this.product.product.category }}</p>
+        </div>
+        <div>
+          <h2>Subcategory:</h2>
+          <p>{{ this.product.product.subcategory }}</p>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

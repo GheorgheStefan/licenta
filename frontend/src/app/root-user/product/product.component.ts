@@ -48,12 +48,13 @@ export class ProductComponent implements OnInit {
       next: (params: any) => {
         this.productService.getProductDetails(params.id).subscribe((product: any) => {
           this.product = product;
-          // console.log(this.product);
+          console.log(this.product);
           this.images.push(this.product.product.presentationImage);
           for (let image of this.product.images) {
             this.images.push(image.imageUrl);
           }
           this.chunkSizes();
+
         }, error => {
           console.log(error);
         });
