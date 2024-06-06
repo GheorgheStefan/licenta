@@ -17,4 +17,5 @@ public class OrderResponseDto {
     private Long orderId;
     private LocalDate orderDate;
     private String status;
+    private String deliveryNumber;
 }

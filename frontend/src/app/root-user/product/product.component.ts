@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular
 import {JwtHandler} from "../../service/JwtHandler";
 import {UserService} from "../../service/user.service";
 import {ShoppingCartService} from "./shoppingCart.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-product',
@@ -39,7 +40,8 @@ export class ProductComponent implements OnInit {
               private formBuilder: FormBuilder,
               private jwtHandler: JwtHandler,
               private userService: UserService,
-              private shoppingCartService: ShoppingCartService) {
+              private shoppingCartService: ShoppingCartService,
+              private snackBar: MatSnackBar) {
   }
 
 
@@ -125,6 +127,17 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart() {
+    // console.log('Am Intrat in addToCart', this.jwtHandler.getEmail());
+    if (this.jwtHandler.getEmail() === '') {
+      this.snackBar.open('Please sign in to add products to cart', '', {
+        duration: 2000,
+        verticalPosition: 'top'
+      });
+      // console.log('Am Intrat in addToCart fara mail');
+      return;
+      }
+    // console.log('nam mai iesit');
+
     this.cartRegistrationForm.patchValue({
       productId: this.product.product.id,
       userId: this.userId,
@@ -132,10 +145,14 @@ export class ProductComponent implements OnInit {
       amount: this.selectedQuantity
     });
 
-    console.log('Product added to cart:', this.cartRegistrationForm.value);
+    // console.log('Product added to cart:', this.cartRegistrationForm.value);
 
     this.shoppingCartService.addToCart(this.cartRegistrationForm.value).subscribe((response: any) => {
-      console.log(response);
+      // console.log(response);
+      this.snackBar.open('Product added to cart!', '', {
+        duration: 2000,
+        verticalPosition: 'top'
+      });
     });
   }
 }

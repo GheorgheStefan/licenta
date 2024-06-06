@@ -40,7 +40,7 @@ public class EmailService {
         send(mail);
     }
 
-    public void sendInvoiceMail(String toEmail, Long orderId){
+    public void sendInvoiceMail(String toEmail, Long orderId, String code){
 
         Email from = new Email(fromEmail);
 
@@ -55,6 +55,7 @@ public class EmailService {
         attachments.setFilename("Invoide no." + orderId + ".pdf");
 
         Personalization personalization = new Personalization();
+        personalization.addDynamicTemplateData("code", code);
         personalization.addTo(to);
 
         Mail mail = new Mail();

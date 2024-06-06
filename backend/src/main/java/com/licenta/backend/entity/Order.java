@@ -42,7 +42,9 @@ public class Order {
     private String BillingPhoneNumber;
 
 //la hau
-    private long deliveryGuyId;
+    private Long deliveryGuyId;
+    private String paymentMethod;
+    private String deliveryNumber;
 
 
     @JsonIgnore

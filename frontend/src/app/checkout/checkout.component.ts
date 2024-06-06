@@ -60,6 +60,8 @@ export class CheckoutComponent implements OnInit {
   inHouseDelivery: any = false;
   shippingPrice = 0;
   productsPrice = 0;
+  cashPayment: any = false;
+  cardPayment: any = false;
 
   fetchAddresses() {
     this.userService.getUserIdByEmail(this.jwtHandler.getEmail()).subscribe((user: any) => {
@@ -124,7 +126,8 @@ export class CheckoutComponent implements OnInit {
       userId: this.userId,
       shippingMethod: this.inHouseDelivery ? 'inHouse' : 'standard',
       shippingPrice: this.shippingPrice,
-      productsPrice: this.productsPrice
+      productsPrice: this.productsPrice,
+      paymentMethod: this.cardPayment ? 'card' : 'cash'
     };
     console.log("asta e orderul meu", order);
     this.checkoutService.saveOrder(order).subscribe((response: any) => {
@@ -177,4 +180,13 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+  toggleCheckbox2(external: string) {
+    if (external === 'card') {
+      this.cardPayment = true;
+      this.cashPayment = false;
+    } else if (external === 'cash') {
+      this.cashPayment = true;
+      this.cardPayment = false;
+    }
+  }
 }

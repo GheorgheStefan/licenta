@@ -49,6 +49,7 @@ public class UserService {
         }
 
         return SigninResponseDto.builder()
+                .enabled(user.getEnabled())
                 .token(jwtService.generateToken(user))
                 .build();
     }

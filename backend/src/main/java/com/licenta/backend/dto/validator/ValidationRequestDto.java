@@ -1,4 +1,4 @@
-package com.licenta.backend.dto.user.response;
+package com.licenta.backend.dto.validator;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SigninResponseDto {
-    private String token;
-    private Boolean enabled;
+public class ValidationRequestDto {
+    private String courierMail;
+    private String deliveryCode;
 }

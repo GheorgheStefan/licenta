@@ -24,6 +24,7 @@ export class UserInformationComponent implements OnInit {
   shippingAddress: any;
   billingAddress: any;
   lastOrder: any = {};
+  displayOrder: boolean = false;
 
   constructor(private jwtHandler: JwtHandler,
               private dashboardUserService: DashboardUserService,
@@ -35,9 +36,11 @@ export class UserInformationComponent implements OnInit {
   fetchUser() {
     this.dashboardUserService.getUser().subscribe((user: any) => {
       this.user = user;
+      // console.log("USERBUUUU");
+      // console.log(user);
       this.userInfoService.getUserLastOrder(this.user.id).subscribe((data: any) => {
         this.lastOrder = data;
-        console.log(this.lastOrder);
+        this.displayOrder = true;
       })
       }, error => {
       console.log(error);

@@ -1,0 +1,10 @@
+<div>
+  <h1> Enter delivery code:</h1>
+  <form [formGroup]="myform">
+    <mat-form-field>
+      <mat-label>DeliveryCode</mat-label>
+      <input formControlName="deliveryCode" matInput>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="onSubmit()">Validate</button>
+  </form>
+</div>

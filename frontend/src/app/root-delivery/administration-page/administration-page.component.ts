@@ -5,6 +5,9 @@ import {NgForOf, NgIf} from "@angular/common";
 import {MatTooltip} from "@angular/material/tooltip";
 import {JwtHandler} from "../../service/JwtHandler";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {AddProductPopupComponent} from "../../popups/add-product-popup/add-product-popup.component";
+import {MatDialog} from "@angular/material/dialog";
+import {ValidationPopupComponent} from "../popups/validation-popup/validation-popup.component";
 
 @Component({
   selector: 'app-administration-page',
@@ -29,6 +32,7 @@ export class AdministrationPageComponent implements OnInit {
   constructor(private jwtHandler: JwtHandler,
               private administrationService: AdministrationService,
               private cdr: ChangeDetectorRef,
+              private dialog: MatDialog,
               private snackBar: MatSnackBar
   ) {
   }
@@ -41,21 +45,16 @@ export class AdministrationPageComponent implements OnInit {
   fetchOrders() {
     this.administrationService.getAllUnsignedOrders().subscribe((data: any) => {
       this.unassignedOrders = data;
-
-      console.log(this.unassignedOrders);
     });
 
     this.administrationService.getOrdersByDeliveryGuy(this.jwtHandler.getEmail()).subscribe((data: any) => {
       this.ownOrders = data;
-      console.log(this.ownOrders);
     });
   }
 
   assignOrder(id: any) {
-    // console.log("Order: " + id);
-    // console.log("Delivery guy: " + this.jwtHandler.getEmail());
+
     this.administrationService.assignOrderToDeliveryGuy(id, this.jwtHandler.getEmail()).subscribe((data: any) => {
-      console.log(data);
       this.fetchOrders();
     });
 
@@ -128,5 +127,18 @@ export class AdministrationPageComponent implements OnInit {
           console.log(this.unassignedOrders);
         });
     });
+  }
+
+  redeemOrder() {
+    const dialogRef = this.dialog.open(ValidationPopupComponent, {
+      width: '800px',
+      height: '200px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.fetchOrders();
+    });
+    this.fetchOrders();
   }
 }

@@ -55,6 +55,33 @@
         </div>
       </div>
     </div>
+<!---->
+    <div class="curier shipping-address">
+      <div class="shipping-address-title">
+        <h4>3. Payment Method</h4>
+      </div>
+      <div class="curier2">
+        <div class="delivery-option" style="display: flex; justify-content: space-between;">
+          <mat-checkbox color="primary" [(ngModel)]="cardPayment" (click)="toggleCheckbox2('card')">
+            <span matTooltip="Online, you will be redirected">
+              <h1 style="margin: 0;">Online payment</h1>
+            </span>
+            <p style="margin: 0;">Visa, Mastercard</p>
+          </mat-checkbox>
+          <i class="fa-solid fa-credit-card iconita"></i>
+        </div>
+        <div class="delivery-option" style="display: flex; justify-content: space-between;">
+          <mat-checkbox color="primary" [(ngModel)]="cashPayment" (click)="toggleCheckbox2('cash')">
+            <span matTooltip="To the delivery guy">
+              <h1 style="margin: 0;">Payment on delivery</h1>
+            </span>
+            <p style="margin: 0;"> Cash </p>
+          </mat-checkbox>
+          <i class="fa-solid fa-money-bill iconita"></i>
+        </div>
+      </div>
+    </div>
+<!---->
   </div>
 
   <div class="scroll-panel">
@@ -64,8 +91,8 @@
       </div>
 
       <div class="product-details">
-        <div class="item">Brand:{{ item.brand }}</div>
-        <div class="item">Name:{{ item.name }}</div>
+        <div class="item">{{ item.brand }}</div>
+        <div class="item">{{ item.name }}</div>
         <div class="item">Size:{{ item.size }}</div>
         <div class="product-quantity">
           <div class="buton-propriu-zis">

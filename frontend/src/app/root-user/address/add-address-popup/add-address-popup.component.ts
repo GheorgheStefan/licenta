@@ -54,13 +54,12 @@ export class AddAddressPopupComponent implements OnInit {
   }
 
 
-  addAddress() { //de dat email ul si iau eu din baza de date user id ul. sa schimb si in frontend
+  addAddress() {
       this.myform.patchValue({userMail: this.jwtHandler.getEmail()});
       console.log(this.myform.value);
       this.addressService.addAddress(this.myform.value).subscribe((res: any) => {
-        console.log(res);
+        // console.log(res);
       });
-
       this.dialog.close(this.myform.value);
   }
 }

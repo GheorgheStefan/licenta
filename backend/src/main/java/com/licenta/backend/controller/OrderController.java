@@ -10,6 +10,8 @@ import com.licenta.backend.dto.order.request.OrderUpdateRequestDto;
 import com.licenta.backend.dto.order.response.OrderDashboardResponseDto;
 import com.licenta.backend.dto.order.response.UserLastOrderResponseDto;
 import com.licenta.backend.dto.order.response.UserOrdersResponseDto;
+import com.licenta.backend.dto.user_address.request.AddAddressRequestDto;
+import com.licenta.backend.dto.validator.ValidationRequestDto;
 import com.licenta.backend.entity.Order;
 import com.licenta.backend.service.OrderService;
 import com.licenta.backend.service.utils.EmailService;
@@ -30,8 +32,11 @@ public class OrderController {
 
     @PostMapping("")
     public ResponseEntity<OrderResponseDto> createOrder(@RequestBody OrderRequestDto orderRequestDto){
+        System.out.println("OrderRequestDto " + orderRequestDto);
         OrderResponseDto orderResponseDto = orderService.createOrder(orderRequestDto); //& send email
-        emailService.sendInvoiceMail(orderResponseDto.getUserMail(), orderResponseDto.getOrderId());
+        String code = Long.toString(orderResponseDto.getOrderId());
+        code += ":" + orderResponseDto.getDeliveryNumber();
+        emailService.sendInvoiceMail(orderResponseDto.getUserMail(), orderResponseDto.getOrderId(), code);
         return ResponseEntity.ok(orderResponseDto);
     }
 
@@ -70,7 +75,7 @@ public class OrderController {
 
     @PutMapping("/assign")
     public ResponseEntity<Order> assignOrderToDeliveryGuy(@RequestBody AssignDeliveryGuyRequestDto assignDeliveryGuyRequestDto){
-        System.out.println("OrderId " + assignDeliveryGuyRequestDto.getOrderId() + " DeliveryGuyEmail " + assignDeliveryGuyRequestDto.getDeliveryGuyEmail());
+//        System.out.println("OrderId " + assignDeliveryGuyRequestDto.getOrderId() + " DeliveryGuyEmail " + assignDeliveryGuyRequestDto.getDeliveryGuyEmail());
         return ResponseEntity.ok(orderService.assignOrderToDeliveryGuy(assignDeliveryGuyRequestDto));
     }
 
@@ -82,6 +87,12 @@ public class OrderController {
     @PostMapping("/map/orders/{deliveryGuyEmail}")
     public List<MapPositionResponseDto> getAllCoordonates(@PathVariable String deliveryGuyEmail, @RequestBody MapPositionResponseDto mapPositionResponseDto){
         return orderService.getAllCoordonatesOfDeliveryGuy(deliveryGuyEmail, mapPositionResponseDto);
+    }
+
+    @PostMapping("/validateOrder")
+    public ResponseEntity<Void> validateOrder(@ModelAttribute ValidationRequestDto validationRequestDto){
+        return orderService.validateOrder(validationRequestDto);
+
     }
 
 

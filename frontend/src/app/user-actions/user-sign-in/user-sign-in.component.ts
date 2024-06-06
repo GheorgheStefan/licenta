@@ -47,9 +47,18 @@ export class UserSignInComponent implements OnInit {
       }
     }
 
-    this.userService.signIn(requestData)
-      .subscribe((data: any) => {
-        this.jwtHandler.setToken(data.token, rememberMe);
+    this.userService.signIn(requestData).subscribe((data: any) => {
+      this.jwtHandler.setToken(data.token, rememberMe);
+      if (this.jwtHandler.getRole() === 'BUYER') {
+        if (data.enabled !== false) {
+          this.snackBar.open('Your account is not activated yet', '', {
+            duration: 2000,
+            verticalPosition: 'top'
+          });
+          this.jwtHandler.removeToken();
+          return;
+        }
+      }
         this.userService.redirectUser(data);
       });
   }

@@ -60,23 +60,23 @@
 <hr>
 
 <div class="title-addresses">
-  <h1>Latest Order:</h1>
+  <h1>Orders:</h1>
   <a class="address-link" routerLink="/user/orders/{{user?.id}}">See all orders</a>
 </div>
 
 <div class="container d-flex place-content-center place-items-center mb-6">
 
   <div class="container-for-basic-infov2">
-      <p>Order:</p>
-      <ul class="distro-the-items" *ngIf="!isLastOrderModified()" >
-        <li>{{lastOrder?.orderId}}</li>
+      <p class="order-title-licenta">Last Order:</p>
+      <ul class="distro-the-items" *ngIf="displayOrder" >
+        <li>Order No: {{lastOrder?.orderId}}</li>
         <li>{{ lastOrder?.orderDate }}</li>
         <li>{{ lastOrder?.totalPrice }} RON</li>
-        <li>{{lastOrder?.shippingOption}}</li>
+        <li>DeliveryType: {{lastOrder?.shippingOption}}</li>
         <li>{{ lastOrder?.status }}</li>
       </ul>
     <div class="d-flex align-content-center justify-content-center">
-      <p *ngIf="isLastOrderModified()">Not purchases found!</p>
+      <p *ngIf="!displayOrder">Not purchases found!</p>
     </div>
     </div>
 

@@ -15,4 +15,5 @@ public class OrderRequestDto {
     private String shippingMethod;
     private Float productsPrice;
     private Float shippingPrice;
+    private String paymentMethod;
 }

@@ -1,6 +1,11 @@
+<div class="titlu-curier">
+  <h1> Delivery Central Hub </h1>
+  <i class="fa-solid fa-truck iconita"></i>
+</div>
+<hr>
 <div class="own-orders">
-  <h1 class="title">Own Orders</h1>
-  <div class="window-scroll-class">
+  <h1 class="title">Unassigned Orders</h1>
+  <div class="window-scroll-class mb-5">
     <div class="item basic-info" *ngFor="let order of unassignedOrders">
       <div class="info">
         <ul>
@@ -20,7 +25,7 @@
   </div>
 </div>
 
-<div class="map-container">
+<div class="map-container mb-4">
   <div class="the-map">
     <app-map
       *ngIf="showMap"
@@ -33,7 +38,7 @@
 </div>
 
 <div class="unassigned-orders">
-  <h1 class="title">Unassigned Orders</h1>
+  <h1 class="title">Own Orders</h1>
   <div class="window-scroll-class">
 
     <div class="item basic-info" *ngFor="let order of ownOrders">
@@ -64,5 +69,8 @@
   </div>
   <div class="checkout-button">
     <button type="submit" class="btn" (click)="routeForAllTheOrders()">Route for all orders!</button>
+  </div>
+  <div class="checkout-button">
+    <button type="submit" class="btn" (click)="redeemOrder()">Validate order</button>
   </div>
 </div>

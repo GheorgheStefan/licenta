@@ -9,6 +9,7 @@ import com.licenta.backend.dto.order.request.OrderUpdateRequestDto;
 import com.licenta.backend.dto.order.response.OrderDashboardResponseDto;
 import com.licenta.backend.dto.order.response.UserLastOrderResponseDto;
 import com.licenta.backend.dto.order.response.UserOrdersResponseDto;
+import com.licenta.backend.dto.validator.ValidationRequestDto;
 import com.licenta.backend.entity.*;
 import com.licenta.backend.exceptions.UserDoNotExistException;
 import com.licenta.backend.repository.OrderRepository;
@@ -20,6 +21,7 @@ import com.licenta.backend.service.utils.NominatimService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.function.EntityResponse;
 
@@ -39,6 +41,7 @@ public class OrderService {
     private final SizesRepository sizesRepository;
     private final CartProductService cartProductService;
     private final NominatimService nominatimService;
+
 
     @Transactional
     public OrderResponseDto createOrder(OrderRequestDto orderRequestDto) {
@@ -87,6 +90,8 @@ public class OrderService {
                 .BillingCountry(billingAddress.getCountry())
                 .BillingPostalCode(billingAddress.getPostalCode())
                 .BillingPhoneNumber(billingAddress.getPhoneNumber())
+                .paymentMethod(orderRequestDto.getPaymentMethod())
+                .deliveryNumber(generate4digitsString())
                 .build();
 
         Order order1 = orderRepository.save(order);
@@ -106,6 +111,7 @@ public class OrderService {
                 .orderId(order1.getId())
                 .orderDate(order1.getOrderDate())
                 .status(order1.getStatus())
+                .deliveryNumber(order1.getDeliveryNumber())
                 .build();
     }
 
@@ -204,7 +210,9 @@ public class OrderService {
 
     public List<Order> getAllDeliveryGuyOrders(String deliveryGuyEmail) {
         User user = userRepository.findByEmail(deliveryGuyEmail).orElseThrow(() -> new RuntimeException("User not found"));
-        return orderRepository.findAll().stream().filter(order -> order.getDeliveryGuyId() == user.getId()).toList();
+        //asta trebuie schimbat DELIVERING
+        return orderRepository.findAll().stream().filter(order -> order.getDeliveryGuyId().equals(user.getId()) &&
+                                                                    order.getStatus().equals("DELIVERING")).toList();
     }
 
     public Order assignOrderToDeliveryGuy(AssignDeliveryGuyRequestDto assignDeliveryGuyRequestDto) {
@@ -229,5 +237,28 @@ public class OrderService {
         nominatimService.sortByDistance(mapPositionResponseDto);
 
         return mapPositionResponseDto;
+    }
+
+    private String generate4digitsString(){
+        String number = "";
+        for (int i = 0; i < 4; i++) {
+            int random = (int) (Math.random() * 10);
+            number += random;
+        }
+        return number;
+    }
+
+    public ResponseEntity<Void> validateOrder(ValidationRequestDto validationRequestDto) {
+        User courier = userRepository.findByEmail(validationRequestDto.getCourierMail()).orElseThrow(() -> new RuntimeException("User not found"));
+        String[] parts = validationRequestDto.getDeliveryCode().split(":");
+        Long orderId = Long.parseLong(parts[0]);
+        String code = parts[1];
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+
+        if(order.getDeliveryNumber().equals(code) && order.getDeliveryGuyId().equals(courier.getId())){
+            order.setStatus("DELIVERED");
+            orderRepository.save(order);
+        }
+        return ResponseEntity.ok().build();
     }
 }

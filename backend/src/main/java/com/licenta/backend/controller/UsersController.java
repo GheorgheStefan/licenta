@@ -30,7 +30,8 @@ public class UsersController {
     @PostMapping("/signin")
     public ResponseEntity<SigninResponseDto> signin(
             @RequestBody SigninRequestDto request) {
-        return ResponseEntity.ok(userService.signin(request));
+        SigninResponseDto signinResponseDto = userService.signin(request);
+        return ResponseEntity.ok(signinResponseDto);
     }
 
     @PostMapping("/register")
