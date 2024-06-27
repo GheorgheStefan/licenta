@@ -1,0 +1,125 @@
+// iteme asezare si tot ceea ce cine de display fara paginare
+.item {
+  transition: transform 0.3s;
+}
+
+.item:hover {
+  transform: scale(1.05);
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+.item{//marime item
+  display: inline-block;
+  width: 325px;
+  height: 390px;
+  position: relative;
+  margin: 0 12px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.content{
+  position: absolute;
+}
+
+.img-wrap{
+  width: 150%;
+  height: 150%;
+  overflow: hidden;
+  position: relative;
+}
+.img-wrap img{
+  width: 325px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.text-wrap{
+  padding: 20px;
+  background-color: white;
+  width: 325px;
+}
+.price{
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.details {
+  margin: 0;
+  padding: 0;
+}
+
+.details h3, .details h4 {
+  margin: 0;
+}
+
+.details h3{
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+
+  /* Define grid columns for small screens */
+}
+@media (min-width: 670px) {
+  .grid-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Two columns on small screens */
+  }
+}
+
+@media (min-width: 1005px) {
+  .grid-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* Three columns on medium screens */
+  }
+}
+
+@media (min-width: 1340px) {
+  .grid-container {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.grid-container > * {
+  margin: 20px;
+}
+///////////////////////////////////////////////////////////////////
+
+//test
+.text-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text-container h1{
+  font-style: revert;
+  font-weight: bold;
+  font-size: 7rem;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.text-container {
+  opacity: 0; /* Initially hide the text */
+  animation: fadeInOut 3s forwards; /* Apply the animation */
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0; /* Start and end with fully transparent */
+  }
+  100% {
+    opacity: 1; /* Fade out at the end */
+  }
+}
+
+
+

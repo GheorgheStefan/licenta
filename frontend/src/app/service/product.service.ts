@@ -47,4 +47,14 @@ export class ProductService {
     return this.http.put('http://localhost:8080/products/update/' + productId, this.getFormData(product));
   }
 
+  getAccessories() {
+    return this.http.get('http://localhost:8080/products/accessories');
+  }
+  getClothing() {
+    return this.http.get('http://localhost:8080/products/clothing');
+  }
+  getFootwear() {
+    return this.http.get('http://localhost:8080/products/footwear');
+  }
+
 }

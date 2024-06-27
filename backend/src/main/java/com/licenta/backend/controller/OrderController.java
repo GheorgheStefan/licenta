@@ -18,6 +18,7 @@ import com.licenta.backend.service.utils.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,21 +31,24 @@ public class OrderController {
     private final OrderService orderService;
     private final EmailService emailService;
 
+    @PreAuthorize("hasAuthority('BUYER')")
     @PostMapping("")
     public ResponseEntity<OrderResponseDto> createOrder(@RequestBody OrderRequestDto orderRequestDto){
-        System.out.println("OrderRequestDto " + orderRequestDto);
-        OrderResponseDto orderResponseDto = orderService.createOrder(orderRequestDto); //& send email
-        String code = Long.toString(orderResponseDto.getOrderId());
-        code += ":" + orderResponseDto.getDeliveryNumber();
-        emailService.sendInvoiceMail(orderResponseDto.getUserMail(), orderResponseDto.getOrderId(), code);
+        log.info("OrderRequestDto: {}", orderRequestDto);
+        OrderResponseDto orderResponseDto = orderService.createOrder(orderRequestDto);
+        emailService.sendInvoiceMail(orderResponseDto.getUserMail(),
+                                        orderResponseDto.getOrderId(),
+                                        emailService.generateDeliveryCode(orderResponseDto.getOrderId(),orderResponseDto.getDeliveryNumber()));
         return ResponseEntity.ok(orderResponseDto);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("")
     public List<OrderDashboardResponseDto> getAllOrders(){
         return orderService.getAllOrdersDashboard();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public Order getOrderById(@PathVariable Long id){
         return orderService.getOrderById(id);

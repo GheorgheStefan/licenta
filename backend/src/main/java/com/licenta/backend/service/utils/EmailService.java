@@ -41,10 +41,9 @@ public class EmailService {
     }
 
     public void sendInvoiceMail(String toEmail, Long orderId, String code){
-
         Email from = new Email(fromEmail);
 
-        final String welcomeTemplateId = "d-53b1e9be0d3a45888f480b75808e17b6";
+        final String templateId = "d-53b1e9be0d3a45888f480b75808e17b6";
         Email to = new Email(toEmail);
 
         byte[] pdfBytes = pdfService.createInvoicePdf(orderId);
@@ -60,11 +59,10 @@ public class EmailService {
 
         Mail mail = new Mail();
         mail.setFrom(from);
-        mail.setTemplateId(welcomeTemplateId);
+        mail.setTemplateId(templateId);
         mail.addPersonalization(personalization);
         mail.addAttachments(attachments);
         send(mail);
-
     }
 
 
@@ -99,5 +97,9 @@ public class EmailService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String generateDeliveryCode(Long orderId, String deliveryNumber){
+        return Long.toString(orderId) + ":" + deliveryNumber;
     }
 }

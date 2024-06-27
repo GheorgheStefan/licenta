@@ -49,6 +49,7 @@ export class AdministrationPageComponent implements OnInit {
 
     this.administrationService.getOrdersByDeliveryGuy(this.jwtHandler.getEmail()).subscribe((data: any) => {
       this.ownOrders = data;
+      console.log(this.ownOrders);
     });
   }
 

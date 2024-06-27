@@ -21,29 +21,22 @@ public class NominatimService {
 
     @Value("${nominatim.url}")
     private String nominatimUrl;
+    //"https://nominatim.openstreetmap.org/search?street=Strada Sergent Dorobantu Constantin&city=Slatina&county=Olt&postalcode=230020&format=json"
 
 
     public MapPositionResponseDto geocodeAddress(String street, String city, String county, String postalcode) {
         StringBuilder urlBuilder = new StringBuilder(nominatimUrl);
         urlBuilder.append("/search?");
-
         if (street != null) urlBuilder.append("&street=").append(street);
         if (city != null) urlBuilder.append("&city=").append(city);
         if (county != null) urlBuilder.append("&county=").append(county);
         if (postalcode != null) urlBuilder.append("&postalcode=").append(postalcode);
-
-        // Append format=json
         urlBuilder.append("&format=json");
-        //"https://nominatim.openstreetmap.org/search?street=Strada Sergent Dorobantu Constantin&city=Slatina&county=Olt&postalcode=230020&format=json"
-
         ResponseEntity<String> response = restTemplate.getForEntity(urlBuilder.toString(), String.class);
 
         Gson gson = new Gson();
         JsonObject[] jsonArray = gson.fromJson(response.getBody(), JsonObject[].class);
-
         MapPositionResponseDto mapPositionResponseDto = new MapPositionResponseDto();
-
-
         if (jsonArray.length > 0) {
             JsonObject jsonObject = jsonArray[0];
             mapPositionResponseDto.setLatitude(jsonObject.get("lat").getAsString());

@@ -60,8 +60,8 @@ export class DashboardProductsComponent implements OnInit{
 
   AddProductPopUp() {
     const dialogRef = this.dialog.open(AddProductPopupComponent, {
-      width: '800px',
-      height: '500px',
+      width: '1100px',
+      height: '600px',
       disableClose: true,
     });
 

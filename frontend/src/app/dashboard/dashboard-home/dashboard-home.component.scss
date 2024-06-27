@@ -45,3 +45,20 @@
   justify-content: center;
   align-items: center;
 }
+
+// titlu
+/* Container styles */
+.name {
+  background-color: black;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Text styles */
+.name div {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}

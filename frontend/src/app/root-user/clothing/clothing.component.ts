@@ -1,19 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductService} from "../../service/product.service";
-import {NavigationExtras, Router, RouterLink} from "@angular/router";
 import {NgForOf} from "@angular/common";
+import {ProductService} from "../../service/product.service";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
-  selector: 'app-footwear',
+  selector: 'app-clothing',
   standalone: true,
-  templateUrl: './footwear.component.html',
   imports: [
     NgForOf,
     RouterLink
   ],
-  styleUrl: './footwear.component.scss'
+  templateUrl: './clothing.component.html',
+  styleUrl: './clothing.component.scss'
 })
-export class FootwearComponent implements OnInit{
+export class ClothingComponent implements OnInit{
   products: any = [];
   constructor( private productService: ProductService,
                private router: Router) {
@@ -21,10 +21,9 @@ export class FootwearComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.productService.getFootwear().subscribe(products => {
+    this.productService.getClothing().subscribe(products => {
       this.products = products;
       console.log(this.products);
     });
   }
-
 }

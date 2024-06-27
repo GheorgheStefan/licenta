@@ -7,6 +7,10 @@ import {NgIf} from "@angular/common";
 import {TruncateNamePipe} from "../truncate-name.pipe";
 import {UserService} from "../../service/user.service";
 import {switchMap} from "rxjs";
+import {AddProductPopupComponent} from "../../popups/add-product-popup/add-product-popup.component";
+import {MatDialog} from "@angular/material/dialog";
+import {ProductService} from "../../service/product.service";
+import {SearchProductsComponent} from "../search-products/search-products.component";
 
 
 @Component({
@@ -29,35 +33,22 @@ export class GeneralNavBarComponent implements OnInit{
 
   constructor(private jwtHandler: JwtHandler,
               private http: HttpClient,
-              private userService: UserService) { }
+              private userService: UserService,
+              private dialog: MatDialog) { }
+
 
   ngOnInit(): void {
     this.http.get('http://localhost:8080/users/' + this.jwtHandler.getEmail()).subscribe((user: any) => {
       this.firstname = user.firstname;
       this.lastname = user.lastname;
     }, error => {
-      console.log(error);
+      // console.log(error);
     });
 
     this.user = this.userService.getUserIdByEmail(this.jwtHandler.getEmail()).subscribe((user: any) => {
         this.user = user;
       }
     );
-    // console.log(this.user);
-
-    // this.userService.getUserIdByEmail(this.jwtHandler.getEmail()).pipe(
-    //   switchMap((user: any) => {
-    //     // this.userId = user.id;
-    //     return this.http.get('http://localhost:8080/shopping-cart/' + user.id);
-    //   })
-    // ).subscribe(
-    //   (cart: any) => {
-    //     console.log(cart);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
   }
 
 
@@ -67,5 +58,15 @@ export class GeneralNavBarComponent implements OnInit{
 
   signOut() {
     this.jwtHandler.removeToken();
+  }
+
+  onSearch() {
+    const dialogRef = this.dialog.open(SearchProductsComponent, {
+      width: '1100px',
+      height: '600px',
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+    });
   }
 }

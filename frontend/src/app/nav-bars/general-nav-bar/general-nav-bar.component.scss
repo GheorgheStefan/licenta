@@ -83,6 +83,33 @@ button-changer{
 .dropdown-menu{
   position: absolute;
 }
+///
+.nav_links {
+  display: none;
+}
+
+/* Show the nav_links at more than 768px */
+@media (min-width: 900px) {
+  .nav_links {
+    display: block;
+  }
+
+}
+/* Default styling for the icon */
+.fa-bars {
+  display: none; /* Hide the icon by default */
+  font-size: 24px; /* Adjust font size as needed */
+  margin-right: 10px; /* Optional: Add margin for spacing */
+  color: white;
+}
+
+/* Media query for screens smaller than 900px */
+@media (max-width: 899px) {
+  .fa-bars {
+    display: inline-block; /* Display the icon when screen size is 899px or smaller */
+    margin-top: 2px;
+  }
+}
 
 
 

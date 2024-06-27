@@ -19,6 +19,8 @@ import {UserInformationComponent} from "./root-user/user-information/user-inform
 import {UserOrdersComponent} from "./root-user/user-orders/user-orders.component";
 import {RootDeliveryComponent} from "./root-delivery/root-delivery.component";
 import {AdministrationPageComponent} from "./root-delivery/administration-page/administration-page.component";
+import {AccessoriesComponent} from "./root-user/accesories/accessories.component";
+import {ClothingComponent} from "./root-user/clothing/clothing.component";
 
 export const routes: Routes = [
 
@@ -31,7 +33,12 @@ export const routes: Routes = [
   {path:"", component: RootUserComponent,children: [
       { path: 'home', component: HomePageComponent},
       { path: 'footwear', component: FootwearComponent },
+      { path: 'accessories', component: AccessoriesComponent },
+      { path: 'clothing', component: ClothingComponent },
       { path: 'footwear/product/:id', component: ProductComponent },
+      { path: 'accessories/product/:id', component: ProductComponent },
+      { path: 'clothing/product/:id', component: ProductComponent },
+      { path: 'product/:id', component: ProductComponent },
       { path: 'user/address/:id', component: AddressComponent },
       { path: 'user/info/:id', component: UserInformationComponent },
       { path: 'user/orders/:id', component: UserOrdersComponent },

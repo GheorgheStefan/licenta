@@ -9,10 +9,14 @@
     <div class="item basic-info" *ngFor="let order of unassignedOrders">
       <div class="info">
         <ul>
+          <li> Order number: {{ order.id }}</li>
           <li> Street: {{ order.deliveryAddress }}</li>
-          <li> Country: {{ order.deliveryCountry }}</li> <!--Romania-->
-          <li>Region: {{ order.deliveryRegion }}</li><!--Olt-->
-          <li>City: {{ order.deliveryCity }}</li><!--Slatina-->
+          <li> {{ order.deliveryCountry }}, {{ order.deliveryRegion }}, {{ order.deliveryCity }}</li>
+          <li> Price: {{ order.productsPrice }} RON</li>
+
+          <!--Romania-->
+          <!--Olt-->
+          <!--Slatina-->
         </ul>
 
       </div>
@@ -34,7 +38,9 @@
     >
     </app-map>
   </div>
-  <p>{{location}}</p>
+<div class="ml-4">
+  <div>{{location}}</div>
+</div>
 </div>
 
 <div class="unassigned-orders">
@@ -44,9 +50,10 @@
     <div class="item basic-info" *ngFor="let order of ownOrders">
       <div class="info">
         <ul>
+          <li> Order number: {{ order.id }}</li>
           <li> Street: {{ order.deliveryAddress }}</li>
-          <li> {{ order.deliveryCountry }}, {{ order.deliveryRegion }}, {{ order.deliveryCity }}</li> <!--Romania--> <!--Olt--> <!--Slatina-->
-          <li>Zipcode:{{ order.deliveryPostalCode }}</li>
+          <li> {{ order.deliveryCountry }}, {{ order.deliveryRegion }}, {{ order.deliveryCity }}</li>
+          <li> Price: {{ order.productsPrice }} RON</li>
         </ul>
 
       </div>

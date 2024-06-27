@@ -92,6 +92,7 @@ public class OrderService {
                 .BillingPhoneNumber(billingAddress.getPhoneNumber())
                 .paymentMethod(orderRequestDto.getPaymentMethod())
                 .deliveryNumber(generate4digitsString())
+                .deliveryGuyId(0L)
                 .build();
 
         Order order1 = orderRepository.save(order);

@@ -28,7 +28,7 @@ export class DetailsOrderPopupComponent implements OnInit {
       this.order = orders;
       this.dashboardOrdersService.getOrderProducts(this.data).subscribe((products:any) => {
         this.productsArr = products;
-        console.log(this.productsArr);
+        // console.log(this.productsArr);
       });
     });
   }

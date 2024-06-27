@@ -12,6 +12,7 @@ import com.licenta.backend.service.OtherProductImagesService;
 import com.licenta.backend.service.ProductService;
 import com.licenta.backend.service.SizesService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ import java.util.Base64;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.ok;
-
+@Slf4j
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
@@ -34,6 +35,7 @@ public class ProductController {
     private final GoogleCloudStorageService googleCloudStorageService;
     private final OtherProductImagesService otherProductImagesService;
     private final SizesService sizesService;
+
 
     @PostMapping("/add")
     public ResponseEntity<ProductRegisterResponseDto> addProduct(
@@ -83,6 +85,23 @@ public class ProductController {
     @GetMapping("/all")
     public List<Product> getAllProducts() {
         return productService.findAll();
+    }
+
+    @GetMapping("/footwear")
+    public List<Product> getAllProductsFootwear(){
+        List <Product> products = productService.findAll();
+        log.info("Products: {}", products);
+        return products.stream().filter(product -> product.getSubcategory().equals("footware")).toList();
+    }
+    @GetMapping("/accessories")
+    public List<Product> getAllProductsAccessories(){
+        List <Product> products = productService.findAll();
+        return products.stream().filter(product -> product.getSubcategory().equals("accessories")).toList();
+    }
+    @GetMapping("/clothing")
+    public List<Product> getAllProductsClothing(){
+        List <Product> products = productService.findAll();
+        return products.stream().filter(product -> product.getSubcategory().equals("clothing")).toList();
     }
 
     @DeleteMapping("/delete/{id}")

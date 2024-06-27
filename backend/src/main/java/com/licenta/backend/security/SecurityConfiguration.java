@@ -41,8 +41,13 @@ public class SecurityConfiguration {
                                         antMatcher("/api/**"),
                                         antMatcher("/**")
                                 ).permitAll()
+
+                                .requestMatchers(
+                                        "/orders/**"
+                                ).permitAll()
                                 .anyRequest()
                                 .authenticated()
+
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

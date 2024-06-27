@@ -8,6 +8,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Collections;
 
 @Slf4j
 @Component
@@ -35,8 +37,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String userEmail;
+        final String role;
 
-//        log.info("authHeader: {}", authHeader);
+        log.info("authHeader: {}", authHeader);
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
@@ -45,8 +48,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         jwt = authHeader.substring(7);
         userEmail = jwtService.extractEmail(jwt);
+        role = jwtService.extractRole(jwt);
 
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            SimpleGrantedAuthority authority = new SimpleGrantedAuthority( role); //
+            System.out.println("Role: " + role);
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken( //
+                    userEmail, null, Collections.singletonList(authority)); //
+            auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); //
+            SecurityContextHolder.getContext().setAuthentication(auth); //
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken =
