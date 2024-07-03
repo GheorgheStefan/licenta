@@ -22,8 +22,8 @@ export class SearchService {
 
   getSearchedItems(search: any) {
     console.log(search);
-    return this.http.get('http://localhost:8080/products/all');
-
+    // return this.http.get('http://localhost:8080/products/all');
+    return this.http.get('http://localhost:8080/products/all/' + search);
     // return this.http.get('http://localhost:8080/products/search/' + search);
   }
 

@@ -1,0 +1,68 @@
+.title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.address-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.div-full-width {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.full-width{
+  width: 90%;
+  margin-left: 20px;
+}
+.div-full-width2{
+  width: 90%;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.half-width{
+  width: 43%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.div-full-width3{
+  width: 90%;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.half-half-width{
+  width: 30%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.btn{
+  width: 90%;
+  height: 50px;
+  border: none;
+  outline: none;
+  background: black;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 40px;
+  border-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.add-button{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.de-modificat-titlu{
+  font-size: 20px;
+  font-weight: bold;
+}

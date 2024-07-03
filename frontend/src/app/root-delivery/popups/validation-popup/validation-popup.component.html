@@ -1,10 +1,14 @@
 <div>
-  <h1> Enter delivery code:</h1>
+  <h3 class="title mt-3 de-modificat-titlu"> Enter delivery code:</h3>
   <form [formGroup]="myform">
-    <mat-form-field>
+    <div class="div-full-width">
+      <mat-form-field class="full-width">
       <mat-label>DeliveryCode</mat-label>
       <input formControlName="deliveryCode" matInput>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="onSubmit()">Validate</button>
+    </div>
+    <div class="add-button">
+      <button type="submit" class="btn" (click)="onSubmit()">Validate</button>
+    </div>
   </form>
 </div>

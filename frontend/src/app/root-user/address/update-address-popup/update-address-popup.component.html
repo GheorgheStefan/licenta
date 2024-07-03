@@ -1,37 +1,48 @@
-<h3 class="title"> Update Address </h3>
+<h3 class="title mt-3 de-modificat-titlu"> Update Address </h3>
 
 <form [formGroup]="myform">
   <div class="address-details">
-    <mat-form-field>
-      <mat-label>Numar de telefon</mat-label>
-      <input formControlName="phoneNumber" matInput>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Adresa</mat-label>
-      <input formControlName="address" matInput>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Cod Postal</mat-label>
-      <input formControlName="postalCode" matInput>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Tara</mat-label>
+
+    <div class="div-full-width">
+      <mat-form-field class="full-width">
+        <mat-label>Address</mat-label>
+        <input formControlName="address" matInput>
+      </mat-form-field>
+    </div>
+
+    <div class="div-full-width2">
+      <mat-form-field class="half-width ml-3">
+        <mat-label>Phone Number</mat-label>
+        <input formControlName="phoneNumber" matInput>
+      </mat-form-field>
+      <mat-form-field class="half-width">
+        <mat-label>Postal Code</mat-label>
+        <input formControlName="postalCode" matInput>
+      </mat-form-field>
+    </div>
+
+    <div class="div-full-width3">
+      <mat-form-field class="half-half-width">
+      <mat-label>Country</mat-label>
       <input formControlName="country" matInput>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Judet</mat-label>
+      <mat-form-field class="half-half-width">
+      <mat-label>Region</mat-label>
       <input formControlName="region" matInput>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Oras</mat-label>
+      <mat-form-field class="half-half-width">
+      <mat-label>City</mat-label>
       <input formControlName="city" matInput>
     </mat-form-field>
+    </div>
 
     <mat-checkbox formControlName="isBillingAddress">Set Billing Address</mat-checkbox>
     <mat-checkbox formControlName="isShippingAddress">Set Shipping Address</mat-checkbox>
   </div>
 
-  <button mat-raised-button color="primary" (click)="updateAddress()">Add Address</button>
+  <div class="add-button">
+    <button type="submit" class="btn" (click)="updateAddress()">Update Address</button>
+  </div>
 
 </form>
 

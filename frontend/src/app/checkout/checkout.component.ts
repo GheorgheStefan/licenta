@@ -17,6 +17,9 @@ import {MatCheckbox} from "@angular/material/checkbox";
 import {MatTooltip} from "@angular/material/tooltip";
 import {FormsModule} from "@angular/forms";
 import {CheckoutService} from "./services/checkout.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
+import {DashboardUserService} from "../dashboard/dashboard-user/dashboard-user.service";
 
 @Component({
   selector: 'app-checkout',
@@ -47,7 +50,10 @@ export class CheckoutComponent implements OnInit {
               private jwtHandler: JwtHandler,
               private addressService: AddressService,
               private dialog: MatDialog,
-              private checkoutService: CheckoutService
+              private router: Router,
+              private dashboardUserService: DashboardUserService,
+              private checkoutService: CheckoutService,
+              private snackBar: MatSnackBar
   ) {
   }
 
@@ -135,6 +141,14 @@ export class CheckoutComponent implements OnInit {
       this.cartItems = [];
       this.refreshTotalPrice();
     });
+    this.snackBar.open('Your order have benn placed!', '', {
+      duration: 2000,
+      verticalPosition: 'top'
+    });
+    
+    setTimeout(() => {
+      window.location.href = 'http://localhost:4200/home';
+    }, 1000); // 1000 ms = 1 second
 
   }
 

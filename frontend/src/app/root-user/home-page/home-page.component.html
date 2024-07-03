@@ -23,7 +23,7 @@
     <div class="slider-wrap">
       <div class="slider-main">
 
-        <div class="item" *ngFor="let item of presentationProducts" [routerLink]="['../footwear/product',item.id]">
+        <div class="item" *ngFor="let item of presentationProducts" [routerLink]="['../product',item.id]"> <!--[routerLink]="['../footwear/product',item.id]-->
           <div class="content">
 
             <div class="img-wrap">
@@ -65,7 +65,7 @@
   <div class="container-fluid">
     <div class="slider-wrap">
       <div class="slider-main">
-        <div class="item" *ngFor="let item of recommendedProducts" [routerLink]="['../footwear/product',item.id]">
+        <div class="item" *ngFor="let item of recommendedProducts" [routerLink]="['../product',item.id]">
           <div class="content">
 
             <div class="img-wrap">

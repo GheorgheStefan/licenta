@@ -62,7 +62,7 @@ export class UserInformationComponent implements OnInit {
   editInfo(userId: any) {
     const dialogRef = this.dialog.open(UserEditPopupComponent, {
       width: '800px',
-      height: '200px',
+      height: '320px',
       data: userId,
       // disableClose: true,
     });

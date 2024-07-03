@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from "@angular/material/dialog";
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {FormArray, FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -46,7 +46,8 @@ interface Size {
     NgxDropzoneModule,
     NgForOf,
     NgIf,
-    MatIcon
+    MatIcon,
+    MatIconButton
   ],
   templateUrl: './add-product-popup.component.html',
   styleUrl: './add-product-popup.component.scss'

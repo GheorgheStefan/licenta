@@ -1,21 +1,29 @@
+<div class="container">
+
 <form [formGroup]="myform">
+
   <h1 mat-dialog-title>Update Product Details</h1>
+
   <div mat-dialog-content>
-
+    <div style="display: flex; justify-content: space-between;">
     <mat-form-field>
-      <mat-label>Name</mat-label>
+      <mat-label>Product Name</mat-label>
       <input formControlName="name" matInput>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Description</mat-label>
-      <input formControlName="description" matInput>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Price</mat-label>
       <input formControlName="price" matInput>
     </mat-form-field>
+  </div>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input formControlName="description" matInput>
+    </mat-form-field>
+
+    <div style="display: flex; justify-content: space-between;">
+
 
     <mat-form-field>
       <mat-label>Category</mat-label>
@@ -31,19 +39,21 @@
       <mat-label>Brand</mat-label>
       <input formControlName="brand" matInput>
     </mat-form-field>
-
+    </div>
+    <div class="container mb-4 cont-img">
     <p>Presentation Image</p>
     <ngx-dropzone (change)="onSelectSingleImage($event)">
       <ngx-dropzone-image-preview *ngFor="let f of prezentationFiles" [file]="f" [removable]="true" (removed)="onRemovePresentationImage(prezentationFiles[0])">
       </ngx-dropzone-image-preview>
     </ngx-dropzone>
-
+    </div>
+    <div class="container mb-4 cont-img">
     <p>Additional Images for Products</p>
     <ngx-dropzone (change)="onSelect($event)">
       <ngx-dropzone-image-preview *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
       </ngx-dropzone-image-preview>
     </ngx-dropzone>
-
+    </div>
     <!-- Size and Quantity -->
     <div formArrayName="sizes">
       <div *ngFor="let size of sizesData.controls; let i = index" [formGroupName]="i">
@@ -69,4 +79,7 @@
     <button mat-button (click)="closePopup()">Cancel</button>
     <button mat-button (click)="updateProduct()">Update</button>
   </div>
+
 </form>
+
+</div>

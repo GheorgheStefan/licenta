@@ -8,6 +8,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {AddProductPopupComponent} from "../../popups/add-product-popup/add-product-popup.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ValidationPopupComponent} from "../popups/validation-popup/validation-popup.component";
+import {DashboardUserService} from "../../dashboard/dashboard-user/dashboard-user.service";
 
 @Component({
   selector: 'app-administration-page',
@@ -33,7 +34,8 @@ export class AdministrationPageComponent implements OnInit {
               private administrationService: AdministrationService,
               private cdr: ChangeDetectorRef,
               private dialog: MatDialog,
-              private snackBar: MatSnackBar
+              private snackBar: MatSnackBar,
+              private dashboardUserService: DashboardUserService
   ) {
   }
 
@@ -49,7 +51,7 @@ export class AdministrationPageComponent implements OnInit {
 
     this.administrationService.getOrdersByDeliveryGuy(this.jwtHandler.getEmail()).subscribe((data: any) => {
       this.ownOrders = data;
-      console.log(this.ownOrders);
+      // console.log(this.ownOrders);
     });
   }
 
@@ -65,7 +67,7 @@ export class AdministrationPageComponent implements OnInit {
     this.showMap = false;
     console.log(street + " " + city + " " + zipCode);
     this.administrationService.getCoordinates(street, city, county, zipCode).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       this.latitude = data.latitude;
       this.longitude = data.longitude;
       this.location = data.displayName;
@@ -80,7 +82,7 @@ export class AdministrationPageComponent implements OnInit {
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
+        // console.log(position);
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.showMap = true;
@@ -133,13 +135,19 @@ export class AdministrationPageComponent implements OnInit {
   redeemOrder() {
     const dialogRef = this.dialog.open(ValidationPopupComponent, {
       width: '800px',
-      height: '200px',
-      disableClose: true,
+      height: '250px',
+      disableClose: false,
     });
 
     dialogRef.afterClosed().subscribe(() => {
       this.fetchOrders();
     });
     this.fetchOrders();
+  }
+
+  signOut() {
+    this.jwtHandler.removeToken();
+
+    this.dashboardUserService.redirectToLogin();
   }
 }

@@ -59,6 +59,8 @@ export class AddressComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((data) => {
       this.ngOnInit();
+      window.location.reload()
+
     });
     this.fetchAddresses();
   }
@@ -72,6 +74,7 @@ export class AddressComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((data) => {
       this.fetchAddresses();
+      window.location.reload()
     });
     this.fetchAddresses();
   }

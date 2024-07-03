@@ -83,15 +83,22 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    public List<Product> getAllProducts() {
+    public List<Product> getAllProductsPrincipal( ){
         return productService.findAll();
+    }
+
+    @GetMapping("/all/{search}")
+    public List<Product> getAllProducts( @PathVariable String search){
+        List<Product> products = productService.findAll();
+        return products.stream().filter(product -> product.getName().toLowerCase().contains(search.toLowerCase()) ||
+                                                    product.getBrand().toLowerCase().contains(search.toLowerCase())).toList();
     }
 
     @GetMapping("/footwear")
     public List<Product> getAllProductsFootwear(){
         List <Product> products = productService.findAll();
         log.info("Products: {}", products);
-        return products.stream().filter(product -> product.getSubcategory().equals("footware")).toList();
+        return products.stream().filter(product -> product.getSubcategory().equals("footwear")).toList();
     }
     @GetMapping("/accessories")
     public List<Product> getAllProductsAccessories(){

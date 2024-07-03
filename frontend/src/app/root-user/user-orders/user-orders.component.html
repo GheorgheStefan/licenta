@@ -1,7 +1,9 @@
 <div class="title">
   <h1>My Orders</h1>
 </div>
-<div class="container d-flex place-content-center place-items-center" *ngFor="let order of userOrders">
+<hr>
+<div *ngIf="userOrders.length > 0">
+<div class="container d-flex place-content-center place-items-center" *ngFor="let order of userOrders" >
   <div class="container-for-basic-info">
     <div class="basic-info">
       <ul>
@@ -20,4 +22,8 @@
     </div>
   </div>
 </div>
-<hr>
+</div>
+
+<div *ngIf="userOrders.length === 0" class="d-flex align-content-center justify-content-center">
+  <h2>No orders found!</h2>
+</div>
